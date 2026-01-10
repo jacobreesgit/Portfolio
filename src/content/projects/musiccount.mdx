@@ -21,6 +21,8 @@ Built a full music library viewer using MusicKit API with play count display, su
 ### Smart Suggestions
 Engineered duplicate detection algorithm that identifies songs with matching titles/artists but mismatched play counts across albums, compilations, and singles.
 
+![MusicCount library browser showing songs with play count statistics](https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=MusicCount+Library)
+
 ### Queue & Match
 Developed queuing system allowing users to add songs multiple times to match play counts between different versions of the same track.
 
@@ -30,3 +32,5 @@ Designed with complete on-device processing—no servers, no analytics, no data 
 ## Technical Details
 
 Built with SwiftUI using the Model-View architecture pattern (no ViewModels) with @Observable macro for reactive state management. Implemented Swift Concurrency throughout (async/await, actors, @MainActor isolation) for thread-safe code. Tested with Swift Testing framework using @Test macros and #expect assertions. Follows Apple Human Interface Guidelines with full Dynamic Type and VoiceOver accessibility support.
+
+![MusicCount duplicate detection showing matched songs ready for sync](https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=MusicCount+Suggestions)
