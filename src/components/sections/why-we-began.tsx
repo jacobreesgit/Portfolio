@@ -6,12 +6,7 @@ import Link from 'next/link';
 
 import Noise from '@/components/noise';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const stats = [
   {
@@ -83,7 +78,12 @@ export default function WhyWeBegan() {
             </div>
 
             {/* CTA Button */}
-            <Button size="lg" variant="outline" className="rounded-full" asChild>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full"
+              asChild
+            >
               <Link href="/about">
                 Learn More
                 <ArrowRight className="ml-2 size-4" />

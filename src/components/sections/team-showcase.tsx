@@ -4,33 +4,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Noise from '@/components/noise';
-import { cn } from '@/lib/utils';
 
-const TECH_STACK = [
+const COMPANIES = [
   {
-    name: 'Netflix',
-    logo: '/images/logos/netflix.svg',
-    url: 'https://netflix.com',
-    className: '',
+    name: 'Revolution Viewing',
+    logo: '/images/logos/revolution-viewing.webp',
+    url: 'https://revolutionviewing.com',
+    role: 'Front-End Developer',
   },
   {
-    name: 'T-Mobile',
-    logo: '/images/logos/t-mobile.svg',
-    className: '',
-    url: 'https://t-mobile.com',
+    name: 'Pavers',
+    logo: '/images/logos/pavers.png',
+    url: 'https://pavers.co.uk',
+    role: 'Web Developer',
   },
   {
-    name: 'Spotify',
-    logo: '/images/logos/spotify.svg',
-    url: 'https://spotify.com',
-    className: '',
-  },
-
-  {
-    name: 'TIBCO',
-    logo: '/images/logos/tibc.svg',
-    className: '',
-    url: 'https://tibco.com',
+    name: 'University of Leeds',
+    logo: '/images/logos/leeds.png',
+    url: 'https://leeds.ac.uk',
+    role: 'BA Digital Media',
   },
 ];
 
@@ -39,28 +31,32 @@ export default function TeamShowcase() {
     <section className="section-padding relative">
       <Noise />
       <div className="bigger-container">
-        <div className="flex flex-col items-center gap-6 lg:flex-row lg:justify-between lg:gap-12">
+        <div className="flex flex-col items-center gap-8 lg:flex-row lg:justify-between lg:gap-12">
           <p className="max-w-sm text-center text-2xl leading-tight lg:text-start">
-            We are a team of passionate developers, designers, and
-            entrepreneurs.
+            Companies I&apos;ve worked with
           </p>
 
-          {/* Right Side - Tech Stack Logos */}
-          <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            {TECH_STACK.map((tech) => (
+          {/* Company Logos */}
+          <div className="flex flex-wrap items-center justify-center gap-8 lg:gap-12">
+            {COMPANIES.map((company) => (
               <Link
-                key={tech.name}
-                href={tech.url}
+                key={company.name}
+                href={company.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative flex h-8 w-32 items-center justify-center transition-opacity duration-200 hover:opacity-80"
+                className="group flex flex-col items-center gap-2 transition-opacity duration-200 hover:opacity-80"
               >
-                <Image
-                  src={tech.logo}
-                  alt={`${tech.name} logo`}
-                  fill
-                  className={cn('object-contain', tech.className)}
-                />
+                <div className="relative flex h-12 w-32 items-center justify-center">
+                  <Image
+                    src={company.logo}
+                    alt={`${company.name} logo`}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+                <span className="text-muted-foreground text-xs">
+                  {company.role}
+                </span>
               </Link>
             ))}
           </div>

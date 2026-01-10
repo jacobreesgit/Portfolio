@@ -19,7 +19,9 @@ export async function generateStaticParams() {
   return slugs.map((slug) => ({ slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
 
@@ -33,11 +35,19 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-// Custom MDX components for full-bleed images with captions
+// Gradient colors per project
+const projectGradients: Record<string, { color1: string; color2: string }> = {
+  canoncore: { color1: 'bg-blue-500/15', color2: 'bg-violet-500/15' },
+  vepple: { color1: 'bg-teal-500/15', color2: 'bg-cyan-400/15' },
+  pavers: { color1: 'bg-amber-500/15', color2: 'bg-orange-400/15' },
+  musiccount: { color1: 'bg-violet-500/15', color2: 'bg-fuchsia-400/15' },
+  waveger: { color1: 'bg-emerald-500/15', color2: 'bg-green-400/15' },
+};
+
+// Custom MDX components for images with captions
 const mdxComponents = {
-  // Override img to support full-bleed styling
   img: (props: { src?: string; alt?: string }) => (
-    <span className="not-prose -mx-8 my-12 block sm:-mx-16 lg:-mx-32">
+    <span className="not-prose my-16 block">
       <Image
         src={props.src || ''}
         alt={props.alt || ''}
@@ -47,7 +57,7 @@ const mdxComponents = {
         className="w-full rounded-lg"
       />
       {props.alt && (
-        <span className="mt-4 block text-center text-sm text-muted-foreground italic">
+        <span className="text-muted-foreground mt-4 block text-center text-sm italic">
           {props.alt}
         </span>
       )}
@@ -63,11 +73,33 @@ export default async function ProjectPage({ params }: PageProps) {
     notFound();
   }
 
+  const gradient = projectGradients[slug] || {
+    color1: 'bg-pink-500/15',
+    color2: 'bg-orange-400/15',
+  };
+
   return (
-    <section className={cn('py-16', 'relative')}>
+    <section className={cn('py-16', 'relative', 'overflow-hidden')}>
+      {/* Background Gradient */}
+      <div className="absolute size-full mask-t-from-50% mask-t-to-100% mask-b-from-50% mask-b-to-90%">
+        <div
+          className={cn(
+            gradient.color1,
+            'absolute size-full rounded-full blur-3xl will-change-transform',
+            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/3 md:translate-y-0',
+          )}
+        />
+        <div
+          className={cn(
+            gradient.color2,
+            'absolute size-full rounded-full blur-3xl will-change-transform',
+            'right-0 bottom-0 translate-y-1/3 md:top-0 md:translate-x-1/3 md:-translate-y-0',
+          )}
+        />
+      </div>
       <Noise />
 
-      <div className="container max-w-4xl relative z-10">
+      <div className="relative z-10 container max-w-7xl">
         {/* Back Button */}
         <Button variant="ghost" size="sm" className="mb-8" asChild>
           <Link href="/projects">
@@ -76,97 +108,92 @@ export default async function ProjectPage({ params }: PageProps) {
           </Link>
         </Button>
 
-        {/* Header Section */}
-        <div className="mb-20">
-          <div className="mb-12">
-            <p className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
-              {project.category}
-            </p>
-            <h1 className="mt-4 text-6xl font-bold tracking-tight md:text-7xl lg:text-8xl">
-              {project.title}
-            </h1>
-            <p className="mt-6 text-2xl text-muted-foreground md:text-3xl">
-              {project.description}
-            </p>
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-4">
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="space-y-8 lg:sticky lg:top-8">
+              {/* Project Info */}
+              <div>
+                <p className="text-muted-foreground mb-4 text-xs font-semibold tracking-widest uppercase">
+                  {project.category}
+                </p>
+                <h1 className="mb-4 text-4xl font-bold">{project.title}</h1>
+                <p className="text-muted-foreground leading-relaxed">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Metadata */}
+              <div className="space-y-6 border-t pt-8">
+                <div>
+                  <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
+                    Year
+                  </p>
+                  <p className="font-medium">{project.year}</p>
+                </div>
+                <div>
+                  <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
+                    Technologies
+                  </p>
+                  <p className="font-medium">
+                    {project.technologies.slice(0, 4).join(', ')}
+                  </p>
+                </div>
+                {project.github && (
+                  <div>
+                    <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
+                      Source
+                    </p>
+                    <Link
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary flex items-center gap-2 font-medium"
+                    >
+                      <Github className="size-4" />
+                      GitHub
+                    </Link>
+                  </div>
+                )}
+                {project.link && (
+                  <div>
+                    <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
+                      Live Site
+                    </p>
+                    <Link
+                      href={project.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-primary flex items-center gap-2 font-medium"
+                    >
+                      <ExternalLink className="size-4" />
+                      Visit
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-12 text-sm">
-            <div>
-              <p className="font-semibold tracking-wider text-muted-foreground uppercase">
-                Year
-              </p>
-              <p className="mt-2 text-lg font-medium">{project.year}</p>
+          {/* Main Content */}
+          <div className="lg:col-span-3">
+            {/* Hero Image */}
+            <div className="mb-16">
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={1920}
+                height={1080}
+                unoptimized
+                className="w-full rounded-lg"
+              />
             </div>
-            <div>
-              <p className="font-semibold tracking-wider text-muted-foreground uppercase">
-                Technologies
-              </p>
-              <p className="mt-2 text-lg font-medium">
-                {project.technologies.slice(0, 3).join(', ')}
-              </p>
-            </div>
-            {project.github && (
-              <div>
-                <p className="font-semibold tracking-wider text-muted-foreground uppercase">
-                  Source
-                </p>
-                <Link
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-2 flex items-center gap-2 text-lg font-medium hover:text-primary"
-                >
-                  <Github className="size-4" />
-                  GitHub
-                </Link>
-              </div>
-            )}
-            {project.link && (
-              <div>
-                <p className="font-semibold tracking-wider text-muted-foreground uppercase">
-                  Live Site
-                </p>
-                <Link
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-2 flex items-center gap-2 text-lg font-medium hover:text-primary"
-                >
-                  <ExternalLink className="size-4" />
-                  Visit
-                </Link>
-              </div>
-            )}
+
+            {/* Content */}
+            <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">
+              <MDXRemote source={project.content} components={mdxComponents} />
+            </article>
           </div>
-        </div>
-      </div>
-
-      {/* Hero Image - Full Width */}
-      <div className="mb-20">
-        <div className="container max-w-7xl">
-          <Image
-            src={project.image}
-            alt={project.title}
-            width={1920}
-            height={1080}
-            unoptimized
-            className="w-full rounded-lg"
-          />
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="container max-w-4xl relative z-10">
-        <div className="prose prose-lg mb-16 max-w-none">
-          <p className="lead text-xl text-muted-foreground">
-            {project.description}
-          </p>
-        </div>
-
-        <div className="mb-16">
-          <article className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-h2:text-3xl prose-h2:mt-16 prose-h2:mb-6 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground">
-            <MDXRemote source={project.content} components={mdxComponents} />
-          </article>
         </div>
       </div>
     </section>

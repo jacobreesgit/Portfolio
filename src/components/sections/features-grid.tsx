@@ -109,7 +109,7 @@ function ProjectCard({
 }: ProjectCardProps) {
   return (
     <Link href={`/projects/${slug}`} className={cn('group', className)}>
-      <Card className="h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg">
+      <Card className="hover:border-primary/50 h-full transition-all duration-300 hover:shadow-lg">
         {/* Image Section */}
         <CardContent>
           <div className="overflow-hidden rounded-lg">
@@ -126,8 +126,10 @@ function ProjectCard({
 
         {/* Content Section */}
         <CardHeader>
-          <p className="text-muted-foreground text-sm font-medium">{category}</p>
-          <CardTitle className="text-xl font-semibold leading-tight">
+          <p className="text-muted-foreground text-sm font-medium">
+            {category}
+          </p>
+          <CardTitle className="text-xl leading-tight font-semibold">
             {title}
           </CardTitle>
           <p className="text-muted-foreground/70 leading-relaxed">

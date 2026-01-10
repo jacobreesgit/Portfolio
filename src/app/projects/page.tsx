@@ -70,19 +70,19 @@ export default function ProjectsPage() {
       <div className="absolute size-full mask-t-from-50% mask-t-to-100% mask-b-from-50% mask-b-to-90%">
         <div
           className={cn(
-            'bg-pink-500/30 absolute size-full rounded-full blur-3xl will-change-transform',
+            'absolute size-full rounded-full bg-pink-500/15 blur-3xl will-change-transform',
             'top-0 left-0 -translate-y-1/3 md:-translate-x-1/3 md:translate-y-0',
           )}
         />
         <div
           className={cn(
-            'bg-orange-400/30 absolute size-full rounded-full blur-3xl will-change-transform',
+            'absolute size-full rounded-full bg-orange-400/15 blur-3xl will-change-transform',
             'right-0 bottom-0 translate-y-1/3 md:top-0 md:translate-x-1/3 md:-translate-y-0',
           )}
         />
       </div>
       <Noise />
-      <div className="container relative z-10">
+      <div className="relative z-10 container">
         {/* Page Header */}
         <div className="mx-auto max-w-3xl space-y-4 text-center">
           <h1 className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl">
@@ -132,7 +132,7 @@ function ProjectCard({
 }: ProjectCardProps) {
   return (
     <Link href={`/projects/${slug}`} className="group">
-      <Card className="h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg">
+      <Card className="hover:border-primary/50 h-full transition-all duration-300 hover:shadow-lg">
         <CardContent>
           <div className="overflow-hidden rounded-lg">
             <Image
@@ -143,14 +143,16 @@ function ProjectCard({
               unoptimized
               className={cn(
                 'w-full object-cover transition-transform duration-300 group-hover:scale-105',
-                size === 'large' ? 'aspect-[4/3]' : 'aspect-[16/9]'
+                size === 'large' ? 'aspect-[4/3]' : 'aspect-[16/9]',
               )}
             />
           </div>
         </CardContent>
         <CardHeader>
-          <p className="text-muted-foreground text-sm font-medium">{category}</p>
-          <CardTitle className="text-xl font-semibold leading-tight">
+          <p className="text-muted-foreground text-sm font-medium">
+            {category}
+          </p>
+          <CardTitle className="text-xl leading-tight font-semibold">
             {title}
           </CardTitle>
           <p className="text-muted-foreground/70 leading-relaxed">

@@ -120,11 +120,15 @@ export default function Hero() {
               className="text-muted-foreground my-4 text-sm md:my-6 md:text-lg"
             >
               Front-End Developer with full-stack experience and a strong
-              background in UI &amp; UX design, specialising in creating intuitive,
-              feature-rich applications that prioritise the user experience.
+              background in UI &amp; UX design, specialising in creating
+              intuitive, feature-rich applications that prioritise the user
+              experience.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="flex flex-wrap gap-4">
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap gap-4"
+            >
               <Button
                 size="lg"
                 className="rounded-full !pl-5.5 before:rounded-full"

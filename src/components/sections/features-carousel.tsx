@@ -166,10 +166,7 @@ export default function FeaturesCarousel() {
   }, [api]);
 
   return (
-    <section
-      id="skills"
-      className="section-padding relative overflow-x-hidden"
-    >
+    <section id="skills" className="section-padding relative overflow-x-hidden">
       <Noise />
       <div className="container grid gap-8 lg:grid-cols-3 lg:gap-40">
         {/* Left Content */}
@@ -184,12 +181,11 @@ export default function FeaturesCarousel() {
           >
             <h2 className="text-4xl tracking-tight text-balance lg:text-5xl">
               Skills &{' '}
-              <span className="text-muted-foreground/80">
-                Technologies
-              </span>
+              <span className="text-muted-foreground/80">Technologies</span>
             </h2>
             <p className="text-muted-foreground text-lg leading-snug">
-              From front-end frameworks to full-stack development and native mobile apps.
+              From front-end frameworks to full-stack development and native
+              mobile apps.
             </p>
           </motion.div>
 
