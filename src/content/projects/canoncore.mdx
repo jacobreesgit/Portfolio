@@ -1,0 +1,48 @@
+---
+title: 'CanonCore'
+category: 'Full-Stack Application'
+description: 'A full-stack media library for organising and streaming personal media collections'
+technologies:
+  [
+    'Next.js',
+    'React',
+    'TypeScript',
+    'PostgreSQL',
+    'Prisma',
+    'Tailwind CSS',
+    'Vitest',
+    'Playwright',
+  ]
+github: 'https://github.com/jacobreesgit/canoncore'
+image: 'https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=CanonCore'
+year: '2025'
+featured: true
+---
+
+## Overview
+
+I built CanonCore as a full-stack media library application that enables users to organise, browse, and stream their personal media collections. Built with Next.js 16, React 19, and PostgreSQL, it provides a cinematic interface for managing movies, TV shows, music, and other media.
+
+## Key Features
+
+### Hierarchical Organisation
+Engineered drag-and-drop reordering system with dnd-kit supporting unlimited nesting depth, dual view modes (tree and grid), and optimistic UI updates.
+
+### Media Streaming
+Built video/audio streaming API with HTTP Range header support for seeking, subtitle rendering (SRT, VTT, ASS), and playback position persistence.
+
+### Google Drive Integration
+Architected OAuth 2.0 flow with AES-256-GCM encrypted token storage, bidirectional sync with circuit breaker pattern, and resumable uploads for large files.
+
+### Cinematic UI
+Designed hero banners with artwork, dark mode interface, and smooth animations using Tailwind CSS and shadcn/ui components.
+
+### Production Security
+Implemented OWASP security headers (HSTS, CSP, X-Frame-Options), Redis rate limiting (Upstash), and comprehensive input validation with Zod.
+
+## Technical Highlights
+
+- Developed comprehensive test suite with 464+ unit tests, integration tests against real PostgreSQL, and Playwright E2E tests with Page Object Model
+- Implemented structured logging with Pino including distributed request tracing via x-request-id headers
+- Built authentication system with NextAuth.js v5 including email/password flow, password reset via Resend, and bcrypt hashing
+- Created 20-page MDX documentation site with Fumadocs featuring collapsible navigation and dark mode support
