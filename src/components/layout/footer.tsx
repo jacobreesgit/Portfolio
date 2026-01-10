@@ -1,79 +1,66 @@
 'use client';
-import Image from 'next/image';
+import { Github, Linkedin, Mail } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import Noise from '@/components/noise';
 
 import Logo from './logo';
-import { NAV_LINKS } from './navbar';
 
-// Create footer sections from NAV_LINKS and add blog links
 const FOOTER_SECTIONS = [
   {
     title: 'Navigation',
-    links: NAV_LINKS.flatMap((link) => [{ name: link.label, href: link.href }]),
-  },
-
-  {
-    title: 'Blog',
     links: [
-      { name: 'All Posts', href: '/blog' },
-      {
-        name: 'Agile Project Management',
-        href: '/blog/agile-project-management-tips',
-      },
-      {
-        name: 'Customer Onboarding',
-        href: '/blog/customer-onboarding-strategies',
-      },
+      { name: 'Home', href: '/' },
+      { name: 'Projects', href: '/projects' },
+      { name: 'About', href: '/about' },
+      { name: 'Contact', href: '/contact' },
     ],
   },
   {
-    title: 'Resources',
+    title: 'Projects',
     links: [
-      { name: 'Terms & Conditions', href: '/terms-and-conditions' },
-      { name: 'Privacy Policy', href: '/privacy-policy' },
+      { name: 'CanonCore', href: '/projects/canoncore' },
+      { name: 'Vepple', href: '/projects/vepple' },
+      { name: 'Pavers', href: '/projects/pavers' },
+      { name: 'MusicCount', href: '/projects/musiccount' },
+      { name: 'Waveger', href: '/projects/waveger' },
+    ],
+  },
+  {
+    title: 'Connect',
+    links: [
+      { name: 'Email', href: 'mailto:jacobrees@icloud.com' },
+      { name: 'LinkedIn', href: 'https://linkedin.com/in/jacobdanielrees' },
+      { name: 'GitHub', href: 'https://github.com/jacobreesgit' },
     ],
   },
 ];
 
 const SOCIAL_LINKS = [
   {
-    name: 'Follow on LinkedIn',
-    href: 'https://linkedin.com',
+    name: 'LinkedIn',
+    href: 'https://linkedin.com/in/jacobdanielrees',
+    icon: Linkedin,
   },
   {
-    name: 'Follow on X',
-    href: 'https://x.com',
-  },
-];
-
-const APP_STORE_BUTTONS = [
-  {
-    href: '#',
-    icon: 'apple',
-    topText: 'Download on the',
-    mainText: 'App Store',
+    name: 'GitHub',
+    href: 'https://github.com/jacobreesgit',
+    icon: Github,
   },
   {
-    href: '#',
-    icon: 'googlePlay',
-    topText: 'GET IT ON',
-    mainText: 'Google Play',
+    name: 'Email',
+    href: 'mailto:jacobrees@icloud.com',
+    icon: Mail,
   },
 ];
 
 const Footer = () => {
   const pathname = usePathname();
 
-  const hideFooter = [
-    '/signin',
-    '/signup',
-    '/docs',
-    '/not-found',
-    '/forgot-password',
-  ].some((route) => pathname.includes(route));
+  const hideFooter = ['/docs', '/not-found'].some((route) =>
+    pathname.includes(route),
+  );
 
   if (hideFooter) return null;
 
@@ -96,6 +83,10 @@ const Footer = () => {
                       <Link
                         href={link.href}
                         className="text-muted-foreground hover:text-foreground text-sm transition-colors"
+                        {...(link.href.startsWith('http') ||
+                        link.href.startsWith('mailto')
+                          ? { target: '_blank', rel: 'noopener noreferrer' }
+                          : {})}
                       >
                         {link.name}
                       </Link>
@@ -106,19 +97,20 @@ const Footer = () => {
             ))}
           </div>
 
-          {/* Right side - Lumen branding and social */}
+          {/* Right side - Branding and social */}
           <div className="flex w-fit flex-col items-start justify-self-end md:col-span-1">
             <Logo />
-            <div className="mt-4 space-y-3 md:mt-8">
+            <div className="mt-4 flex gap-4 md:mt-8">
               {SOCIAL_LINKS.map((link, index) => (
                 <Link
                   key={index}
                   href={link.href}
-                  className="text-muted-foreground hover:text-foreground flex items-center gap-2 text-sm transition-colors"
+                  className="text-muted-foreground hover:text-foreground transition-colors"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label={link.name}
                 >
-                  {link.name}
+                  <link.icon className="size-5" />
                 </Link>
               ))}
             </div>
@@ -126,68 +118,13 @@ const Footer = () => {
         </div>
 
         <div className="mt-15 flex flex-col items-center justify-between gap-4 md:mt-20 md:flex-row">
-          <div className="flex gap-4">
-            {APP_STORE_BUTTONS.map((button, index) => (
-              <Link key={index} href={button.href}>
-                {button.icon === 'apple' ? (
-                  <div className="relative">
-                    <Image
-                      src="/images/apple-button.png"
-                      alt="Apple App Store"
-                      width={124}
-                      height={42.6}
-                      className="dark:hidden"
-                    />
-                    <Image
-                      src="/images/apple-button-dark-mode.png"
-                      alt="Apple App Store"
-                      width={124}
-                      height={42.6}
-                      className="hidden dark:block"
-                    />
-                  </div>
-                ) : (
-                  <div className="relative">
-                    <Image
-                      src="/images/google-button.png"
-                      alt="Google Play Store"
-                      width={124}
-                      height={42.6}
-                      className="dark:hidden"
-                    />
-                    <Image
-                      src="/images/google-button-dark-mode.png"
-                      alt="Google Play Store"
-                      width={124}
-                      height={42.6}
-                      className="hidden dark:block"
-                    />
-                  </div>
-                )}
-              </Link>
-            ))}
-          </div>
+          <p className="text-muted-foreground text-sm">
+            Based in Durham, England
+          </p>
 
-          <div className="flex gap-6">
-            <Link
-              href="https://www.shadcnblocks.com"
-              className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-            >
-              © {new Date().getFullYear()} Shadcnblocks.com
-            </Link>
-            <Link
-              href="/privacy-policy"
-              className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-            >
-              Privacy
-            </Link>
-            <Link
-              href="/terms-and-conditions"
-              className="text-muted-foreground hover:text-foreground text-sm transition-colors"
-            >
-              Terms
-            </Link>
-          </div>
+          <p className="text-muted-foreground text-sm">
+            © {new Date().getFullYear()} Jacob Rees. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

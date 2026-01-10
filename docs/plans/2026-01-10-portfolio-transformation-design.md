@@ -13,6 +13,7 @@ Transform the Lumen Next.js template into Jacob Rees's personal portfolio websit
 ## Site Structure
 
 ### Navigation
+
 - **Home** - Landing page with hero, featured work, skills
 - **Projects** - Full project showcase with case studies
 - **About** - Personal story and experience
@@ -20,6 +21,7 @@ Transform the Lumen Next.js template into Jacob Rees's personal portfolio websit
 - **CV** - Download/view link (opens PDF)
 
 ### URL Structure
+
 ```
 /                    → Home
 /projects            → All projects grid
@@ -33,11 +35,13 @@ Transform the Lumen Next.js template into Jacob Rees's personal portfolio websit
 ## Projects
 
 ### Hero Projects (featured prominently)
+
 1. **CanonCore** - Full-stack media library (Next.js, PostgreSQL)
 2. **Vepple** - Virtual campus tours for 30+ UK universities (Vue.js, Pinia, Quasar)
 3. **Pavers** - E-commerce & component libraries (Shopify, Sanity CMS)
 
 ### Secondary Projects
+
 4. **MusicCount** - iOS app (Swift, SwiftUI)
 5. **Waveger** - University project
 6. **Sustainability Speaks** - Freelance UI/UX & Web (Figma, podcast platform)
@@ -48,13 +52,13 @@ Transform the Lumen Next.js template into Jacob Rees's personal portfolio websit
 
 ### HOME PAGE
 
-| Section | Component | Custom Needed? | Content Source |
-|---------|-----------|----------------|----------------|
-| Hero | `hero.tsx` | Minor text changes | `CV.md` intro line |
-| Tech Stack | `logos.tsx` | Swap logos → tech icons | Source SVGs from Simple Icons |
-| Featured Projects | `features-grid.tsx` | Reduce to 3 cards | Project screenshots + descriptions |
-| Skills Carousel | `features-carousel.tsx` | Change icons/content | `CV.md` skills section |
-| About Preview | `why-we-began.tsx` | Simplify to photo + stats | `Me.jpeg` + CV stats |
+| Section           | Component               | Custom Needed?            | Content Source                     |
+| ----------------- | ----------------------- | ------------------------- | ---------------------------------- |
+| Hero              | `hero.tsx`              | Minor text changes        | `CV.md` intro line                 |
+| Tech Stack        | `logos.tsx`             | Swap logos → tech icons   | Source SVGs from Simple Icons      |
+| Featured Projects | `features-grid.tsx`     | Reduce to 3 cards         | Project screenshots + descriptions |
+| Skills Carousel   | `features-carousel.tsx` | Change icons/content      | `CV.md` skills section             |
+| About Preview     | `why-we-began.tsx`      | Simplify to photo + stats | `Me.jpeg` + CV stats               |
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -89,11 +93,11 @@ Transform the Lumen Next.js template into Jacob Rees's personal portfolio websit
 
 ### PROJECTS PAGE (`/projects`)
 
-| Section | Component | Custom Needed? | Content Source |
-|---------|-----------|----------------|----------------|
-| Page Header | `about-hero.tsx` (simplified) | Just title + subtitle | - |
-| Hero Project Cards | `features-grid.tsx` | 3 large cards | Project folders |
-| Secondary Cards | `features-grid.tsx` | 3 smaller cards | Project folders |
+| Section            | Component                     | Custom Needed?        | Content Source  |
+| ------------------ | ----------------------------- | --------------------- | --------------- |
+| Page Header        | `about-hero.tsx` (simplified) | Just title + subtitle | -               |
+| Hero Project Cards | `features-grid.tsx`           | 3 large cards         | Project folders |
+| Secondary Cards    | `features-grid.tsx`           | 3 smaller cards       | Project folders |
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -111,35 +115,35 @@ Transform the Lumen Next.js template into Jacob Rees's personal portfolio websit
 
 ### INDIVIDUAL PROJECT PAGE (`/projects/[slug]`)
 
-| Section | Component | Custom Needed? | Content Source |
-|---------|-----------|----------------|----------------|
-| Project Hero | `project4.tsx` | ✓ Downloaded | MDX frontmatter |
-| Challenge/Solution/Results | `project4.tsx` | Built-in sections | Project MDX |
-| Tech Stack Badges | `tech-badges.tsx` | ✓ Created | MDX frontmatter |
-| Links | `button.tsx` | - | MDX frontmatter |
-| Screenshots | `features-carousel.tsx` | Or simple image grid | Project folders |
+| Section                    | Component               | Custom Needed?       | Content Source  |
+| -------------------------- | ----------------------- | -------------------- | --------------- |
+| Project Hero               | `project4.tsx`          | ✓ Downloaded         | MDX frontmatter |
+| Challenge/Solution/Results | `project4.tsx`          | Built-in sections    | Project MDX     |
+| Tech Stack Badges          | `tech-badges.tsx`       | ✓ Created            | MDX frontmatter |
+| Links                      | `button.tsx`            | -                    | MDX frontmatter |
+| Screenshots                | `features-carousel.tsx` | Or simple image grid | Project folders |
 
 **Content sources per project:**
 
-| Project | Help Files Source | Screenshots | Live Link |
-|---------|------------------|-------------|-----------|
-| CanonCore | `Help Files/canoncore-v2/` | Need to capture | GitHub |
-| Vepple | `CV.md` details | Need from Jacob (NDA?) | vepple.co.uk? |
-| Pavers | `CV.md` details | Need from Jacob | pavers.co.uk |
-| MusicCount | `Help Files/MusicCount/CLAUDE.md` | App Store? | App Store? |
-| Waveger | `Help Files/Waveger/` + old site | Old site has screenshots | - |
-| Sustainability Speaks | LinkedIn description | Need from Jacob | sustainabilityspeaks.co.uk? |
+| Project               | Help Files Source                 | Screenshots              | Live Link                   |
+| --------------------- | --------------------------------- | ------------------------ | --------------------------- |
+| CanonCore             | `Help Files/canoncore-v2/`        | Need to capture          | GitHub                      |
+| Vepple                | `CV.md` details                   | Need from Jacob (NDA?)   | vepple.co.uk?               |
+| Pavers                | `CV.md` details                   | Need from Jacob          | pavers.co.uk                |
+| MusicCount            | `Help Files/MusicCount/CLAUDE.md` | App Store?               | App Store?                  |
+| Waveger               | `Help Files/Waveger/` + old site  | Old site has screenshots | -                           |
+| Sustainability Speaks | LinkedIn description              | Need from Jacob          | sustainabilityspeaks.co.uk? |
 
 ---
 
 ### ABOUT PAGE (`/about`)
 
-| Section | Component | Custom Needed? | Content Source |
-|---------|-----------|----------------|----------------|
-| Hero + Stats | `about-hero.tsx` | Change stats | `CV.md` |
-| My Story | `why-we-began.tsx` | Photo + paragraphs | `Me.jpeg` + write new |
-| Experience Timeline | `experience3.tsx` | ✓ Downloaded | `CV.md` work history |
-| Companies/Tech | `team-showcase.tsx` | Swap logos | Company logos |
+| Section             | Component           | Custom Needed?     | Content Source        |
+| ------------------- | ------------------- | ------------------ | --------------------- |
+| Hero + Stats        | `about-hero.tsx`    | Change stats       | `CV.md`               |
+| My Story            | `why-we-began.tsx`  | Photo + paragraphs | `Me.jpeg` + write new |
+| Experience Timeline | `experience3.tsx`   | ✓ Downloaded       | `CV.md` work history  |
+| Companies/Tech      | `team-showcase.tsx` | Swap logos         | Company logos         |
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -162,11 +166,11 @@ Transform the Lumen Next.js template into Jacob Rees's personal portfolio websit
 
 ### CONTACT PAGE (`/contact`)
 
-| Section | Component | Custom Needed? | Content Source |
-|---------|-----------|----------------|----------------|
-| Hero text | Simple heading | Minimal | - |
-| Contact Cards | `projects15d.tsx` | ✓ Downloaded (video removed) | `CV.md` links |
-| Location | Simple text | - | - |
+| Section       | Component         | Custom Needed?               | Content Source |
+| ------------- | ----------------- | ---------------------------- | -------------- |
+| Hero text     | Simple heading    | Minimal                      | -              |
+| Contact Cards | `projects15d.tsx` | ✓ Downloaded (video removed) | `CV.md` links  |
+| Location      | Simple text       | -                            | -              |
 
 ```
 ┌─────────────────────────────────────────────┐
@@ -195,29 +199,30 @@ Components sourced from shadcnblocks and custom:
 
 ## Component Mapping (Lumen → Portfolio)
 
-| Original Component | New Purpose | Action |
-|-------------------|-------------|--------|
-| `hero.tsx` | Your intro section | MODIFY |
-| `logos.tsx` | Tech stack marquee | MODIFY |
-| `features-grid.tsx` | Projects grid | MODIFY |
-| `features-showcase.tsx` | Project case studies | MODIFY |
-| `features-carousel.tsx` | Skills showcase / screenshots | MODIFY |
-| `why-we-began.tsx` | About preview (home) | MODIFY |
-| `about-hero.tsx` | About page header | MODIFY |
-| `team-showcase.tsx` | Companies worked with | MODIFY |
-| `benefits-showcase.tsx` | - | DELETE |
-| `video-showcase.tsx` | - | DELETE |
-| `testimonials.tsx` | - | DELETE |
-| `testimonials-marquee.tsx` | - | DELETE |
-| `faq-section.tsx` | - | DELETE |
-| `pricing.tsx` | - | DELETE |
-| `pricing-table.tsx` | - | DELETE |
+| Original Component         | New Purpose                   | Action |
+| -------------------------- | ----------------------------- | ------ |
+| `hero.tsx`                 | Your intro section            | MODIFY |
+| `logos.tsx`                | Tech stack marquee            | MODIFY |
+| `features-grid.tsx`        | Projects grid                 | MODIFY |
+| `features-showcase.tsx`    | Project case studies          | MODIFY |
+| `features-carousel.tsx`    | Skills showcase / screenshots | MODIFY |
+| `why-we-began.tsx`         | About preview (home)          | MODIFY |
+| `about-hero.tsx`           | About page header             | MODIFY |
+| `team-showcase.tsx`        | Companies worked with         | MODIFY |
+| `benefits-showcase.tsx`    | -                             | DELETE |
+| `video-showcase.tsx`       | -                             | DELETE |
+| `testimonials.tsx`         | -                             | DELETE |
+| `testimonials-marquee.tsx` | -                             | DELETE |
+| `faq-section.tsx`          | -                             | DELETE |
+| `pricing.tsx`              | -                             | DELETE |
+| `pricing-table.tsx`        | -                             | DELETE |
 
 ---
 
 ## Technical Implementation
 
 ### Files to DELETE
+
 ```
 src/app/(main)/blog/
 src/app/(main)/pricing/
@@ -233,6 +238,7 @@ src/components/sections/video-showcase.tsx
 ```
 
 ### Files to CREATE
+
 ```
 src/app/(main)/projects/page.tsx
 src/app/(main)/projects/[slug]/page.tsx
@@ -246,6 +252,7 @@ src/content/projects/
 ```
 
 ### Custom Components (Already Downloaded/Created)
+
 ```
 src/components/project4.tsx              ✓ Downloaded from shadcnblocks
 src/components/sections/tech-badges.tsx  ✓ Created (uses existing Badge)
@@ -254,6 +261,7 @@ src/components/projects15d.tsx           ✓ Downloaded from shadcnblocks (video
 ```
 
 ### Files to MODIFY
+
 ```
 src/app/(main)/page.tsx        → New home layout
 src/app/(main)/about/page.tsx  → Your story + timeline
@@ -270,6 +278,7 @@ src/components/footer.tsx → Your links
 ## Assets
 
 ### Available (from Help Files)
+
 - `Help Files/Old Website Files/Home Page_files/Me.jpeg` - Your photo
 - `Help Files/JR Favicon.png` - Favicon
 - `Help Files/CV.md` - Experience, skills, stats
@@ -279,6 +288,7 @@ src/components/footer.tsx → Your links
 - `Help Files/Old Website Files/Waveger_files/` - Screenshots
 
 ### Needed from Jacob
+
 - Vepple screenshots/description (NDA permitting)
 - Pavers screenshots/description
 - CanonCore screenshots
@@ -291,10 +301,12 @@ src/components/footer.tsx → Your links
 ## Content Requirements
 
 ### Hero Section
+
 - Tagline (e.g., "Front-End Developer")
 - 1-2 sentence intro (use CV summary)
 
 ### Project Case Studies (each)
+
 - Brief description (2-3 sentences)
 - Challenge / Solution / Results
 - Tech stack list
@@ -302,6 +314,7 @@ src/components/footer.tsx → Your links
 - Links (live site, GitHub)
 
 ### About Page
+
 - Your story (why development)
 - What you're looking for
 - Photo

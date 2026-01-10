@@ -1,5 +1,12 @@
 'use client';
-import { BarChart3, Filter, Link2 } from 'lucide-react';
+import {
+  Box,
+  FileText,
+  Globe,
+  Headphones,
+  Music,
+  ShoppingBag,
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -26,67 +33,63 @@ import { useMediaQuery } from '@/hooks/use-media-query';
 import { cn } from '@/lib/utils';
 
 export const NAV_LINKS = [
+  { label: 'Home', href: '/' },
   {
-    label: 'Features',
-    href: '#',
+    label: 'Projects',
+    href: '/projects',
     subitems: [
       {
-        label: 'Work with clarity',
-        href: '/#features-carousel',
-        description: 'This is a subtext that explains a part of the item',
-        icon: Link2,
+        label: 'CanonCore',
+        href: '/projects/canoncore',
+        description: 'Full-stack media library',
+        icon: Box,
       },
       {
-        label: 'Issue tracking with less noise',
-        href: '/#features-grid',
-        description: 'This is a subtext that explains a part of the item',
-        icon: BarChart3,
+        label: 'Vepple',
+        href: '/projects/vepple',
+        description: 'Virtual campus tours',
+        icon: Globe,
       },
       {
-        label: 'Filtering Tasks, no more distractions',
-        href: '/#features-showcase',
-        description: 'This is a subtext that explains a part of the item',
-        icon: Filter,
+        label: 'Pavers',
+        href: '/projects/pavers',
+        description: 'E-commerce components',
+        icon: ShoppingBag,
+      },
+      {
+        label: 'MusicCount',
+        href: '/projects/musiccount',
+        description: 'iOS play count sync',
+        icon: Music,
+      },
+      {
+        label: 'Waveger',
+        href: '/projects/waveger',
+        description: 'Music prediction game',
+        icon: Headphones,
       },
     ],
   },
   { label: 'About', href: '/about' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Blog', href: '/blog' },
-  { label: 'FAQ', href: '/faq' },
+  { label: 'Contact', href: '/contact' },
 ];
 
 const ACTION_BUTTONS = [
-  { label: 'Sign in', href: '/signin', variant: 'ghost' as const },
-  { label: 'Get started', href: '/signup', variant: 'default' as const },
+  {
+    label: 'Download CV',
+    href: '/cv.pdf',
+    variant: 'default' as const,
+    icon: FileText,
+  },
 ];
-const Navbar = ({
-  initialBannerVisible = true,
-}: {
-  initialBannerVisible?: boolean;
-}) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isAtLeast } = useMediaQuery();
   const pathname = usePathname();
-  const [isBannerVisible, setIsBannerVisible] = useState(initialBannerVisible);
-  const hideNavbar = [
-    '/signin',
-    '/signup',
-    '/docs',
-    '/not-found',
-    '/forgot-password',
-  ].some((route) => pathname.includes(route));
-
-  useEffect(() => {
-    const handleBannerDismiss = () => {
-      setIsBannerVisible(false);
-    };
-
-    window.addEventListener('banner-dismissed', handleBannerDismiss);
-    return () =>
-      window.removeEventListener('banner-dismissed', handleBannerDismiss);
-  }, []);
+  const hideNavbar = ['/docs', '/not-found'].some((route) =>
+    pathname.includes(route),
+  );
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -144,7 +147,6 @@ const Navbar = ({
                       <NavigationMenuTrigger
                         className={cn(
                           'cursor-pointer [&_svg]:ms-2 [&_svg]:size-4',
-                          // "after:from-chart-2 after:to-chart-3 after:absolute after:-inset-0.25 after:-z-1 after:rounded-sm after:bg-gradient-to-tr after:opacity-0 after:transition-all after:content-[''] hover:after:opacity-100",
                           pathname.startsWith(item.href) &&
                             'bg-accent font-semibold',
                         )}
@@ -153,14 +155,22 @@ const Navbar = ({
                         {item.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="">
-                        <ul className="grid w-[263px] gap-2">
+                        <ul className="grid w-[280px] gap-2">
+                          <li>
+                            <NavigationMenuLink
+                              href={item.href}
+                              className="hover:bg-accent/50 flex-row gap-3 p-3 font-medium"
+                            >
+                              View All Projects
+                            </NavigationMenuLink>
+                          </li>
                           {item.subitems.map((subitem) => (
                             <li key={subitem.label}>
                               <NavigationMenuLink
                                 href={subitem.href}
                                 className="hover:bg-accent/50 flex-row gap-3 p-3"
                               >
-                                <subitem.icon className="text-foreground size-5.5" />
+                                <subitem.icon className="text-foreground size-5" />
                                 <div className="flex flex-col gap-1">
                                   <div className="text-sm font-medium tracking-normal">
                                     {subitem.label}
@@ -180,7 +190,6 @@ const Navbar = ({
                       href={item.href}
                       className={cn(
                         navigationMenuTriggerStyle(),
-                        // "after:from-chart-2 after:to-chart-3 after:absolute after:-inset-0.25 after:-z-1 after:rounded-sm after:bg-gradient-to-tr after:opacity-0 after:transition-all after:content-[''] hover:after:opacity-100",
                         pathname === item.href && 'bg-accent font-semibold',
                       )}
                       suppressHydrationWarning
@@ -247,10 +256,7 @@ const Navbar = ({
         {/*  Mobile Menu Navigation */}
         <div
           className={cn(
-            'bg-background/95 text-accent-foreground fixed inset-0 -z-10 flex flex-col justify-between tracking-normal backdrop-blur-md transition-all duration-500 ease-out lg:hidden',
-            isBannerVisible
-              ? 'pt-[calc(var(--header-height)+3rem)]'
-              : 'pt-[var(--header-height)]',
+            'bg-background/95 text-accent-foreground fixed inset-0 -z-10 flex flex-col justify-between pt-[var(--header-height)] tracking-normal backdrop-blur-md transition-all duration-500 ease-out lg:hidden',
             isMenuOpen
               ? 'translate-x-0 opacity-100'
               : 'pointer-events-none translate-x-full opacity-0',
@@ -315,9 +321,7 @@ const Navbar = ({
             {ACTION_BUTTONS.map((button) => (
               <Button
                 key={button.label}
-                variant={
-                  button.variant === 'ghost' ? 'outline' : button.variant
-                }
+                variant={button.variant}
                 asChild
                 className="h-12 flex-1 rounded-sm shadow-sm"
               >

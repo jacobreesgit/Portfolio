@@ -2,9 +2,7 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { cookies } from 'next/headers';
 
-import Banner from '@/components/layout/banner';
 import Footer from '@/components/layout/footer';
 import Navbar from '@/components/layout/navbar';
 import { StyleGlideProvider } from '@/components/styleglide-provider';
@@ -19,72 +17,61 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Lumen - Modern Next.js Template',
-    template: '%s | Lumen',
+    default: 'Jacob Rees | Front-End Developer',
+    template: '%s | Jacob Rees',
   },
   description:
-    'A modern, fully featured Next.js template built with Shadcn/UI, TailwindCSS and TypeScript, perfect for your next web application.',
+    'Front-End Developer with full-stack experience, specialising in Vue.js, React, and Next.js. Creating intuitive, feature-rich applications that prioritise the user experience.',
   keywords: [
-    'Next.js',
+    'Front-End Developer',
+    'Vue.js',
     'React',
-    'JavaScript',
+    'Next.js',
     'TypeScript',
-    'TailwindCSS',
-    'Template',
-    'Shadcn/UI',
-    'Web Development',
+    'JavaScript',
+    'Web Developer',
+    'Portfolio',
   ],
-  authors: [{ name: 'Lumen - Shadcnblocks.com' }],
-  creator: 'Lumen - Shadcnblocks.com',
-  publisher: 'Lumen',
+  authors: [{ name: 'Jacob Rees' }],
+  creator: 'Jacob Rees',
+  publisher: 'Jacob Rees',
   robots: {
     index: true,
     follow: true,
   },
   icons: {
-    icon: [
-      { url: '/favicon/favicon.ico', sizes: '48x48' },
-      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
-      { url: '/favicon/favicon.svg', type: 'image/svg+xml' },
-      { url: '/favicon/favicon.ico' },
-    ],
-    apple: [{ url: '/favicon/apple-touch-icon.png', sizes: '180x180' }],
-    shortcut: [{ url: '/favicon/favicon.ico' }],
+    icon: [{ url: '/favicon.png', type: 'image/png' }],
+    apple: [{ url: '/favicon.png' }],
+    shortcut: [{ url: '/favicon.png' }],
   },
   openGraph: {
-    title: 'Lumen - Modern Next.js Template',
+    title: 'Jacob Rees | Front-End Developer',
     description:
-      'A modern, fully featured Next.js template built with Shadcn/UI, TailwindCSS and TypeScript, perfect for your next web application.',
-    siteName: 'Lumen',
+      'Front-End Developer with full-stack experience, specialising in Vue.js, React, and Next.js.',
+    siteName: 'Jacob Rees',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Lumen - Modern Next.js Template',
+        alt: 'Jacob Rees - Front-End Developer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lumen - Modern Next.js Template',
+    title: 'Jacob Rees | Front-End Developer',
     description:
-      'A modern, fully featured Next.js template built with Shadcn/UI, TailwindCSS and TypeScript, perfect for your next web application.',
-    images: ['/og-image.jpg'],
-    creator: '@shadcnblocks',
+      'Front-End Developer with full-stack experience, specialising in Vue.js, React, and Next.js.',
+    images: ['/images/og-image.jpg'],
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // Read banner dismissed state from cookies (server-side)
-  const cookieStore = await cookies();
-  const bannerDismissed = cookieStore.get('banner-dismissed')?.value === 'true';
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -95,16 +82,11 @@ export default async function RootLayout({
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           disableTransitionOnChange
         >
           <StyleGlideProvider />
-
-          <Banner
-            url="https://www.shadcnblocks.com/template/lumen"
-            initialVisible={!bannerDismissed}
-          />
-          <Navbar initialBannerVisible={!bannerDismissed} />
+          <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
         </ThemeProvider>

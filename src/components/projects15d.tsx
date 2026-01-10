@@ -1,7 +1,7 @@
-import { AudioLines } from "lucide-react";
-import type React from "react";
+import { AudioLines } from 'lucide-react';
+import type React from 'react';
 
-import { cn } from "@/lib/utils";
+import { cn } from '@/lib/utils';
 
 interface Projects15dProps {
   className?: string;
@@ -18,7 +18,7 @@ const CardSection: React.FC<CardSectionProps> = ({
   imageSrc,
   label,
   title,
-  className = "",
+  className = '',
 }) => {
   return (
     <div
@@ -50,35 +50,35 @@ const Projects15d = ({ className }: Projects15dProps) => {
   const cardSections = [
     {
       imageSrc:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/jeremy-bishop-iEjCQtcsVPY-unsplash.jpg",
-      label: "MERIDIAN FILMS",
-      title: "Coastal Reflections",
+        'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/jeremy-bishop-iEjCQtcsVPY-unsplash.jpg',
+      label: 'MERIDIAN FILMS',
+      title: 'Coastal Reflections',
     },
     {
       imageSrc:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/carles-rabada-f7UprkNqi08-unsplash.jpg",
-      label: "ZENITH VISUALS",
-      title: "Ethereal Moments",
+        'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/carles-rabada-f7UprkNqi08-unsplash.jpg',
+      label: 'ZENITH VISUALS',
+      title: 'Ethereal Moments',
     },
     {
       imageSrc:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/sam-wermut-FiUuNWxnb3k-unsplash.jpg",
-      label: "NEXUS CREATIVE",
-      title: "Deserted Frontiers",
+        'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/sam-wermut-FiUuNWxnb3k-unsplash.jpg',
+      label: 'NEXUS CREATIVE',
+      title: 'Deserted Frontiers',
     },
     {
       imageSrc:
-        "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/ines-alvarez-fdez-VjRc6HDXJ5s-unsplash.jpg",
-      label: "PRISM STUDIOS",
+        'https://deifkwefumgah.cloudfront.net/shadcnblocks/block/photos/ines-alvarez-fdez-VjRc6HDXJ5s-unsplash.jpg',
+      label: 'PRISM STUDIOS',
       title: "Nature's Symphony",
     },
   ];
 
   return (
-    <section className={cn("bg-background py-8 md:py-32", className)}>
+    <section className={cn('bg-background py-8 md:py-32', className)}>
       <div className="container mx-auto">
         {/* Header Section */}
-        <div className="mb-12 text-left text-foreground">
+        <div className="text-foreground mb-12 text-left">
           <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:mb-8 lg:text-8xl">
             Explore Our Projects
           </h1>
