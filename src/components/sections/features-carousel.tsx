@@ -1,11 +1,11 @@
 'use client';
 
-import { BarChart3, Clock, Filter, Link } from 'lucide-react';
+import { Code, Database, Palette, Smartphone } from 'lucide-react';
 import { motion } from 'motion/react';
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import Noise from '@/components/noise';
+import { Badge } from '@/components/ui/badge';
 import {
   Card,
   CardContent,
@@ -22,58 +22,34 @@ import {
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
 import { cn } from '@/lib/utils';
 
-const features = [
+const skillCategories = [
   {
-    id: 'navigation',
-    icon: Link,
-    title: 'Navigate your work with clarity',
-    description: 'A style board that adapts with your work.',
-    image: {
-      src: '/images/features-carousel/1.webp',
-      alt: 'Navigate your work with clarity',
-      width: 400,
-      height: 400,
-      className: 'ps-4 pt-4',
-    },
+    id: 'frontend',
+    icon: Code,
+    title: 'Front-End',
+    description: 'Building responsive, accessible interfaces with modern frameworks',
+    skills: ['Vue.js', 'React', 'Next.js', 'TypeScript', 'Tailwind', 'Sass'],
   },
   {
-    id: 'tracking',
-    icon: BarChart3,
-    title: 'Issue tracking with less noise',
-    description: 'Simple, powerful, and built for clarity.',
-    image: {
-      src: '/images/features-carousel/2.webp',
-      alt: 'Issue tracking with less noise',
-      width: 400,
-      height: 400,
-      className: 'pt-4',
-    },
+    id: 'fullstack',
+    icon: Database,
+    title: 'Full-Stack',
+    description: 'End-to-end application development from database to deployment',
+    skills: ['Node.js', 'PostgreSQL', 'Prisma', 'REST APIs', 'GraphQL'],
   },
   {
-    id: 'filtering',
-    icon: Filter,
-    title: 'Filtering Tasks, no more distractions',
-    description: 'Smart filters that adapt to your needs.',
-    image: {
-      src: '/images/features-carousel/3.webp',
-      alt: 'Filtering Tasks',
-      width: 400,
-      height: 400,
-      className: 'p-4',
-    },
+    id: 'mobile',
+    icon: Smartphone,
+    title: 'Mobile',
+    description: 'Native iOS applications with modern Swift patterns',
+    skills: ['Swift', 'SwiftUI', 'iOS Development'],
   },
   {
-    id: 'timeline',
-    icon: Clock,
-    title: 'Timeline Management, no more delays',
-    description: 'Keep track of project progress with ease.',
-    image: {
-      src: '/images/features-carousel/4.webp',
-      alt: 'Timeline Management',
-      width: 400,
-      height: 400,
-      className: 'pt-4',
-    },
+    id: 'tools',
+    icon: Palette,
+    title: 'Tools & Design',
+    description: 'Design systems, DevOps, and analytics integration',
+    skills: ['Figma', 'Docker', 'Git', 'Vercel', 'GTM', 'Google Analytics'],
   },
 ];
 
@@ -144,7 +120,7 @@ export default function FeaturesCarousel() {
     },
   };
 
-  const handleFeatureClick = (index: number) => {
+  const handleCategoryClick = (index: number) => {
     setActiveIndex(index);
     api?.scrollTo(index);
   };
@@ -167,7 +143,7 @@ export default function FeaturesCarousel() {
 
   return (
     <section
-      id="features-carousel"
+      id="skills"
       className="section-padding relative overflow-x-hidden"
     >
       <Noise />
@@ -183,13 +159,13 @@ export default function FeaturesCarousel() {
             variants={headerVariants}
           >
             <h2 className="text-4xl tracking-tight text-balance lg:text-5xl">
-              Navigate your{' '}
+              Skills &{' '}
               <span className="text-muted-foreground/80">
-                work with clarity
+                Technologies
               </span>
             </h2>
             <p className="text-muted-foreground text-lg leading-snug">
-              A style board that adapts to how your team works.
+              From front-end frameworks to full-stack development and native mobile apps.
             </p>
           </motion.div>
 
@@ -201,14 +177,14 @@ export default function FeaturesCarousel() {
             viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
           >
-            {features.map((feature, index) => {
-              const IconComponent = feature.icon;
+            {skillCategories.map((category, index) => {
+              const IconComponent = category.icon;
               const isActive = index === activeIndex;
 
               return (
                 <motion.button
-                  key={feature.id}
-                  onClick={() => handleFeatureClick(index)}
+                  key={category.id}
+                  onClick={() => handleCategoryClick(index)}
                   variants={buttonVariants}
                   className={cn(
                     `border-input hover:bg-border/50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-sm border transition-all duration-300`,
@@ -223,10 +199,10 @@ export default function FeaturesCarousel() {
 
           {/* Dots Indicator */}
           <div className="mt-6 hidden flex-1 items-end justify-center gap-1 lg:flex">
-            {features.map((_, index) => (
+            {skillCategories.map((_, index) => (
               <button
                 key={index}
-                onClick={() => handleFeatureClick(index)}
+                onClick={() => handleCategoryClick(index)}
                 className={cn(
                   'size-1.5 cursor-pointer rounded-full transition-all duration-300',
                   index === activeIndex
@@ -256,37 +232,42 @@ export default function FeaturesCarousel() {
             className="cursor-grab"
           >
             <CarouselContent className="h-full">
-              {features.map((feature) => (
-                <CarouselItem
-                  key={feature.id}
-                  className="h-full md:basis-[60%]"
-                >
-                  <Card className="bg-border border-input aspect-[284/362] h-full !pb-0 transition-all duration-300 hover:shadow-lg lg:aspect-[384/562]">
-                    <CardHeader>
-                      <CardTitle className="text-lg leading-tight md:text-2xl lg:text-3xl">
-                        {feature.title}
-                      </CardTitle>
-                      <CardDescription className="text-sm md:text-lg">
-                        {feature.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="relative h-full">
-                      <div className="bg-card dark:bg-card-foreground border-input relative h-full overflow-hidden rounded-lg border">
-                        <Image
-                          src={feature.image.src}
-                          alt={feature.image.alt}
-                          fill
-                          className={cn(
-                            'object-contain transition-transform duration-300 hover:scale-105',
-                            feature.image.className,
-                          )}
-                        />
-                      </div>
-                      <div className="to-chart-4 absolute inset-0 bg-gradient-to-b from-transparent from-70%"></div>
-                    </CardContent>
-                  </Card>
-                </CarouselItem>
-              ))}
+              {skillCategories.map((category) => {
+                const IconComponent = category.icon;
+                return (
+                  <CarouselItem
+                    key={category.id}
+                    className="h-full md:basis-[60%]"
+                  >
+                    <Card className="bg-border border-input aspect-[284/362] h-full transition-all duration-300 hover:shadow-lg lg:aspect-[384/562]">
+                      <CardHeader>
+                        <div className="mb-4 flex size-12 items-center justify-center rounded-lg bg-primary/10">
+                          <IconComponent className="size-6 text-primary" />
+                        </div>
+                        <CardTitle className="text-lg leading-tight md:text-2xl lg:text-3xl">
+                          {category.title}
+                        </CardTitle>
+                        <CardDescription className="text-sm md:text-lg">
+                          {category.description}
+                        </CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="flex flex-wrap gap-2">
+                          {category.skills.map((skill) => (
+                            <Badge
+                              key={skill}
+                              variant="secondary"
+                              className="text-sm"
+                            >
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
           </Carousel>
           {/* Icon Buttons */}
@@ -297,14 +278,14 @@ export default function FeaturesCarousel() {
             viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
           >
-            {features.map((feature, index) => {
-              const IconComponent = feature.icon;
+            {skillCategories.map((category, index) => {
+              const IconComponent = category.icon;
               const isActive = index === activeIndex;
 
               return (
                 <motion.button
-                  key={feature.id}
-                  onClick={() => handleFeatureClick(index)}
+                  key={category.id}
+                  onClick={() => handleCategoryClick(index)}
                   variants={buttonVariants}
                   className={cn(
                     `border-input hover:bg-border/50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-sm border transition-all duration-300`,
@@ -325,10 +306,10 @@ export default function FeaturesCarousel() {
             viewport={{ once: true, amount: 0.3 }}
             variants={containerVariants}
           >
-            {features.map((_, index) => (
+            {skillCategories.map((_, index) => (
               <motion.button
                 key={index}
-                onClick={() => handleFeatureClick(index)}
+                onClick={() => handleCategoryClick(index)}
                 variants={buttonVariants}
                 className={cn(
                   'size-1.5 cursor-pointer rounded-full transition-all duration-300',

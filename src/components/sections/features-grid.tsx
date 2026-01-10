@@ -1,151 +1,146 @@
 'use client';
 
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Noise from '@/components/noise';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
 
-const FEATURES_DATA = [
+const PROJECTS_DATA = [
   {
     id: 1,
-    image: '/images/features-grid/1.webp',
-    imageAlt: 'Feature management interface',
-    title: 'Smart Task Management',
+    slug: 'canoncore',
+    image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=CanonCore',
+    imageAlt: 'CanonCore media library application',
+    category: 'Full-Stack Application',
+    title: 'CanonCore',
     description:
-      'Organize and prioritize tasks with intelligent automation that adapts to your workflow patterns.',
-    className: 'lg:col-span-3',
-    width: 423,
-    height: 228,
+      'Built a full-stack media library with drag-and-drop organisation, Google Drive streaming, and 464+ tests. Next.js 16, React 19, PostgreSQL.',
+    technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL'],
+    className: 'lg:col-span-2',
   },
   {
     id: 2,
-    image: '/images/features-grid/2.webp',
-    imageAlt: 'Team collaboration dashboard',
-    title: 'Team Collaboration',
+    slug: 'vepple',
+    image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=Vepple',
+    imageAlt: 'Vepple virtual campus tour platform',
+    category: 'Enterprise Platform',
+    title: 'Vepple',
     description:
-      'Connect with your team seamlessly through integrated communication and shared workspaces.',
-    className: 'lg:col-span-3',
-    width: 435,
-    height: 228,
+      'Architected features for virtual campus tour platform serving 30+ UK universities. Events system, A/B testing, 41% increased session duration.',
+    technologies: ['Vue.js', 'Pinia', 'Quasar', 'Firebase'],
+    className: 'lg:col-span-2',
   },
   {
     id: 3,
-    image: '/images/features-grid/3.webp',
-    imageAlt: 'Analytics and reporting',
-    title: 'Advanced Analytics',
+    slug: 'pavers',
+    image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=Pavers',
+    imageAlt: 'Pavers e-commerce platform',
+    category: 'E-Commerce',
+    title: 'Pavers',
     description:
-      'Get comprehensive insights into your project performance with detailed analytics and customizable reports.',
-    className: 'lg:col-span-4',
-    width: 599,
-    height: 218,
-  },
-  {
-    id: 4,
-    image: '/images/features-grid/4.webp',
-    imageAlt: 'Project timeline view',
-    title: 'Project Timeline',
-    description:
-      'Visualize project progress and milestones with interactive timeline views and dependency tracking.',
+      'Developed WCAG 2.1 AA component library for 160+ store retailer. Algolia search (+10% conversions), weather-based recommendations (+7% conversion).',
+    technologies: ['Shopify Liquid', 'Sanity CMS', 'Algolia'],
     className: 'lg:col-span-2',
-    width: 292,
-    height: 215,
-  },
-  {
-    id: 5,
-    image: '/images/features-grid/5.webp',
-    imageAlt: 'Integration capabilities',
-    title: 'Seamless Integrations',
-    description:
-      'Connect with your favorite tools and services to create a unified workflow ecosystem.',
-    className: 'lg:col-span-3',
-    width: 417,
-    height: 175,
-  },
-  {
-    id: 6,
-    image: '/images/features-grid/6.webp',
-    imageAlt: 'Mobile application',
-    title: 'Mobile Ready',
-    description:
-      'Access your projects anywhere with our fully responsive mobile application.',
-    className: 'lg:col-span-3',
-    width: 433,
-    height: 155,
   },
 ];
 
 export default function FeaturesGrid() {
   return (
-    <section id="features-grid" className="section-padding relative">
+    <section id="projects" className="section-padding relative">
       <Noise />
       <div className="container">
         {/* Section Header */}
         <div className="mx-auto max-w-5xl space-y-3 lg:space-y-4 lg:text-center">
           <h2 className="text-4xl tracking-tight lg:text-5xl">
-            Feature management that fits your workflow
+            Featured Projects
           </h2>
           <p className="text-muted-foreground text-lg leading-snug lg:text-balance">
-            Assign, prioritize, and monitor every feature with precision. Lumen
-            helps teams ship faster by bringing structure to your development
-            process, without slowing you down.
+            A selection of professional and personal work showcasing full-stack
+            development, enterprise platforms, and e-commerce solutions.
           </p>
         </div>
 
-        {/* Features Grid */}
-        <div className="mt-8 grid grid-cols-1 gap-2 lg:mt-12 lg:grid-cols-6">
-          {FEATURES_DATA.map((feature) => (
-            <FeatureCard key={feature.id} {...feature} />
+        {/* Projects Grid */}
+        <div className="mt-8 grid grid-cols-1 gap-4 lg:mt-12 lg:grid-cols-6">
+          {PROJECTS_DATA.map((project) => (
+            <ProjectCard key={project.id} {...project} />
           ))}
+        </div>
+
+        {/* View All Projects Button */}
+        <div className="mt-8 flex justify-center lg:mt-12">
+          <Button size="lg" variant="outline" className="rounded-full" asChild>
+            <Link href="/projects">
+              View All Projects
+              <ArrowRight className="ml-2 size-4" />
+            </Link>
+          </Button>
         </div>
       </div>
     </section>
   );
 }
 
-interface FeatureCardProps {
+interface ProjectCardProps {
+  slug: string;
   image: string;
   imageAlt: string;
+  category: string;
   title: string;
   description: string;
+  technologies: string[];
   className?: string;
-  width: number;
-  height: number;
 }
 
-function FeatureCard({
+function ProjectCard({
+  slug,
   image,
   imageAlt,
+  category,
   title,
   description,
+  technologies,
   className,
-  width,
-  height,
-}: FeatureCardProps) {
+}: ProjectCardProps) {
   return (
-    <Card className={cn('h-full', className)}>
-      {/* Image Section */}
-      <CardContent>
-        <div className="overflow-hidden rounded-lg">
-          <Image
-            src={image}
-            alt={imageAlt}
-            width={width}
-            height={height}
-            className="w-full object-cover"
-          />
-        </div>
-      </CardContent>
+    <Link href={`/projects/${slug}`} className={cn('group', className)}>
+      <Card className="h-full transition-all duration-300 hover:border-primary/50 hover:shadow-lg">
+        {/* Image Section */}
+        <CardContent>
+          <div className="overflow-hidden rounded-lg">
+            <Image
+              src={image}
+              alt={imageAlt}
+              width={800}
+              height={600}
+              className="aspect-[4/3] w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </div>
+        </CardContent>
 
-      {/* Content Section */}
-      <CardHeader>
-        <CardTitle className="text-xl leading-tight font-semibold">
-          {title}
-        </CardTitle>
-        <p className="text-muted-foreground/70 leading-relaxed">
-          {description}
-        </p>
-      </CardHeader>
-    </Card>
+        {/* Content Section */}
+        <CardHeader>
+          <p className="text-muted-foreground text-sm font-medium">{category}</p>
+          <CardTitle className="text-xl font-semibold leading-tight">
+            {title}
+          </CardTitle>
+          <p className="text-muted-foreground/70 leading-relaxed">
+            {description}
+          </p>
+          <div className="flex flex-wrap gap-2 pt-2">
+            {technologies.map((tech) => (
+              <Badge key={tech} variant="secondary" className="text-xs">
+                {tech}
+              </Badge>
+            ))}
+          </div>
+        </CardHeader>
+      </Card>
+    </Link>
   );
 }
