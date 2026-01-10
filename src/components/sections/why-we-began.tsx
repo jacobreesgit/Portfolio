@@ -16,7 +16,7 @@ import {
 const stats = [
   {
     value: '3+',
-    label: 'Years Experience',
+    label: 'Years Professional',
   },
   {
     value: '30+',
@@ -57,9 +57,9 @@ export default function WhyWeBegan() {
                 About Me
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                I&apos;ve been building things with code since secondary school.
-                Today I create intuitive, feature-rich applications that
-                prioritise the user experience.
+                I create intuitive, feature-rich applications that prioritise
+                the user experience. With 3+ years of professional experience,
+                I&apos;ve built platforms used by millions.
               </p>
             </div>
 
