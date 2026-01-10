@@ -43,8 +43,10 @@ export const useMediaQuery = (debounceMs = 100) => {
       newSize = 'lg';
     } else if (effectiveWidth >= SCREEN_SIZES.md) {
       newSize = 'md';
-    } else {
+    } else if (effectiveWidth >= SCREEN_SIZES.sm) {
       newSize = 'sm';
+    } else {
+      newSize = 'xs';
     }
 
     setScreenSize(newSize);

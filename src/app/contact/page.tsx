@@ -1,16 +1,20 @@
-import type { Metadata } from 'next';
+'use client';
+
 import { Download, Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 
 import Noise from '@/components/noise';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import {
+  fadeUp,
+  fadeUpSmall,
+  heroContainer,
+  scrollViewport,
+  staggerContainerFast,
+} from '@/lib/animations';
 import { cn } from '@/lib/utils';
-
-export const metadata: Metadata = {
-  title: 'Contact',
-  description:
-    'Get in touch with Jacob Rees - Front-End Developer open to new opportunities',
-};
 
 const contactLinks = [
   {
@@ -55,40 +59,51 @@ interface ContactCardProps {
   image: string;
 }
 
-function ContactCard({ icon: Icon, label, value, href, image }: ContactCardProps) {
+function ContactCard({
+  icon: Icon,
+  label,
+  value,
+  href,
+  image,
+}: ContactCardProps) {
   const isExternal = href.startsWith('http');
 
   return (
-    <Link
-      href={href}
-      target={isExternal ? '_blank' : undefined}
-      rel={isExternal ? 'noopener noreferrer' : undefined}
-      className="group relative aspect-video w-full cursor-pointer overflow-hidden rounded-lg"
-    >
-      <img
-        src={image}
-        alt={label}
-        className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-      />
-      <div className="absolute inset-0 bg-black/50 transition-all duration-500 group-hover:bg-black/40" />
-      <div className="absolute inset-0 flex items-end p-6 sm:p-8">
-        <div className="text-left text-white">
-          <div className="mb-3 flex items-center gap-2">
-            <Icon className="size-5 opacity-80" />
-            <p className="text-sm font-medium tracking-wider uppercase opacity-80">
-              {label}
+    <motion.div variants={fadeUpSmall}>
+      <Link
+        href={href}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+        className="group relative block aspect-video w-full cursor-pointer overflow-hidden rounded-lg"
+      >
+        <img
+          src={image}
+          alt={label}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-black/50 transition-all duration-500 group-hover:bg-black/40" />
+        <div className="absolute inset-0 flex items-end p-6 sm:p-8">
+          <div className="text-left text-white">
+            <div className="mb-3 flex items-center gap-2">
+              <Icon className="size-5 opacity-80" />
+              <p className="text-sm font-medium tracking-wider uppercase opacity-80">
+                {label}
+              </p>
+            </div>
+            <p className="text-xl font-light tracking-tight sm:text-2xl">
+              {value}
             </p>
           </div>
-          <p className="text-xl font-light tracking-tight sm:text-2xl">
-            {value}
-          </p>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </motion.div>
   );
 }
 
 export default function ContactPage() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const initial = prefersReducedMotion ? 'visible' : 'hidden';
+
   return (
     <section className="section-padding relative overflow-hidden">
       {/* Background Gradient */}
@@ -108,13 +123,21 @@ export default function ContactPage() {
       </div>
       <Noise />
 
-      <div className="container relative z-10">
+      <div className="relative z-10 container">
         {/* Header */}
-        <div className="mb-12 text-left lg:mb-16">
-          <h1 className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:mb-8 lg:text-7xl">
+        <motion.div
+          className="mb-12 text-left lg:mb-16"
+          initial={initial}
+          animate="visible"
+          variants={heroContainer}
+        >
+          <motion.h1
+            className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:mb-8 lg:text-7xl"
+            variants={fadeUp}
+          >
             Get in Touch
-          </h1>
-          <div className="space-y-2">
+          </motion.h1>
+          <motion.div className="space-y-2" variants={fadeUp}>
             <p className="text-muted-foreground text-lg md:text-xl">
               Open to new opportunities in front-end and full-stack development
             </p>
@@ -122,15 +145,21 @@ export default function ContactPage() {
               <MapPin className="size-4" />
               Based in Durham, England · Open to remote and hybrid
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
 
         {/* Contact Cards Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
+        <motion.div
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8"
+          initial={initial}
+          whileInView="visible"
+          viewport={scrollViewport}
+          variants={staggerContainerFast}
+        >
           {contactLinks.map((contact) => (
             <ContactCard key={contact.label} {...contact} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,8 +1,16 @@
+import type { Metadata } from 'next';
+
 import { Experience3 } from '@/components/experience3';
 import Noise from '@/components/noise';
 import AboutHero from '@/components/sections/about-hero';
 import MyStory from '@/components/sections/my-story';
 import { cn } from '@/lib/utils';
+
+export const metadata: Metadata = {
+  title: 'About',
+  description:
+    'Learn about Jacob Rees - Front-End Developer with 3+ years experience building platforms for 30+ universities and 160+ retail stores.',
+};
 
 export default function AboutPage() {
   return (

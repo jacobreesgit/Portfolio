@@ -1,12 +1,5 @@
 'use client';
-import {
-  Box,
-  FileText,
-  Globe,
-  Headphones,
-  Music,
-  ShoppingBag,
-} from 'lucide-react';
+import { FileText } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -30,45 +23,20 @@ import {
   navigationMenuTriggerStyle,
 } from '@/components/ui/navigation-menu';
 import { useMediaQuery } from '@/hooks/use-media-query';
+import { PROJECTS } from '@/lib/project-data';
 import { cn } from '@/lib/utils';
 
-export const NAV_LINKS = [
+const NAV_LINKS = [
   { label: 'Home', href: '/' },
   {
     label: 'Projects',
     href: '/projects',
-    subitems: [
-      {
-        label: 'CanonCore',
-        href: '/projects/canoncore',
-        description: 'Full-stack media library',
-        icon: Box,
-      },
-      {
-        label: 'Vepple',
-        href: '/projects/vepple',
-        description: 'Virtual campus tours',
-        icon: Globe,
-      },
-      {
-        label: 'Pavers',
-        href: '/projects/pavers',
-        description: 'E-commerce components',
-        icon: ShoppingBag,
-      },
-      {
-        label: 'MusicCount',
-        href: '/projects/musiccount',
-        description: 'iOS play count sync',
-        icon: Music,
-      },
-      {
-        label: 'Waveger',
-        href: '/projects/waveger',
-        description: 'Music prediction game',
-        icon: Headphones,
-      },
-    ],
+    subitems: PROJECTS.map((p) => ({
+      label: p.title,
+      href: `/projects/${p.slug}`,
+      description: p.shortDescription,
+      icon: p.icon,
+    })),
   },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },

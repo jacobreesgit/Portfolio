@@ -1,36 +1,58 @@
 'use client';
 
 import { ArrowRight } from 'lucide-react';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import Noise from '@/components/noise';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import {
+  fadeUp,
+  popIn,
+  scaleUp,
+  scrollViewport,
+  staggerContainer,
+  staggerContainerFast,
+} from '@/lib/animations';
 
 const stats = [
   {
+    id: 'years',
     value: '3+',
     label: 'Years Professional',
   },
   {
+    id: 'universities',
     value: '30+',
     label: 'Universities',
   },
   {
+    id: 'stores',
     value: '160+',
     label: 'Stores',
   },
 ];
 
 export default function WhyWeBegan() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const initial = prefersReducedMotion ? 'visible' : 'hidden';
+
   return (
     <section className="section-padding relative">
       <Noise />
       <div className="container">
         <div className="flex flex-col-reverse items-center gap-8 md:flex-row lg:gap-12">
           {/* Image Section */}
-          <div className="relative h-full w-full md:w-[453px]">
+          <motion.div
+            className="relative h-full w-full md:w-[453px]"
+            initial={initial}
+            whileInView="visible"
+            viewport={scrollViewport}
+            variants={scaleUp}
+          >
             {/* Background gradient circles */}
             <div className="bg-chart-2 absolute top-0 left-0 size-60 -translate-x-1/6 rounded-full opacity-30 blur-[80px] will-change-transform md:opacity-70" />
             <div className="bg-chart-3 absolute right-0 bottom-0 size-60 -translate-x-1/4 translate-y-1/6 rounded-full opacity-50 blur-[80px] will-change-transform md:opacity-70" />
@@ -43,11 +65,17 @@ export default function WhyWeBegan() {
                 className="rounded-xl object-cover"
               />
             </div>
-          </div>
+          </motion.div>
 
           {/* Content Section */}
-          <div className="flex-1 space-y-6 lg:space-y-8">
-            <div className="space-y-6 lg:space-y-8">
+          <motion.div
+            className="flex-1 space-y-6 lg:space-y-8"
+            initial={initial}
+            whileInView="visible"
+            viewport={scrollViewport}
+            variants={staggerContainer}
+          >
+            <motion.div className="space-y-6 lg:space-y-8" variants={fadeUp}>
               <h2 className="text-3xl leading-none font-medium tracking-tight lg:text-4xl">
                 About Me
               </h2>
@@ -56,40 +84,44 @@ export default function WhyWeBegan() {
                 the user experience. With 3+ years of professional experience,
                 I&apos;ve built platforms used by millions.
               </p>
-            </div>
+            </motion.div>
 
             {/* Stats Cards */}
-            <div className="flex flex-1 flex-wrap gap-4">
-              {stats.map((stat, index) => (
-                <Card
-                  key={index}
-                  className="min-w-[120px] flex-1 gap-0 text-center"
-                >
-                  <CardHeader className="pb-1">
-                    <CardTitle className="text-3xl font-medium">
-                      {stat.value}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="text-muted-foreground text-sm">
-                    {stat.label}
-                  </CardContent>
-                </Card>
+            <motion.div
+              className="flex flex-1 flex-wrap gap-4"
+              variants={staggerContainerFast}
+            >
+              {stats.map((stat) => (
+                <motion.div key={stat.id} variants={popIn} className="flex-1">
+                  <Card className="min-w-[120px] gap-0 text-center">
+                    <CardHeader className="pb-1">
+                      <CardTitle className="text-3xl font-medium">
+                        {stat.value}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="text-muted-foreground text-sm">
+                      {stat.label}
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
 
             {/* CTA Button */}
-            <Button
-              size="lg"
-              variant="outline"
-              className="rounded-full"
-              asChild
-            >
-              <Link href="/about">
-                Learn More
-                <ArrowRight className="ml-2 size-4" />
-              </Link>
-            </Button>
-          </div>
+            <motion.div variants={fadeUp}>
+              <Button
+                size="lg"
+                variant="outline"
+                className="rounded-full"
+                asChild
+              >
+                <Link href="/about">
+                  Learn More
+                  <ArrowRight className="ml-2 size-4" />
+                </Link>
+              </Button>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

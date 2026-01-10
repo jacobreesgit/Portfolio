@@ -1,7 +1,11 @@
 'use client';
 
+import { motion } from 'motion/react';
+
 import { Marquee } from '@/components/magicui/marquee';
 import Noise from '@/components/noise';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { fadeIn, fadeUp, scrollViewport } from '@/lib/animations';
 
 const technologies = [
   { name: 'Vue.js', color: 'text-emerald-500' },
@@ -19,14 +23,28 @@ const technologies = [
 ];
 
 export default function Logos() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const initial = prefersReducedMotion ? 'visible' : 'hidden';
+
   return (
     <section className="section-padding relative">
       <Noise />
-      <p className="text-muted-foreground container text-center text-base">
+      <motion.p
+        className="text-muted-foreground container text-center text-base"
+        initial={initial}
+        whileInView="visible"
+        viewport={scrollViewport}
+        variants={fadeUp}
+      >
         Technologies I work with
-      </p>
+      </motion.p>
 
-      <div>
+      <motion.div
+        initial={initial}
+        whileInView="visible"
+        viewport={scrollViewport}
+        variants={fadeIn}
+      >
         <Marquee
           pauseOnHover
           className="mt-8 mask-r-from-60% mask-r-to-100% mask-l-from-60% mask-l-to-100% [--duration:25s] [--gap:3rem]"
@@ -40,7 +58,7 @@ export default function Logos() {
             </div>
           ))}
         </Marquee>
-      </div>
+      </motion.div>
     </section>
   );
 }

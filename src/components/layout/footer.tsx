@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import Noise from '@/components/noise';
+import { PROJECTS } from '@/lib/project-data';
 
 import Logo from './logo';
 
@@ -19,13 +20,10 @@ const FOOTER_SECTIONS = [
   },
   {
     title: 'Projects',
-    links: [
-      { name: 'CanonCore', href: '/projects/canoncore' },
-      { name: 'Vepple', href: '/projects/vepple' },
-      { name: 'Pavers', href: '/projects/pavers' },
-      { name: 'MusicCount', href: '/projects/musiccount' },
-      { name: 'Waveger', href: '/projects/waveger' },
-    ],
+    links: PROJECTS.map((p) => ({
+      name: p.title,
+      href: `/projects/${p.slug}`,
+    })),
   },
   {
     title: 'Connect',

@@ -1,18 +1,31 @@
-import { Download } from 'lucide-react';
-import Link from 'next/link';
-import React from 'react';
+'use client';
 
-import { cn } from '@/lib/utils';
+import { Download } from 'lucide-react';
+import { motion } from 'motion/react';
+import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import {
+  fadeUp,
+  fadeUpSmall,
+  scrollViewport,
+  staggerContainer,
+  staggerContainerFast,
+} from '@/lib/animations';
+import { cn } from '@/lib/utils';
 
 interface Experience3Props {
   className?: string;
 }
 
 const Experience3 = ({ className }: Experience3Props) => {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const initial = prefersReducedMotion ? 'visible' : 'hidden';
+
   const experience = [
     {
+      id: 'revolution-viewing',
       period: 'Mar 2023 - Present',
       title: 'Front-End Developer',
       company: 'Revolution Viewing',
@@ -22,6 +35,7 @@ const Experience3 = ({ className }: Experience3Props) => {
         'Vue.js, Pinia, Quasar, Firebase, Vitest, Figma, GTM, Google Analytics',
     },
     {
+      id: 'pavers',
       period: 'Aug 2022 - Mar 2023',
       title: 'Web Developer',
       company: 'Pavers',
@@ -31,6 +45,7 @@ const Experience3 = ({ className }: Experience3Props) => {
         'Shopify Liquid, Sanity CMS, Bootstrap, jQuery, Algolia, Jest, Lucky Orange, GTM',
     },
     {
+      id: 'university-leeds',
       period: '2019 - 2022',
       title: 'BA Digital Media',
       company: 'University of Leeds',
@@ -44,8 +59,14 @@ const Experience3 = ({ className }: Experience3Props) => {
   return (
     <section className={cn('py-32', className)}>
       <div className="container">
-        <div className="flex h-fit w-full flex-col justify-between gap-10 lg:flex-row lg:items-center">
-          <div className="max-w-xl">
+        <motion.div
+          className="flex h-fit w-full flex-col justify-between gap-10 lg:flex-row lg:items-center"
+          initial={initial}
+          whileInView="visible"
+          viewport={scrollViewport}
+          variants={staggerContainer}
+        >
+          <motion.div className="max-w-xl" variants={fadeUp}>
             <p className="tracking-loose text-foreground/30 uppercase">
               Professional Journey
             </p>
@@ -56,28 +77,40 @@ const Experience3 = ({ className }: Experience3Props) => {
               3+ years building products used by millions, from virtual campus
               platforms to e-commerce solutions.
             </p>
-          </div>
-          <Button
-            size="lg"
-            variant="outline"
-            className="rounded-full"
-            asChild
+          </motion.div>
+          <motion.div variants={fadeUp}>
+            <Button
+              size="lg"
+              variant="outline"
+              className="rounded-full"
+              asChild
+            >
+              <Link href="/cv.pdf" target="_blank">
+                <Download className="mr-2 size-4" />
+                Download CV
+              </Link>
+            </Button>
+          </motion.div>
+        </motion.div>
+        <motion.ul
+          className="relative w-full"
+          initial={initial}
+          whileInView="visible"
+          viewport={scrollViewport}
+          variants={staggerContainerFast}
+        >
+          <motion.li
+            className="text-foreground/40 flex justify-between gap-10 border-b pt-15 pb-2 text-sm tracking-tight uppercase lg:text-base"
+            variants={fadeUpSmall}
           >
-            <Link href="/cv.pdf" target="_blank">
-              <Download className="mr-2 size-4" />
-              Download CV
-            </Link>
-          </Button>
-        </div>
-        <ul className="relative w-full">
-          <li className="text-foreground/40 flex justify-between gap-10 border-b pt-15 pb-2 text-sm tracking-tight uppercase lg:text-base">
             <p>Role & Company</p>
             <p>Period</p>
-          </li>
-          {experience.map((exp, index) => (
-            <li
-              key={index}
+          </motion.li>
+          {experience.map((exp) => (
+            <motion.li
+              key={exp.id}
               className="flex justify-between gap-10 border-b py-10 lg:py-15"
+              variants={fadeUpSmall}
             >
               <div className="max-w-2xl">
                 <h3 className="mb-2 text-xl font-semibold tracking-tighter lg:text-2xl lg:text-3xl">
@@ -97,9 +130,9 @@ const Experience3 = ({ className }: Experience3Props) => {
               <p className="text-foreground/50 w-fit min-w-28 text-right text-sm uppercase lg:text-base">
                 {exp.period}
               </p>
-            </li>
+            </motion.li>
           ))}
-        </ul>
+        </motion.ul>
       </div>
     </section>
   );

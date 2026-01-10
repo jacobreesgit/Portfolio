@@ -20,6 +20,13 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import {
+  fadeUp,
+  popIn,
+  scrollViewport,
+  slideInRight,
+  staggerContainer,
+} from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
 const features = [
@@ -81,68 +88,7 @@ export default function FeaturesCarousel() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // Animation variants
-  const headerVariants = {
-    hidden: { opacity: 0, y: 30, filter: 'blur(2px)' },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-        damping: 25,
-        duration: 0.6,
-      },
-    },
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const buttonVariants = {
-    hidden: { opacity: 0, scale: 0.8, filter: 'blur(2px)' },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 120,
-        damping: 20,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      x: 60,
-      scale: 0.95,
-      filter: 'blur(3px)',
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 80,
-        damping: 20,
-        duration: 0.8,
-      },
-    },
-  };
+  const initial = prefersReducedMotion ? 'visible' : 'hidden';
 
   const handleFeatureClick = (index: number) => {
     setActiveIndex(index);
@@ -174,10 +120,10 @@ export default function FeaturesCarousel() {
           {/* Title and Description */}
           <motion.div
             className="space-y-4"
-            initial={prefersReducedMotion ? 'visible' : 'hidden'}
+            initial={initial}
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={headerVariants}
+            viewport={scrollViewport}
+            variants={fadeUp}
           >
             <h2 className="text-4xl tracking-tight text-balance lg:text-5xl">
               Skills &{' '}
@@ -192,10 +138,10 @@ export default function FeaturesCarousel() {
           {/* Icon Buttons */}
           <motion.div
             className="mx-auto hidden max-w-[155px] grid-cols-2 justify-between gap-5 lg:grid"
-            initial={prefersReducedMotion ? 'visible' : 'hidden'}
+            initial={initial}
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
+            viewport={scrollViewport}
+            variants={staggerContainer}
           >
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
@@ -205,11 +151,12 @@ export default function FeaturesCarousel() {
                 <motion.button
                   key={feature.id}
                   onClick={() => handleFeatureClick(index)}
-                  variants={buttonVariants}
+                  variants={popIn}
                   className={cn(
                     `border-input hover:bg-border/50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-sm border transition-all duration-300`,
                     isActive && 'bg-border',
                   )}
+                  aria-label={feature.title}
                 >
                   <IconComponent className="size-5" strokeWidth={2.1} />
                 </motion.button>
@@ -238,10 +185,10 @@ export default function FeaturesCarousel() {
         {/* Right Content - Carousel Cards */}
         <motion.div
           className="select-none md:mask-r-from-60% md:mask-r-to-100% lg:col-span-2"
-          initial={prefersReducedMotion ? 'visible' : 'hidden'}
+          initial={initial}
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={cardVariants}
+          viewport={scrollViewport}
+          variants={slideInRight}
         >
           <Carousel
             setApi={setApi}
@@ -286,13 +233,14 @@ export default function FeaturesCarousel() {
               ))}
             </CarouselContent>
           </Carousel>
-          {/* Icon Buttons */}
+
+          {/* Mobile Icon Buttons */}
           <motion.div
             className="mx-auto my-8 flex max-w-md justify-between gap-4 lg:hidden"
-            initial={prefersReducedMotion ? 'visible' : 'hidden'}
+            initial={initial}
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
+            viewport={scrollViewport}
+            variants={staggerContainer}
           >
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
@@ -302,11 +250,12 @@ export default function FeaturesCarousel() {
                 <motion.button
                   key={feature.id}
                   onClick={() => handleFeatureClick(index)}
-                  variants={buttonVariants}
+                  variants={popIn}
                   className={cn(
                     `border-input hover:bg-border/50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-sm border transition-all duration-300`,
                     isActive && 'bg-border',
                   )}
+                  aria-label={feature.title}
                 >
                   <IconComponent className="size-5" strokeWidth={2.1} />
                 </motion.button>
@@ -314,19 +263,19 @@ export default function FeaturesCarousel() {
             })}
           </motion.div>
 
-          {/* Dots Indicator */}
+          {/* Mobile Dots Indicator */}
           <motion.div
             className="flex flex-1 items-end justify-center gap-1 lg:hidden"
-            initial={prefersReducedMotion ? 'visible' : 'hidden'}
+            initial={initial}
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            variants={containerVariants}
+            viewport={scrollViewport}
+            variants={staggerContainer}
           >
             {features.map((_, index) => (
               <motion.button
                 key={index}
                 onClick={() => handleFeatureClick(index)}
-                variants={buttonVariants}
+                variants={popIn}
                 className={cn(
                   'size-1.5 cursor-pointer rounded-full transition-all duration-300',
                   index === activeIndex

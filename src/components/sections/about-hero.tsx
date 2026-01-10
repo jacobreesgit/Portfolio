@@ -1,22 +1,41 @@
+'use client';
+
 import { MapPin } from 'lucide-react';
+import { motion } from 'motion/react';
 import Image from 'next/image';
 
 import Noise from '@/components/noise';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import {
+  fadeUp,
+  heroContainer,
+  popIn,
+  scaleUp,
+  staggerContainerFast,
+} from '@/lib/animations';
 
 const stats = [
-  { number: '3+', label: 'Years Professional' },
-  { number: '30+', label: 'Universities' },
-  { number: '160+', label: 'Stores' },
+  { id: 'years', number: '3+', label: 'Years Professional' },
+  { id: 'universities', number: '30+', label: 'Universities' },
+  { id: 'stores', number: '160+', label: 'Stores' },
 ];
 
 export default function AboutHero() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const initial = prefersReducedMotion ? 'visible' : 'hidden';
+
   return (
     <section className="section-padding relative">
       <Noise />
       <div className="bigger-container">
         <div className="flex flex-col items-center gap-8 md:flex-row md:items-start lg:gap-16">
           {/* Profile Image */}
-          <div className="relative h-72 w-72 shrink-0 overflow-hidden rounded-2xl border md:h-80 md:w-80 lg:h-96 lg:w-96">
+          <motion.div
+            className="relative h-72 w-72 shrink-0 overflow-hidden rounded-2xl border md:h-80 md:w-80 lg:h-96 lg:w-96"
+            initial={initial}
+            animate="visible"
+            variants={scaleUp}
+          >
             <Image
               src="/me.jpeg"
               alt="Jacob Rees"
@@ -24,35 +43,56 @@ export default function AboutHero() {
               className="object-cover"
               priority
             />
-          </div>
+          </motion.div>
 
           {/* Content */}
-          <div className="flex-1 text-center md:text-left">
-            <h1 className="text-4xl font-medium tracking-tighter md:text-6xl md:leading-none lg:text-7xl">
+          <motion.div
+            className="flex-1 text-center md:text-left"
+            initial={initial}
+            animate="visible"
+            variants={heroContainer}
+          >
+            <motion.h1
+              className="text-4xl font-medium tracking-tighter md:text-6xl md:leading-none lg:text-7xl"
+              variants={fadeUp}
+            >
               Jacob Rees
-            </h1>
-            <p className="text-muted-foreground mt-2 text-xl md:text-2xl">
+            </motion.h1>
+            <motion.p
+              className="text-muted-foreground mt-2 text-xl md:text-2xl"
+              variants={fadeUp}
+            >
               Front-End Developer
-            </p>
-            <p className="text-muted-foreground mt-3 flex items-center justify-center gap-1.5 md:justify-start">
+            </motion.p>
+            <motion.p
+              className="text-muted-foreground mt-3 flex items-center justify-center gap-1.5 md:justify-start"
+              variants={fadeUp}
+            >
               <MapPin className="size-4" />
               Durham, England
-            </p>
+            </motion.p>
 
             {/* Stats Grid */}
-            <div className="mt-8 grid grid-cols-3 gap-6 lg:mt-12 lg:gap-8">
-              {stats.map((stat, index) => (
-                <div key={index} className="border-input border-b pb-4">
+            <motion.div
+              className="mt-8 grid grid-cols-3 gap-6 lg:mt-12 lg:gap-8"
+              variants={staggerContainerFast}
+            >
+              {stats.map((stat) => (
+                <motion.div
+                  key={stat.id}
+                  className="border-input border-b pb-4"
+                  variants={popIn}
+                >
                   <div className="text-2xl font-medium md:text-3xl lg:text-4xl">
                     {stat.number}
                   </div>
                   <div className="text-muted-foreground mt-1 text-sm md:text-base">
                     {stat.label}
                   </div>
-                </div>
+                </motion.div>
               ))}
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

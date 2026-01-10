@@ -6,98 +6,20 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { fadeUp, heroContainer, scaleUp } from '@/lib/animations';
 
 export default function NotFound() {
   const prefersReducedMotion = usePrefersReducedMotion();
-
-  // Animation variants
-  const backgroundTextVariants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.8,
-      filter: 'blur(4px)',
-      rotate: -5,
-    },
-    visible: {
-      opacity: 0.8,
-      scale: 1,
-      filter: 'blur(0px)',
-      rotate: 0,
-      transition: {
-        type: 'spring' as const,
-        stiffness: 60,
-        damping: 15,
-        duration: 1.2,
-        delay: 0.2,
-      },
-    },
-  };
-
-  const contentVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.4,
-      },
-    },
-  };
-
-  const titleVariants = {
-    hidden: { opacity: 0, y: 30, filter: 'blur(2px)' },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-        damping: 20,
-        duration: 0.8,
-      },
-    },
-  };
-
-  const descriptionVariants = {
-    hidden: { opacity: 0, y: 20, filter: 'blur(2px)' },
-    visible: {
-      opacity: 1,
-      y: 0,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 120,
-        damping: 20,
-        duration: 0.6,
-      },
-    },
-  };
-
-  const buttonVariants = {
-    hidden: { opacity: 0, y: 20, scale: 0.95, filter: 'blur(2px)' },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      filter: 'blur(0px)',
-      transition: {
-        type: 'spring' as const,
-        stiffness: 100,
-        damping: 15,
-        duration: 0.7,
-      },
-    },
-  };
+  const initial = prefersReducedMotion ? 'visible' : 'hidden';
 
   return (
     <section className="section-padding relative container flex min-h-screen items-center justify-center">
       {/* Large 404 background text */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
-        initial={prefersReducedMotion ? 'visible' : 'hidden'}
+        initial={initial}
         animate="visible"
-        variants={backgroundTextVariants}
+        variants={scaleUp}
       >
         <span className="text-muted/80 text-[12rem] font-bold select-none sm:text-[16rem] md:text-[25rem] lg:text-[32rem]">
           404
@@ -107,27 +29,27 @@ export default function NotFound() {
       {/* Main content */}
       <motion.div
         className="relative z-10 text-center"
-        initial={prefersReducedMotion ? 'visible' : 'hidden'}
+        initial={initial}
         animate="visible"
-        variants={contentVariants}
+        variants={heroContainer}
       >
         <motion.h1
           className="text-foreground mb-4 text-3xl font-bold md:text-4xl lg:text-5xl"
-          variants={titleVariants}
+          variants={fadeUp}
         >
           Page Not Found
         </motion.h1>
 
         <motion.p
           className="text-muted-foreground mx-auto mb-6 max-w-md text-sm md:text-base lg:text-lg"
-          variants={descriptionVariants}
+          variants={fadeUp}
         >
-          Duis dolor sit amet, consectetur adipiscing
+          The page you&apos;re looking for doesn&apos;t exist
           <br />
-          elitvestibulum in pharetra.
+          or has been moved.
         </motion.p>
 
-        <motion.div variants={buttonVariants}>
+        <motion.div variants={fadeUp}>
           <Button
             asChild
             size="lg"

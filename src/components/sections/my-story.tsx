@@ -1,16 +1,37 @@
+'use client';
+
+import { motion } from 'motion/react';
+
 import Noise from '@/components/noise';
+import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
+import { fadeUp, scrollViewport, staggerContainer } from '@/lib/animations';
 
 export default function MyStory() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const initial = prefersReducedMotion ? 'visible' : 'hidden';
+
   return (
     <section className="section-padding relative">
       <Noise />
       <div className="container">
-        <div className="mx-auto max-w-3xl space-y-6">
-          <h2 className="text-3xl font-medium tracking-tight lg:text-4xl">
+        <motion.div
+          className="mx-auto max-w-3xl space-y-6"
+          initial={initial}
+          whileInView="visible"
+          viewport={scrollViewport}
+          variants={staggerContainer}
+        >
+          <motion.h2
+            className="text-3xl font-medium tracking-tight lg:text-4xl"
+            variants={fadeUp}
+          >
             My Story
-          </h2>
+          </motion.h2>
 
-          <div className="text-muted-foreground space-y-6 text-lg leading-relaxed">
+          <motion.div
+            className="text-muted-foreground space-y-6 text-lg leading-relaxed"
+            variants={fadeUp}
+          >
             <p>
               I&apos;ve been hooked on building things with code since secondary
               school Computer Science. What started as curiosity became a
@@ -42,8 +63,8 @@ export default function MyStory() {
               want to build products that matter, with a team that cares about
               doing things properly.
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );
