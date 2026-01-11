@@ -35,13 +35,36 @@ export async function generateMetadata({
   };
 }
 
-// Gradient colors per project
-const projectGradients: Record<string, { color1: string; color2: string }> = {
-  canoncore: { color1: 'bg-blue-500/15', color2: 'bg-violet-500/15' },
-  vepple: { color1: 'bg-teal-500/15', color2: 'bg-cyan-400/15' },
-  pavers: { color1: 'bg-amber-500/15', color2: 'bg-orange-400/15' },
-  musiccount: { color1: 'bg-violet-500/15', color2: 'bg-fuchsia-400/15' },
-  waveger: { color1: 'bg-emerald-500/15', color2: 'bg-green-400/15' },
+// Gradient colors per project (color3 is optional middle blob for tall pages)
+const projectGradients: Record<
+  string,
+  { color1: string; color2: string; color3?: string }
+> = {
+  canoncore: {
+    color1: 'bg-blue-500/15',
+    color2: 'bg-violet-500/15',
+    color3: 'bg-indigo-400/10',
+  },
+  vepple: {
+    color1: 'bg-teal-500/15',
+    color2: 'bg-cyan-400/15',
+    color3: 'bg-emerald-400/10',
+  },
+  pavers: {
+    color1: 'bg-amber-500/15',
+    color2: 'bg-orange-400/15',
+    color3: 'bg-yellow-400/10',
+  },
+  musiccount: {
+    color1: 'bg-violet-500/15',
+    color2: 'bg-fuchsia-400/15',
+    color3: 'bg-pink-400/10',
+  },
+  waveger: {
+    color1: 'bg-emerald-500/15',
+    color2: 'bg-green-400/15',
+    color3: 'bg-teal-400/10',
+  },
 };
 
 // Custom MDX components for images with captions
@@ -79,27 +102,38 @@ export default async function ProjectPage({ params }: PageProps) {
   };
 
   return (
-    <section className={cn('py-16', 'relative', 'overflow-hidden')}>
+    <div className="relative overflow-hidden">
       {/* Background Gradient */}
-      <div className="absolute size-full mask-t-from-50% mask-t-to-100% mask-b-from-50% mask-b-to-90%">
+      <div className="pointer-events-none absolute inset-0">
         <div
           className={cn(
             gradient.color1,
-            'absolute size-full rounded-full blur-3xl will-change-transform',
-            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/3 md:translate-y-0',
+            'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
+            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/4',
           )}
         />
+        {/* Middle blob for tall pages */}
+        {gradient.color3 && (
+          <div
+            className={cn(
+              gradient.color3,
+              'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
+              'left-0 top-[35%] md:-translate-x-1/4',
+            )}
+          />
+        )}
         <div
           className={cn(
             gradient.color2,
-            'absolute size-full rounded-full blur-3xl will-change-transform',
-            'right-0 bottom-0 translate-y-1/3 md:top-0 md:translate-x-1/3 md:-translate-y-0',
+            'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
+            'right-0 bottom-0 translate-y-1/2 md:translate-x-1/4',
           )}
         />
       </div>
       <Noise />
 
-      <div className="relative z-10 container max-w-7xl">
+      <section className="relative z-10 py-16">
+        <div className="container max-w-7xl">
         {/* Back Button */}
         <Button variant="ghost" size="sm" className="mb-8" asChild>
           <Link href="/projects">
@@ -195,7 +229,8 @@ export default async function ProjectPage({ params }: PageProps) {
             </article>
           </div>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }

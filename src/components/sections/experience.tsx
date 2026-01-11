@@ -15,11 +15,11 @@ import {
 } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
-interface Experience3Props {
+interface ExperienceProps {
   className?: string;
 }
 
-const Experience3 = ({ className }: Experience3Props) => {
+export default function Experience({ className }: ExperienceProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const initial = prefersReducedMotion ? 'visible' : 'hidden';
 
@@ -30,7 +30,7 @@ const Experience3 = ({ className }: Experience3Props) => {
       title: 'Front-End Developer',
       company: 'Revolution Viewing',
       description:
-        'Developed Vepple, a virtual experience platform for 30+ UK universities delivering personalised campus tours, interactive maps, and live events with lead capture. Engineered the front-end using Vue.js, Pinia, and Quasar, with a Figma design system and reusable component library. Architected Events Management System with Firebase real-time chat, 1-second status engine, and timezone-aware scheduling. Built production A/B testing framework reducing bounce rate by 19%. Led mobile navigation overhaul increasing session duration by 41% and mobile engagement by 85%.',
+        'Developed Vepple, a virtual experience platform for 30+ UK universities including Imperial College London and Nottingham Trent. Platform drives 4x more pages per session vs standard university websites, with users averaging 12+ pages and 7 minutes per visit. Architected Events System with Firebase real-time chat delivering 108% increase in views per session. Built Explore by Map feature (21 pages/session, 64% engagement increase) and Guided Tours used by 1M+ students. Led mobile navigation overhaul increasing session duration by 41%.',
       technologies:
         'Vue.js, Pinia, Quasar, Firebase, Vitest, Figma, GTM, Google Analytics',
     },
@@ -67,13 +67,13 @@ const Experience3 = ({ className }: Experience3Props) => {
           variants={staggerContainer}
         >
           <motion.div className="max-w-xl" variants={fadeUp}>
-            <p className="tracking-loose text-foreground/30 uppercase">
+            <p className="text-muted-foreground/50 tracking-loose uppercase">
               Professional Journey
             </p>
-            <h1 className="mt-2 text-4xl font-semibold tracking-tight lg:text-6xl">
+            <h2 className="mt-2 text-4xl tracking-tight lg:text-5xl">
               Experience
-            </h1>
-            <p className="text-foreground/50 mt-10 text-lg">
+            </h2>
+            <p className="text-muted-foreground mt-10 text-lg">
               3+ years building products used by millions, from virtual campus
               platforms to e-commerce solutions.
             </p>
@@ -100,7 +100,7 @@ const Experience3 = ({ className }: Experience3Props) => {
           variants={staggerContainerFast}
         >
           <motion.li
-            className="text-foreground/40 flex justify-between gap-10 border-b pt-15 pb-2 text-sm tracking-tight uppercase lg:text-base"
+            className="text-muted-foreground/60 flex justify-between gap-10 border-b pt-15 pb-2 text-sm tracking-tight uppercase lg:text-base"
             variants={fadeUpSmall}
           >
             <p>Role & Company</p>
@@ -116,18 +116,18 @@ const Experience3 = ({ className }: Experience3Props) => {
                 <h3 className="mb-2 text-xl font-semibold tracking-tighter lg:text-2xl lg:text-3xl">
                   {exp.title}
                 </h3>
-                <p className="text-foreground/70 mb-4 text-base font-medium">
+                <p className="text-muted-foreground mb-4 text-base font-medium">
                   {exp.company}
                 </p>
-                <p className="text-foreground/50 mb-3 text-sm lg:text-base">
+                <p className="text-muted-foreground/80 mb-3 text-sm lg:text-base">
                   {exp.description}
                 </p>
-                <p className="text-foreground/40 text-xs lg:text-sm">
+                <p className="text-muted-foreground/60 text-xs lg:text-sm">
                   <span className="font-medium">Technologies:</span>{' '}
                   {exp.technologies}
                 </p>
               </div>
-              <p className="text-foreground/50 w-fit min-w-28 text-right text-sm uppercase lg:text-base">
+              <p className="text-muted-foreground w-fit min-w-28 text-right text-sm uppercase lg:text-base">
                 {exp.period}
               </p>
             </motion.li>
@@ -136,6 +136,4 @@ const Experience3 = ({ className }: Experience3Props) => {
       </div>
     </section>
   );
-};
-
-export { Experience3 };
+}

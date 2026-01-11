@@ -76,9 +76,7 @@ export default function WhyWeBegan() {
             variants={staggerContainer}
           >
             <motion.div className="space-y-6 lg:space-y-8" variants={fadeUp}>
-              <h2 className="text-3xl leading-none font-medium tracking-tight lg:text-4xl">
-                About Me
-              </h2>
+              <h2 className="text-4xl tracking-tight lg:text-5xl">About Me</h2>
               <p className="text-muted-foreground text-lg leading-relaxed">
                 I create intuitive, feature-rich applications that prioritise
                 the user experience. With 3+ years of professional experience,

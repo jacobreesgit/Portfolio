@@ -53,7 +53,6 @@ export default function NotFound() {
           <Button
             asChild
             size="lg"
-            variant="light"
             className="group !pl-5.5 font-medium"
           >
             <Link href="/">

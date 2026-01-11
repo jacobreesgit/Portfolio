@@ -118,6 +118,12 @@ const Navbar = () => {
                           pathname.startsWith(item.href) &&
                             'bg-accent font-semibold',
                         )}
+                        onClick={(e) => {
+                          // Prevent click from closing dropdown when already open
+                          if (e.currentTarget.dataset.state === 'open') {
+                            e.preventDefault();
+                          }
+                        }}
                         suppressHydrationWarning
                       >
                         {item.label}

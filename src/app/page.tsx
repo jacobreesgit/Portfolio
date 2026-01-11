@@ -1,17 +1,17 @@
-import FeaturesCarousel from '@/components/sections/features-carousel';
-import FeaturesGrid from '@/components/sections/features-grid';
+import AboutPreview from '@/components/sections/about-preview';
+import FeaturedProjects from '@/components/sections/featured-projects';
 import Hero from '@/components/sections/hero';
-import Logos from '@/components/sections/logos';
-import WhyWeBegan from '@/components/sections/why-we-began';
+import SkillsCarousel from '@/components/sections/skills-carousel';
+import TechStack from '@/components/sections/tech-stack';
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <Logos />
-      <FeaturesGrid />
-      <FeaturesCarousel />
-      <WhyWeBegan />
+      <TechStack />
+      <FeaturedProjects />
+      <SkillsCarousel />
+      <AboutPreview />
     </>
   );
 }

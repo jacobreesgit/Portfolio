@@ -22,7 +22,7 @@ export default function MyStory() {
           variants={staggerContainer}
         >
           <motion.h2
-            className="text-3xl font-medium tracking-tight lg:text-4xl"
+            className="text-4xl tracking-tight lg:text-5xl"
             variants={fadeUp}
           >
             My Story
@@ -34,19 +34,18 @@ export default function MyStory() {
           >
             <p>
               I&apos;ve been hooked on building things with code since secondary
-              school Computer Science. What started as curiosity became a
-              passion for the intersection of design and engineering—making
-              things that not only work well, but feel right to use.
+              school Computer Science. What started as curiosity became a drive
+              to make things that work well and feel right to use.
             </p>
 
             <p>
               After studying Digital Media at Leeds (graduating with a First in
               my final coding project), I&apos;ve spent the last 3+ years as a
               Front-End Developer working on products used by millions. At
-              Revolution Viewing, I built Vepple—a platform serving 30+ UK
-              universities—architecting everything from real-time event systems
-              to A/B testing frameworks. At Pavers, I developed accessible
-              component libraries powering 160+ retail stores.
+              Pavers, I developed accessible component libraries powering 160+
+              retail stores. At Revolution Viewing, I built Vepple, a platform
+              serving 30+ UK universities, architecting everything from
+              real-time event systems to A/B testing frameworks.
             </p>
 
             <p>

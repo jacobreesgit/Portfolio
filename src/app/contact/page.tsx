@@ -107,17 +107,17 @@ export default function ContactPage() {
   return (
     <section className="section-padding relative overflow-hidden">
       {/* Background Gradient */}
-      <div className="pointer-events-none absolute inset-0 mask-t-from-50% mask-t-to-100% mask-b-from-50% mask-b-to-90%">
+      <div className="pointer-events-none absolute inset-0">
         <div
           className={cn(
-            'absolute size-full rounded-full bg-violet-500/15 blur-3xl will-change-transform',
-            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/3 md:translate-y-0',
+            'absolute h-[60vh] w-full rounded-full bg-violet-500/15 blur-3xl will-change-transform',
+            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/4',
           )}
         />
         <div
           className={cn(
-            'absolute size-full rounded-full bg-indigo-400/15 blur-3xl will-change-transform',
-            'right-0 bottom-0 translate-y-1/3 md:top-0 md:translate-x-1/3 md:-translate-y-0',
+            'absolute h-[60vh] w-full rounded-full bg-indigo-400/15 blur-3xl will-change-transform',
+            'right-0 bottom-0 translate-y-1/2 md:translate-x-1/4',
           )}
         />
       </div>
@@ -132,7 +132,7 @@ export default function ContactPage() {
           variants={heroContainer}
         >
           <motion.h1
-            className="mb-4 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl lg:mb-8 lg:text-7xl"
+            className="mb-4 text-4xl font-medium tracking-tight md:text-5xl lg:mb-8 lg:text-6xl"
             variants={fadeUp}
           >
             Get in Touch

@@ -117,7 +117,7 @@ function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div variants={fadeUpSmall} className={className}>
-      <Link href={`/projects/${slug}`} className="group block">
+      <Link href={`/projects/${slug}`} className="group block h-full">
         <Card className="hover:border-primary/50 h-full transition-all duration-300 hover:shadow-lg">
           {/* Image Section */}
           <CardContent>
@@ -134,7 +134,7 @@ function ProjectCard({
           </CardContent>
 
           {/* Content Section */}
-          <CardHeader>
+          <CardHeader className="flex-1">
             <p className="text-muted-foreground text-sm font-medium">
               {category}
             </p>
@@ -146,7 +146,10 @@ function ProjectCard({
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
               {technologies.map((tech) => (
-                <Badge key={tech} variant="secondary" className="text-xs">
+                <Badge
+                  key={tech}
+                  className="border-transparent bg-muted text-muted-foreground text-xs"
+                >
                   {tech}
                 </Badge>
               ))}

@@ -31,24 +31,25 @@ export default function ProjectsPage() {
   const initial = prefersReducedMotion ? 'visible' : 'hidden';
 
   return (
-    <section className="section-padding relative overflow-hidden">
+    <div className="relative overflow-hidden">
       {/* Background Gradient */}
-      <div className="absolute size-full mask-t-from-50% mask-t-to-100% mask-b-from-50% mask-b-to-90%">
+      <div className="pointer-events-none absolute inset-0">
         <div
           className={cn(
-            'absolute size-full rounded-full bg-pink-500/15 blur-3xl will-change-transform',
-            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/3 md:translate-y-0',
+            'absolute h-[60vh] w-full rounded-full bg-pink-500/15 blur-3xl will-change-transform',
+            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/4',
           )}
         />
         <div
           className={cn(
-            'absolute size-full rounded-full bg-orange-400/15 blur-3xl will-change-transform',
-            'right-0 bottom-0 translate-y-1/3 md:top-0 md:translate-x-1/3 md:-translate-y-0',
+            'absolute h-[60vh] w-full rounded-full bg-orange-400/15 blur-3xl will-change-transform',
+            'right-0 bottom-0 translate-y-1/2 md:translate-x-1/4',
           )}
         />
       </div>
       <Noise />
-      <div className="relative z-10 container">
+      <section className="section-padding relative z-10">
+        <div className="container">
         {/* Page Header */}
         <motion.div
           className="mx-auto max-w-3xl space-y-4 text-center"
@@ -57,7 +58,7 @@ export default function ProjectsPage() {
           variants={heroContainer}
         >
           <motion.h1
-            className="text-4xl font-bold tracking-tight md:text-5xl lg:text-6xl"
+            className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl"
             variants={fadeUp}
           >
             Projects
@@ -95,8 +96,9 @@ export default function ProjectsPage() {
             <ProjectCard key={project.slug} {...project} size="small" />
           ))}
         </motion.div>
-      </div>
-    </section>
+        </div>
+      </section>
+    </div>
   );
 }
 
@@ -121,7 +123,7 @@ function ProjectCard({
 }: ProjectCardProps) {
   return (
     <motion.div variants={fadeUpSmall}>
-      <Link href={`/projects/${slug}`} className="group block">
+      <Link href={`/projects/${slug}`} className="group block h-full">
         <Card className="hover:border-primary/50 h-full transition-all duration-300 hover:shadow-lg">
           <CardContent>
             <div className="overflow-hidden rounded-lg">
@@ -150,12 +152,15 @@ function ProjectCard({
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
               {technologies.slice(0, 4).map((tech) => (
-                <Badge key={tech} variant="secondary" className="text-xs">
+                <Badge
+                    key={tech}
+                    className="border-transparent bg-muted text-muted-foreground text-xs"
+                  >
                   {tech}
                 </Badge>
               ))}
               {technologies.length > 4 && (
-                <Badge variant="secondary" className="text-xs">
+                <Badge className="border-transparent bg-muted text-muted-foreground text-xs">
                   +{technologies.length - 4}
                 </Badge>
               )}

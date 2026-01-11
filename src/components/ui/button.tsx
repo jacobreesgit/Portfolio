@@ -15,13 +15,9 @@ const buttonVariants = cva(
           'bg-destructive text-white shadow-xl hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60',
         outline:
           'border bg-background shadow-none border-input hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50',
-        secondary:
-          'bg-secondary text-secondary-foreground shadow-xl hover:bg-secondary/80',
         ghost:
           'hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50',
         link: 'text-primary underline-offset-4 hover:underline',
-        light:
-          'bg-chart-4 border-[0.8px] font-normal border-foreground/10 before:absolute relative before:-inset-0.25 before:content-[""] before:chart-4 before:-z-1 after:absolute after:inset-0 after:content-[""] after:bg-primary/30 hover:after:translate-y-[95%] after:transition-all after:translate-y-[100%] after:blur-md overflow-hidden',
       },
       size: {
         default: 'h-9 px-4 py-2 has-[>svg]:px-3',

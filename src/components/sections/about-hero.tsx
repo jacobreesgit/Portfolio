@@ -53,7 +53,7 @@ export default function AboutHero() {
             variants={heroContainer}
           >
             <motion.h1
-              className="text-4xl font-medium tracking-tighter md:text-6xl md:leading-none lg:text-7xl"
+              className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl"
               variants={fadeUp}
             >
               Jacob Rees

@@ -41,7 +41,7 @@ export const PROJECTS: ProjectMeta[] = [
     title: 'Vepple',
     category: 'Enterprise Platform',
     description:
-      'Architected features for virtual campus tour platform serving 30+ UK universities. Events system, A/B testing, 41% increased session duration.',
+      'Architected features for virtual campus tour platform serving 30+ UK universities. 4x more pages per session, 12+ pages and 7 min average visits.',
     shortDescription: 'Virtual campus tours',
     technologies: ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL'],
     image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=Vepple',

@@ -1,32 +1,39 @@
 import type { Metadata } from 'next';
 
-import { Experience3 } from '@/components/experience3';
 import Noise from '@/components/noise';
 import AboutHero from '@/components/sections/about-hero';
+import Experience from '@/components/sections/experience';
 import MyStory from '@/components/sections/my-story';
 import { cn } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'About',
   description:
-    'Learn about Jacob Rees - Front-End Developer with 3+ years experience building platforms for 30+ universities and 160+ retail stores.',
+    'Front-End Developer with 3+ years experience. Built Vepple (30+ universities, 4x engagement) and Pavers e-commerce (160+ stores, WCAG 2.1 AA).',
 };
 
 export default function AboutPage() {
   return (
     <div className="relative overflow-hidden">
       {/* Background Gradient */}
-      <div className="pointer-events-none absolute inset-0 mask-t-from-50% mask-t-to-100% mask-b-from-50% mask-b-to-90%">
+      <div className="pointer-events-none absolute inset-0">
         <div
           className={cn(
-            'absolute size-full rounded-full bg-emerald-500/15 blur-3xl will-change-transform',
-            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/3 md:translate-y-0',
+            'absolute h-[60vh] w-full rounded-full bg-emerald-500/15 blur-3xl will-change-transform',
+            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/4',
+          )}
+        />
+        {/* Middle blob for tall page */}
+        <div
+          className={cn(
+            'absolute h-[60vh] w-full rounded-full bg-teal-400/10 blur-3xl will-change-transform',
+            'left-0 top-[35%] md:-translate-x-1/4',
           )}
         />
         <div
           className={cn(
-            'absolute size-full rounded-full bg-cyan-400/15 blur-3xl will-change-transform',
-            'right-0 bottom-0 translate-y-1/3 md:top-0 md:translate-x-1/3 md:-translate-y-0',
+            'absolute h-[60vh] w-full rounded-full bg-cyan-400/15 blur-3xl will-change-transform',
+            'right-0 bottom-0 translate-y-1/2 md:translate-x-1/4',
           )}
         />
       </div>
@@ -34,7 +41,7 @@ export default function AboutPage() {
       <div className="relative z-10">
         <AboutHero />
         <MyStory />
-        <Experience3 />
+        <Experience />
       </div>
     </div>
   );

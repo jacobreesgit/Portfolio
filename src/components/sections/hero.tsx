@@ -34,7 +34,7 @@ export default function Hero() {
           <div className="order-2 lg:order-1">
             <motion.h1
               variants={fadeUp}
-              className="text-3xl leading-tight tracking-tight md:text-5xl lg:text-6xl"
+              className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl"
             >
               Jacob Rees
             </motion.h1>
@@ -51,9 +51,9 @@ export default function Hero() {
               className="text-muted-foreground my-4 text-sm md:my-6 md:text-lg"
             >
               Front-End Developer with full-stack experience and a strong
-              background in UI &amp; UX design, specialising in creating
-              intuitive, feature-rich applications that prioritise the user
-              experience.
+              background in UI &amp; UX design. 3+ years building products used
+              by millions, including Vepple (30+ UK universities, 4x
+              engagement) and Pavers e-commerce (160+ stores).
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
