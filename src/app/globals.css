@@ -259,3 +259,36 @@ html.theme-transition::view-transition-new(root) {
     display: none !important;
   }
 }
+
+/* GitHub Contributions Calendar Styles */
+.github-calendar-wrapper {
+  /* Custom scrollbar for horizontal scroll on mobile */
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) transparent;
+}
+
+.github-calendar-wrapper::-webkit-scrollbar {
+  height: 6px;
+}
+
+.github-calendar-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.github-calendar-wrapper::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border-radius: 3px;
+}
+
+/* Style the calendar text */
+.github-calendar-wrapper text {
+  fill: var(--muted-foreground) !important;
+  font-size: 11px !important;
+}
+
+/* Total count styling */
+.github-calendar-wrapper footer {
+  color: var(--muted-foreground) !important;
+  font-size: 13px !important;
+  margin-top: 12px !important;
+}
