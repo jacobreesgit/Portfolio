@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 
 import Footer from '@/components/layout/footer';
 import Navbar from '@/components/layout/navbar';
+import ScrollToTop from '@/components/scroll-to-top';
 import { StyleGlideProvider } from '@/components/styleglide-provider';
 import { ThemeProvider } from '@/components/theme-provider';
 import { cn } from '@/lib/utils';
@@ -86,6 +87,7 @@ export default function RootLayout({
           defaultTheme="light"
           disableTransitionOnChange
         >
+          <ScrollToTop />
           <StyleGlideProvider />
           <Navbar />
           <main className="flex-1">{children}</main>

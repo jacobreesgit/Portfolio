@@ -130,7 +130,7 @@ const Navbar = () => {
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="">
                         <ul className="grid w-[280px] gap-2">
-                          <li>
+                          <li className="border-muted-foreground/5 border-b pb-2">
                             <NavigationMenuLink
                               href={item.href}
                               className="hover:bg-accent/50 flex-row gap-3 p-3 font-medium"
@@ -142,7 +142,7 @@ const Navbar = () => {
                             <li key={subitem.label}>
                               <NavigationMenuLink
                                 href={subitem.href}
-                                className="hover:bg-accent/50 flex-row gap-3 p-3"
+                                className="hover:bg-accent/50 flex-row items-center gap-3 p-3"
                               >
                                 <subitem.icon className="text-foreground size-5" />
                                 <div className="flex flex-col gap-1">
@@ -252,13 +252,20 @@ const Navbar = () => {
                           </AccordionTrigger>
                           <AccordionContent className="pb-0">
                             <div className="space-y-2">
+                              <NavigationMenuLink
+                                href={item.href}
+                                onClick={() => setIsMenuOpen(false)}
+                                className="text-muted-foreground hover:bg-accent/50 flex flex-row items-center gap-2 p-3 font-medium transition-colors"
+                              >
+                                View All Projects
+                              </NavigationMenuLink>
                               {item.subitems.map((subitem) => (
                                 <NavigationMenuLink
                                   key={subitem.label}
                                   href={subitem.href}
                                   onClick={() => setIsMenuOpen(false)}
                                   className={cn(
-                                    'text-muted-foreground hover:bg-accent/50 flex flex-row gap-2 p-3 font-medium transition-colors',
+                                    'text-muted-foreground hover:bg-accent/50 flex flex-row items-center gap-2 p-3 font-medium transition-colors',
                                     pathname === subitem.href &&
                                       'bg-accent font-semibold',
                                   )}

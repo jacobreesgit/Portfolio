@@ -43,3 +43,6 @@ next-env.d.ts
 # help files
 /Help Files
 .env*.local
+
+# docs
+/docs

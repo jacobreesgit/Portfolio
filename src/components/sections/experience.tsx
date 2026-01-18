@@ -30,9 +30,9 @@ export default function Experience({ className }: ExperienceProps) {
       title: 'Front-End Developer',
       company: 'Revolution Viewing',
       description:
-        'Developed Vepple, a virtual experience platform for 30+ UK universities including Imperial College London and Nottingham Trent. Platform drives 4x more pages per session vs standard university websites, with users averaging 12+ pages and 7 minutes per visit. Architected Events System with Firebase real-time chat delivering 108% increase in views per session. Built Explore by Map feature (21 pages/session, 64% engagement increase) and Guided Tours used by 1M+ students. Led mobile navigation overhaul increasing session duration by 41%.',
+        'Developed Vepple, a virtual experience platform for 30+ UK universities delivering personalised campus tours, interactive maps, and live events with lead capture. Architected Events Management System with Firebase real-time chat, 1-second status engine, and timezone-aware scheduling. Built production A/B testing framework with GrowthBook SDK, GDPR-compliant tracking, and GTM analytics, reducing bounce rate by 19%. Led mobile navigation overhaul increasing session duration by 41% and mobile engagement by 85%. Developed custom map UI with Mapbox GL and directions API, with map users viewing 68% more pages. Enhanced panorama Guided Tour suite with ambassador video integration, real-time synchronised transcription, and engagement analytics.',
       technologies:
-        'Vue.js, Pinia, Quasar, Firebase, Vitest, Figma, GTM, Google Analytics',
+        'Vue.js, Pinia, Quasar, Firebase, Vitest, Figma, GTM, Google Analytics, Bitbucket Pipelines',
     },
     {
       id: 'pavers',
@@ -40,19 +40,18 @@ export default function Experience({ className }: ExperienceProps) {
       title: 'Web Developer',
       company: 'Pavers',
       description:
-        'Built front-end solutions for a UK footwear retailer with 160+ stores. Developed a WCAG 2.1 AA-compliant component library using Shopify Liquid and jQuery, enabling content teams to customise pages via Sanity CMS across 5+ brands including Jones Bootmaker and Herring Shoes. Integrated Algolia search driving a 10% increase in search-driven conversions. Combined Lucky Orange with a weather API for location-based recommendations, resulting in 7%+ conversion improvement. Increased front-end test coverage by 40% through Jest-based tests.',
+        'Built front-end solutions for Pavers, a UK footwear retailer with 160+ stores. Developed a WCAG 2.1 AA-compliant component library using Shopify Liquid and jQuery, enabling content teams to customise pages via Sanity CMS across 5+ brands including Jones Bootmaker and Herring Shoes. Integrated Algolia search, improving search relevance and driving a 10% increase in search-driven conversions. Combined Lucky Orange with a weather API for location-based recommendations, resulting in 7+% conversion. Increased front-end test coverage by 40% through Jest-based tests for critical user flows.',
       technologies:
-        'Shopify Liquid, Sanity CMS, Bootstrap, jQuery, Algolia, Jest, Lucky Orange, GTM',
+        'Shopify Liquid, Sanity CMS, Bootstrap, jQuery, Algolia, Jest, Lucky Orange, Google Tag Manager',
     },
     {
       id: 'university-leeds',
-      period: '2019 - 2022',
-      title: 'BA Digital Media',
+      period: 'Jul 2022',
+      title: 'BA in Digital Media',
       company: 'University of Leeds',
       description:
-        'Achieved a 2:1 overall with a First in the final coding project. Built Waveger, a full-stack music chart prediction game that attracted 3,000+ users and 150,000+ views through targeted social media launch strategy.',
-      technologies:
-        'JavaScript, Python, Flask, Firebase, PostgreSQL, Spotify API',
+        'Achieved a 2:1 overall with a First in the final coding project.',
+      technologies: '',
     },
   ];
 
@@ -122,10 +121,12 @@ export default function Experience({ className }: ExperienceProps) {
                 <p className="text-muted-foreground/80 mb-3 text-sm lg:text-base">
                   {exp.description}
                 </p>
-                <p className="text-muted-foreground/60 text-xs lg:text-sm">
-                  <span className="font-medium">Technologies:</span>{' '}
-                  {exp.technologies}
-                </p>
+                {exp.technologies && (
+                  <p className="text-muted-foreground/60 text-xs lg:text-sm">
+                    <span className="font-medium">Technologies:</span>{' '}
+                    {exp.technologies}
+                  </p>
+                )}
               </div>
               <p className="text-muted-foreground w-fit min-w-28 text-right text-sm uppercase lg:text-base">
                 {exp.period}

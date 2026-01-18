@@ -1,8 +1,8 @@
 import {
-  Box,
   Globe,
   Headphones,
   Music,
+  MonitorPlay,
   ShoppingBag,
   type LucideIcon,
 } from 'lucide-react';
@@ -14,10 +14,21 @@ export interface ProjectMeta {
   description: string;
   shortDescription: string;
   technologies: string[];
+  tags: string[];
   image: string;
   featured: boolean;
   icon: LucideIcon;
 }
+
+// Filter categories matching homepage Skills & Technologies section
+export const PROJECT_TAGS = [
+  'Front-End',
+  'Full-Stack',
+  'Mobile',
+  'Tools & Design',
+] as const;
+
+export type ProjectTag = (typeof PROJECT_TAGS)[number];
 
 /**
  * Single source of truth for project metadata used across the site.
@@ -32,9 +43,10 @@ export const PROJECTS: ProjectMeta[] = [
       'Built a full-stack media library with drag-and-drop organisation, Google Drive streaming, and 464+ tests. Next.js 16, React 19, PostgreSQL.',
     shortDescription: 'Full-stack media library',
     technologies: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Prisma'],
-    image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=CanonCore',
+    tags: ['Front-End', 'Full-Stack', 'Tools & Design'],
+    image: '/images/projects/canoncore-hero.png',
     featured: true,
-    icon: Box,
+    icon: MonitorPlay,
   },
   {
     slug: 'vepple',
@@ -44,7 +56,8 @@ export const PROJECTS: ProjectMeta[] = [
       'Architected features for virtual campus tour platform serving 30+ UK universities. 4x more pages per session, 12+ pages and 7 min average visits.',
     shortDescription: 'Virtual campus tours',
     technologies: ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL'],
-    image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=Vepple',
+    tags: ['Front-End', 'Tools & Design'],
+    image: '/images/projects/vepple.jpg',
     featured: true,
     icon: Globe,
   },
@@ -56,7 +69,8 @@ export const PROJECTS: ProjectMeta[] = [
       'Developed WCAG 2.1 AA component library for 160+ store retailer. Algolia search (+10% conversions), weather-based recommendations (+7% conversion).',
     shortDescription: 'E-commerce components',
     technologies: ['Shopify Liquid', 'Sanity CMS', 'Algolia', 'jQuery'],
-    image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=Pavers',
+    tags: ['Front-End', 'Tools & Design'],
+    image: '/images/projects/pavers.jpg',
     featured: true,
     icon: ShoppingBag,
   },
@@ -68,7 +82,8 @@ export const PROJECTS: ProjectMeta[] = [
       'Built native iOS app for syncing play counts across duplicate songs with MusicKit API integration.',
     shortDescription: 'iOS play count sync',
     technologies: ['Swift', 'SwiftUI', 'MusicKit', 'Swift Testing'],
-    image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=MusicCount',
+    tags: ['Mobile'],
+    image: '/images/musiccount.png',
     featured: false,
     icon: Music,
   },
@@ -77,10 +92,11 @@ export const PROJECTS: ProjectMeta[] = [
     title: 'Waveger',
     category: 'University Project',
     description:
-      'Engineered music chart prediction game achieving First class grade with 3,000+ users and 150,000+ views.',
+      'Engineered music chart prediction game achieving First class grade. Beta tested with 25 users, 24% satisfaction improvement through iterative UX.',
     shortDescription: 'Music prediction game',
     technologies: ['JavaScript', 'Python', 'Flask', 'Firebase', 'PostgreSQL'],
-    image: 'https://placehold.co/800x600/1a1a2e/FFFFFF?text=Waveger',
+    tags: ['Front-End', 'Full-Stack'],
+    image: '/images/projects/waveger-hero.png',
     featured: false,
     icon: Headphones,
   },

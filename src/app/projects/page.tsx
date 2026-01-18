@@ -1,8 +1,11 @@
 'use client';
 
+import { Code, Database, Palette, Smartphone } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams, useRouter } from 'next/navigation';
+import { useMemo, useCallback, Suspense, useRef, useEffect } from 'react';
 
 import Noise from '@/components/noise';
 import { Badge } from '@/components/ui/badge';
@@ -12,23 +15,144 @@ import {
   fadeUp,
   fadeUpSmall,
   heroContainer,
-  scrollViewport,
   staggerContainerFast,
 } from '@/lib/animations';
-import { PROJECTS } from '@/lib/project-data';
+import { PROJECTS, PROJECT_TAGS } from '@/lib/project-data';
 import { cn } from '@/lib/utils';
 
-// First two featured projects shown larger
-const heroProjects = PROJECTS.filter((p) => p.featured).slice(0, 2);
-// Remaining projects shown smaller
-const secondaryProjects = [
-  ...PROJECTS.filter((p) => p.featured).slice(2),
-  ...PROJECTS.filter((p) => !p.featured),
-];
+// Map tags to icons (matching homepage skills-carousel)
+const tagIcons = {
+  'Front-End': Code,
+  'Full-Stack': Database,
+  Mobile: Smartphone,
+  'Tools & Design': Palette,
+} as const;
 
 export default function ProjectsPage() {
+  return (
+    <Suspense fallback={<ProjectsPageSkeleton />}>
+      <ProjectsPageContent />
+    </Suspense>
+  );
+}
+
+function ProjectsPageSkeleton() {
+  return (
+    <div className="relative overflow-hidden">
+      <div className="pointer-events-none absolute inset-0">
+        <div
+          className={cn(
+            'absolute h-[60vh] w-full rounded-full bg-pink-500/15 blur-3xl will-change-transform',
+            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/4',
+          )}
+        />
+        <div
+          className={cn(
+            'absolute h-[60vh] w-full rounded-full bg-orange-400/15 blur-3xl will-change-transform',
+            'right-0 bottom-0 translate-y-1/2 md:translate-x-1/4',
+          )}
+        />
+      </div>
+      <Noise />
+      <section className="section-padding relative z-10">
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-4 text-center">
+            <h1 className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl">
+              Projects
+            </h1>
+            <p className="text-muted-foreground text-lg md:text-xl">
+              A selection of professional and personal work
+            </p>
+          </div>
+          <div className="mt-8 flex justify-center">
+            <div className="bg-muted/30 h-10 w-64 animate-pulse rounded-full" />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function ProjectsPageContent() {
   const prefersReducedMotion = usePrefersReducedMotion();
   const initial = prefersReducedMotion ? 'visible' : 'hidden';
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // Track if initial animation has completed to prevent re-animation on filter change
+  const hasAnimatedRef = useRef(false);
+  useEffect(() => {
+    // Mark as animated after initial render
+    const timer = setTimeout(() => {
+      hasAnimatedRef.current = true;
+    }, 1200); // After all stagger animations complete
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Use 'visible' initial state after first animation to prevent re-animation
+  const gridInitial = hasAnimatedRef.current ? 'visible' : initial;
+
+  // Read filter from URL query param
+  const filterParam = searchParams.get('filter');
+  const selectedTag = PROJECT_TAGS.includes(
+    filterParam as (typeof PROJECT_TAGS)[number],
+  )
+    ? filterParam
+    : null;
+
+  // Update URL when filter changes
+  const setSelectedTag = useCallback(
+    (tag: string | null) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (tag) {
+        params.set('filter', tag);
+      } else {
+        params.delete('filter');
+      }
+      router.push(`/projects?${params.toString()}`, { scroll: false });
+    },
+    [searchParams, router],
+  );
+
+  // Filter projects based on selected tag
+  const filteredProjects = useMemo(() => {
+    if (selectedTag === null) return PROJECTS;
+    return PROJECTS.filter((p) => p.tags.includes(selectedTag));
+  }, [selectedTag]);
+
+  // Determine layout mode based on filtered count
+  const totalFiltered = filteredProjects.length;
+  const useCompactLayout = totalFiltered <= 3;
+
+  // For compact layout: all projects in single adaptive grid
+  // For normal layout: split into hero (featured) and secondary
+  const heroProjects = useCompactLayout
+    ? []
+    : filteredProjects.filter((p) => p.featured).slice(0, 2);
+  const secondaryProjects = useCompactLayout
+    ? filteredProjects
+    : [
+        ...filteredProjects.filter((p) => p.featured).slice(2),
+        ...filteredProjects.filter((p) => !p.featured),
+      ];
+
+  // Get adaptive grid classes based on item count
+  const getCompactGridClasses = (count: number) => {
+    if (count === 1) return 'grid-cols-1 max-w-2xl mx-auto';
+    if (count === 2) return 'grid-cols-1 md:grid-cols-2';
+    return 'grid-cols-1 md:grid-cols-3';
+  };
+
+  const getHeroGridClasses = (count: number) => {
+    if (count === 1) return 'grid-cols-1 max-w-2xl mx-auto';
+    return 'grid-cols-1 md:grid-cols-2';
+  };
+
+  const getSecondaryGridClasses = (count: number) => {
+    if (count === 1) return 'grid-cols-1 max-w-md mx-auto';
+    if (count === 2) return 'grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto';
+    return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+  };
 
   return (
     <div className="relative overflow-hidden">
@@ -50,52 +174,198 @@ export default function ProjectsPage() {
       <Noise />
       <section className="section-padding relative z-10">
         <div className="container">
-        {/* Page Header */}
-        <motion.div
-          className="mx-auto max-w-3xl space-y-4 text-center"
-          initial={initial}
-          animate="visible"
-          variants={heroContainer}
-        >
-          <motion.h1
-            className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl"
-            variants={fadeUp}
+          {/* Page Header */}
+          <motion.div
+            className="mx-auto max-w-3xl space-y-4 text-center"
+            initial={initial}
+            animate="visible"
+            variants={heroContainer}
           >
-            Projects
-          </motion.h1>
-          <motion.p
-            className="text-muted-foreground text-lg md:text-xl"
-            variants={fadeUp}
+            <motion.h1
+              className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl"
+              variants={fadeUp}
+            >
+              Projects
+            </motion.h1>
+            <motion.p
+              className="text-muted-foreground text-lg md:text-xl"
+              variants={fadeUp}
+            >
+              A selection of professional and personal work
+            </motion.p>
+          </motion.div>
+
+          {/* Filter Buttons */}
+          <motion.div
+            className="mt-8 flex justify-center"
+            initial={initial}
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15,
+                  delayChildren: 0.5,
+                },
+              },
+            }}
           >
-            A selection of professional and personal work
-          </motion.p>
-        </motion.div>
+            <motion.div
+              className="flex flex-wrap items-center justify-center gap-2"
+              variants={fadeUp}
+            >
+              <button
+                onClick={() => setSelectedTag(null)}
+                className={cn(
+                  'flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ease-out active:scale-95',
+                  selectedTag === null
+                    ? 'bg-gradient-to-r from-pink-500 to-orange-400 text-white shadow-lg shadow-pink-500/25'
+                    : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border-border/50 border hover:scale-[1.02]',
+                )}
+              >
+                All
+              </button>
+              {PROJECT_TAGS.map((tag) => {
+                const Icon = tagIcons[tag];
+                const isActive = selectedTag === tag;
+                return (
+                  <button
+                    key={tag}
+                    onClick={() => setSelectedTag(tag)}
+                    className={cn(
+                      'flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ease-out active:scale-95',
+                      isActive
+                        ? 'bg-gradient-to-r from-pink-500 to-orange-400 text-white shadow-lg shadow-pink-500/25'
+                        : 'bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground border-border/50 border hover:scale-[1.02]',
+                    )}
+                  >
+                    <Icon className="size-4" />
+                    {tag}
+                  </button>
+                );
+              })}
+            </motion.div>
+          </motion.div>
 
-        {/* Hero Projects Grid - 2 columns */}
-        <motion.div
-          className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:mt-16"
-          initial={initial}
-          whileInView="visible"
-          viewport={scrollViewport}
-          variants={staggerContainerFast}
-        >
-          {heroProjects.map((project) => (
-            <ProjectCard key={project.slug} {...project} size="large" />
-          ))}
-        </motion.div>
+          {filteredProjects.length > 0 ? (
+            <>
+              {/* Compact Layout - Single adaptive grid for ≤3 items */}
+              {useCompactLayout && (
+                <motion.div
+                  className={cn(
+                    'mt-12 grid gap-6 lg:mt-16',
+                    getCompactGridClasses(totalFiltered),
+                  )}
+                  initial={gridInitial}
+                  animate="visible"
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: {
+                        staggerChildren: 0.1,
+                        delayChildren: 0.7,
+                      },
+                    },
+                  }}
+                >
+                  {filteredProjects.map((project) => (
+                    <ProjectCard
+                      key={project.slug}
+                      {...project}
+                      size={totalFiltered === 1 ? 'large' : 'medium'}
+                    />
+                  ))}
+                </motion.div>
+              )}
 
-        {/* Secondary Projects Grid - 3 columns */}
-        <motion.div
-          className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3"
-          initial={initial}
-          whileInView="visible"
-          viewport={scrollViewport}
-          variants={staggerContainerFast}
-        >
-          {secondaryProjects.map((project) => (
-            <ProjectCard key={project.slug} {...project} size="small" />
-          ))}
-        </motion.div>
+              {/* Normal Layout - Hero + Secondary grids for 4+ items */}
+              {!useCompactLayout && (
+                <>
+                  {/* Hero Projects Grid */}
+                  {heroProjects.length > 0 && (
+                    <motion.div
+                      className={cn(
+                        'mt-12 grid gap-6 lg:mt-16',
+                        getHeroGridClasses(heroProjects.length),
+                      )}
+                      initial={gridInitial}
+                      animate="visible"
+                      variants={{
+                        hidden: { opacity: 0 },
+                        visible: {
+                          opacity: 1,
+                          transition: {
+                            staggerChildren: 0.1,
+                            delayChildren: 0.7,
+                          },
+                        },
+                      }}
+                    >
+                      {heroProjects.map((project) => (
+                        <ProjectCard
+                          key={project.slug}
+                          {...project}
+                          size="large"
+                        />
+                      ))}
+                    </motion.div>
+                  )}
+
+                  {/* Secondary Projects Grid */}
+                  {secondaryProjects.length > 0 && (
+                    <motion.div
+                      className={cn(
+                        'grid gap-6',
+                        getSecondaryGridClasses(secondaryProjects.length),
+                        heroProjects.length > 0 ? 'mt-8' : 'mt-12 lg:mt-16',
+                      )}
+                      initial={gridInitial}
+                      animate="visible"
+                      variants={{
+                        hidden: { opacity: 0 },
+                        visible: {
+                          opacity: 1,
+                          transition: {
+                            staggerChildren: 0.1,
+                            delayChildren: heroProjects.length > 0 ? 0.9 : 0.7,
+                          },
+                        },
+                      }}
+                    >
+                      {secondaryProjects.map((project) => (
+                        <ProjectCard
+                          key={project.slug}
+                          {...project}
+                          size="small"
+                        />
+                      ))}
+                    </motion.div>
+                  )}
+                </>
+              )}
+            </>
+          ) : (
+            <motion.div
+              className="mt-16 flex flex-col items-center justify-center text-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <h3 className="text-xl font-medium">No Projects Found</h3>
+              <p className="text-muted-foreground mt-2 max-w-md">
+                No projects match this category. Try selecting a different
+                filter.
+              </p>
+              <button
+                onClick={() => setSelectedTag(null)}
+                className="mt-4 cursor-pointer rounded-full bg-gradient-to-r from-pink-500 to-orange-400 px-6 py-2 text-sm font-medium text-white shadow-lg shadow-pink-500/25 transition-all hover:shadow-xl hover:shadow-pink-500/30"
+              >
+                View All Projects
+              </button>
+            </motion.div>
+          )}
         </div>
       </section>
     </div>
@@ -109,7 +379,7 @@ interface ProjectCardProps {
   title: string;
   description: string;
   technologies: string[];
-  size: 'large' | 'small';
+  size: 'large' | 'medium' | 'small';
 }
 
 function ProjectCard({
@@ -121,6 +391,13 @@ function ProjectCard({
   technologies,
   size,
 }: ProjectCardProps) {
+  const aspectClass =
+    size === 'large'
+      ? 'aspect-[4/3]'
+      : size === 'medium'
+        ? 'aspect-[3/2]'
+        : 'aspect-[4/3]';
+
   return (
     <motion.div variants={fadeUpSmall}>
       <Link href={`/projects/${slug}`} className="group block h-full">
@@ -135,7 +412,7 @@ function ProjectCard({
                 unoptimized
                 className={cn(
                   'w-full object-cover transition-transform duration-300 group-hover:scale-105',
-                  size === 'large' ? 'aspect-[4/3]' : 'aspect-[16/9]',
+                  aspectClass,
                 )}
               />
             </div>
@@ -151,19 +428,14 @@ function ProjectCard({
               {description}
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
-              {technologies.slice(0, 4).map((tech) => (
+              {technologies.map((tech) => (
                 <Badge
-                    key={tech}
-                    className="border-transparent bg-muted text-muted-foreground text-xs"
-                  >
+                  key={tech}
+                  className="bg-muted text-muted-foreground border-transparent text-xs"
+                >
                   {tech}
                 </Badge>
               ))}
-              {technologies.length > 4 && (
-                <Badge className="border-transparent bg-muted text-muted-foreground text-xs">
-                  +{technologies.length - 4}
-                </Badge>
-              )}
             </div>
           </CardHeader>
         </Card>

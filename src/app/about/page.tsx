@@ -27,7 +27,7 @@ export default function AboutPage() {
         <div
           className={cn(
             'absolute h-[60vh] w-full rounded-full bg-teal-400/10 blur-3xl will-change-transform',
-            'left-0 top-[35%] md:-translate-x-1/4',
+            'top-[35%] left-0 md:-translate-x-1/4',
           )}
         />
         <div

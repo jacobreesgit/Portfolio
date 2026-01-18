@@ -50,11 +50,7 @@ export default function NotFound() {
         </motion.p>
 
         <motion.div variants={fadeUp}>
-          <Button
-            asChild
-            size="lg"
-            className="group !pl-5.5 font-medium"
-          >
+          <Button asChild size="lg" className="group !pl-5.5 font-medium">
             <Link href="/">
               Return Home
               <div className="bg-border border-input grid size-5.5 place-items-center rounded-full border">

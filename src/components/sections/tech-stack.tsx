@@ -27,7 +27,7 @@ export default function Logos() {
   const initial = prefersReducedMotion ? 'visible' : 'hidden';
 
   return (
-    <section className="section-padding relative">
+    <section className="relative py-10 md:py-12 lg:py-16">
       <Noise />
       <motion.p
         className="text-muted-foreground container text-center text-base"

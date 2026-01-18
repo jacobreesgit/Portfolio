@@ -7,13 +7,7 @@ import Link from 'next/link';
 
 import Noise from '@/components/noise';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
-import {
-  fadeUp,
-  fadeUpSmall,
-  heroContainer,
-  scrollViewport,
-  staggerContainerFast,
-} from '@/lib/animations';
+import { fadeUp, fadeUpSmall, heroContainer } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 
 const contactLinks = [
@@ -22,32 +16,28 @@ const contactLinks = [
     label: 'Email',
     value: 'jacobrees@icloud.com',
     href: 'mailto:jacobrees@icloud.com',
-    image:
-      'https://images.unsplash.com/photo-1526554850534-7c78330d5f90?w=800&h=600&fit=crop',
+    image: '/images/contact/email.jpg',
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
     value: '/in/jacobdanielrees',
     href: 'https://linkedin.com/in/jacobdanielrees',
-    image:
-      'https://images.unsplash.com/photo-1616469829581-73993eb86b02?w=800&h=600&fit=crop',
+    image: '/images/contact/linkedin.jpg',
   },
   {
     icon: Github,
     label: 'GitHub',
     value: '/jacobreesgit',
     href: 'https://github.com/jacobreesgit',
-    image:
-      'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop',
+    image: '/images/contact/github.jpg',
   },
   {
     icon: Download,
     label: 'CV',
     value: 'Download PDF',
     href: '/cv.pdf',
-    image:
-      'https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=600&fit=crop',
+    image: '/images/contact/cv.jpg',
   },
 ];
 
@@ -152,9 +142,17 @@ export default function ContactPage() {
         <motion.div
           className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8"
           initial={initial}
-          whileInView="visible"
-          viewport={scrollViewport}
-          variants={staggerContainerFast}
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.1,
+                delayChildren: 0.6,
+              },
+            },
+          }}
         >
           {contactLinks.map((contact) => (
             <ContactCard key={contact.label} {...contact} />

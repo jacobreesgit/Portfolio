@@ -1,8 +1,9 @@
 'use client';
 
-import { Code, Database, Palette, Smartphone } from 'lucide-react';
+import { ArrowRight, Code, Database, Palette, Smartphone } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 import Noise from '@/components/noise';
@@ -35,12 +36,13 @@ const features = [
     icon: Code,
     title: 'Front-End Development',
     description: 'Vue.js, React, Next.js, TypeScript, Tailwind, Sass',
+    filterTag: 'Front-End',
     image: {
-      src: 'https://placehold.co/400x400/1a1a2e/FFFFFF?text=Front-End',
+      src: '/images/skills/front end.png',
       alt: 'Front-End Development',
       width: 400,
       height: 400,
-      className: 'p-4',
+      className: '',
     },
   },
   {
@@ -48,38 +50,42 @@ const features = [
     icon: Database,
     title: 'Full-Stack Development',
     description: 'Node.js, PostgreSQL, Prisma, REST APIs, GraphQL',
+    filterTag: 'Full-Stack',
     image: {
-      src: 'https://placehold.co/400x400/1a1a2e/FFFFFF?text=Full-Stack',
+      src: '/images/skills/full stack.png',
       alt: 'Full-Stack Development',
       width: 400,
       height: 400,
-      className: 'p-4',
+      className: '',
     },
   },
   {
     id: 'mobile',
     icon: Smartphone,
-    title: 'Mobile Development',
-    description: 'Swift, SwiftUI, iOS Development',
+    title: 'Mobile App Development',
+    description:
+      'Native iOS apps with Swift, SwiftUI, UIKit, Core Data, and Combine',
+    filterTag: 'Mobile',
     image: {
-      src: 'https://placehold.co/400x400/1a1a2e/FFFFFF?text=Mobile',
+      src: '/images/skills/mobile development.png',
       alt: 'Mobile Development',
       width: 400,
       height: 400,
-      className: 'p-4',
+      className: '',
     },
   },
   {
     id: 'tools',
     icon: Palette,
-    title: 'Tools & Design',
+    title: 'DevOps, Analytics & UI/UX Design',
     description: 'Figma, Docker, Git, Vercel, GTM, Google Analytics',
+    filterTag: 'Tools & Design',
     image: {
-      src: 'https://placehold.co/400x400/1a1a2e/FFFFFF?text=Tools+%26+Design',
-      alt: 'Tools & Design',
+      src: '/images/skills/ux ui.png',
+      alt: 'UX/UI Design',
       width: 400,
       height: 400,
-      className: 'p-4',
+      className: '',
     },
   },
 ];
@@ -184,12 +190,19 @@ export default function FeaturesCarousel() {
 
         {/* Right Content - Carousel Cards */}
         <motion.div
-          className="select-none md:mask-r-from-60% md:mask-r-to-100% lg:col-span-2"
+          className="relative select-none lg:col-span-2"
           initial={initial}
           whileInView="visible"
           viewport={scrollViewport}
           variants={slideInRight}
         >
+          {/* Right fade overlay - animated */}
+          <div
+            className={cn(
+              'from-background pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-[40%] bg-gradient-to-l to-transparent transition-opacity duration-500 ease-out md:block',
+              activeIndex === features.length - 1 ? 'opacity-0' : 'opacity-100',
+            )}
+          />
           <Carousel
             setApi={setApi}
             opts={{
@@ -212,6 +225,13 @@ export default function FeaturesCarousel() {
                       <CardDescription className="text-sm md:text-lg">
                         {feature.description}
                       </CardDescription>
+                      <Link
+                        href={`/projects?filter=${encodeURIComponent(feature.filterTag)}`}
+                        className="group/link mt-2 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-pink-500 transition-all duration-300 hover:gap-2.5 hover:text-orange-400"
+                      >
+                        View Projects
+                        <ArrowRight className="size-4 transition-transform duration-300 group-hover/link:translate-x-0.5" />
+                      </Link>
                     </CardHeader>
                     <CardContent className="relative h-full">
                       <div className="bg-card dark:bg-card-foreground border-input relative h-full overflow-hidden rounded-lg border">
@@ -221,7 +241,7 @@ export default function FeaturesCarousel() {
                           fill
                           unoptimized
                           className={cn(
-                            'object-contain transition-transform duration-300 hover:scale-105',
+                            'object-cover transition-transform duration-300 hover:scale-105',
                             feature.image.className,
                           )}
                         />

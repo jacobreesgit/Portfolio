@@ -118,7 +118,7 @@ export default async function ProjectPage({ params }: PageProps) {
             className={cn(
               gradient.color3,
               'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
-              'left-0 top-[35%] md:-translate-x-1/4',
+              'top-[35%] left-0 md:-translate-x-1/4',
             )}
           />
         )}
@@ -134,101 +134,104 @@ export default async function ProjectPage({ params }: PageProps) {
 
       <section className="relative z-10 py-16">
         <div className="container max-w-7xl">
-        {/* Back Button */}
-        <Button variant="ghost" size="sm" className="mb-8" asChild>
-          <Link href="/projects">
-            <ArrowLeft className="mr-2 size-4" />
-            Back to Projects
-          </Link>
-        </Button>
+          {/* Back Button */}
+          <Button variant="ghost" size="sm" className="mb-8" asChild>
+            <Link href="/projects">
+              <ArrowLeft className="mr-2 size-4" />
+              Back to Projects
+            </Link>
+          </Button>
 
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-4">
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="space-y-8 lg:sticky lg:top-8">
-              {/* Project Info */}
-              <div>
-                <p className="text-muted-foreground mb-4 text-xs font-semibold tracking-widest uppercase">
-                  {project.category}
-                </p>
-                <h1 className="mb-4 text-4xl font-bold">{project.title}</h1>
-                <p className="text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-              </div>
-
-              {/* Metadata */}
-              <div className="space-y-6 border-t pt-8">
+          <div className="grid grid-cols-1 gap-16 lg:grid-cols-4">
+            {/* Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="space-y-8 lg:sticky lg:top-8">
+                {/* Project Info */}
                 <div>
-                  <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
-                    Year
+                  <p className="text-muted-foreground mb-4 text-xs font-semibold tracking-widest uppercase">
+                    {project.category}
                   </p>
-                  <p className="font-medium">{project.year}</p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
-                    Technologies
-                  </p>
-                  <p className="font-medium">
-                    {project.technologies.slice(0, 4).join(', ')}
+                  <h1 className="mb-4 text-4xl font-bold">{project.title}</h1>
+                  <p className="text-muted-foreground leading-relaxed">
+                    {project.description}
                   </p>
                 </div>
-                {project.github && (
+
+                {/* Metadata */}
+                <div className="space-y-6 border-t pt-8">
                   <div>
                     <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
-                      Source
+                      Year
                     </p>
-                    <Link
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-primary flex items-center gap-2 font-medium"
-                    >
-                      <Github className="size-4" />
-                      GitHub
-                    </Link>
+                    <p className="font-medium">{project.year}</p>
                   </div>
-                )}
-                {project.link && (
                   <div>
                     <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
-                      Live Site
+                      Technologies
                     </p>
-                    <Link
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-primary flex items-center gap-2 font-medium"
-                    >
-                      <ExternalLink className="size-4" />
-                      Visit
-                    </Link>
+                    <p className="font-medium">
+                      {project.technologies.slice(0, 4).join(', ')}
+                    </p>
                   </div>
-                )}
+                  {project.github && (
+                    <div>
+                      <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
+                        Source
+                      </p>
+                      <Link
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-primary flex items-center gap-2 font-medium"
+                      >
+                        <Github className="size-4" />
+                        GitHub
+                      </Link>
+                    </div>
+                  )}
+                  {project.link && (
+                    <div>
+                      <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
+                        Live Site
+                      </p>
+                      <Link
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-primary flex items-center gap-2 font-medium"
+                      >
+                        <ExternalLink className="size-4" />
+                        Visit
+                      </Link>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Main Content */}
-          <div className="lg:col-span-3">
-            {/* Hero Image */}
-            <div className="mb-16">
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={1920}
-                height={1080}
-                unoptimized
-                className="w-full rounded-lg"
-              />
+            {/* Main Content */}
+            <div className="lg:col-span-3">
+              {/* Hero Image */}
+              <div className="mb-16">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  width={1920}
+                  height={1080}
+                  unoptimized
+                  className="w-full rounded-lg"
+                />
+              </div>
+
+              {/* Content */}
+              <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">
+                <MDXRemote
+                  source={project.content}
+                  components={mdxComponents}
+                />
+              </article>
             </div>
-
-            {/* Content */}
-            <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">
-              <MDXRemote source={project.content} components={mdxComponents} />
-            </article>
           </div>
-        </div>
         </div>
       </section>
     </div>

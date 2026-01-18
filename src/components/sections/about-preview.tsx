@@ -44,29 +44,7 @@ export default function WhyWeBegan() {
     <section className="section-padding relative">
       <Noise />
       <div className="container">
-        <div className="flex flex-col-reverse items-center gap-8 md:flex-row lg:gap-12">
-          {/* Image Section */}
-          <motion.div
-            className="relative h-full w-full md:w-[453px]"
-            initial={initial}
-            whileInView="visible"
-            viewport={scrollViewport}
-            variants={scaleUp}
-          >
-            {/* Background gradient circles */}
-            <div className="bg-chart-2 absolute top-0 left-0 size-60 -translate-x-1/6 rounded-full opacity-30 blur-[80px] will-change-transform md:opacity-70" />
-            <div className="bg-chart-3 absolute right-0 bottom-0 size-60 -translate-x-1/4 translate-y-1/6 rounded-full opacity-50 blur-[80px] will-change-transform md:opacity-70" />
-
-            <div className="relative aspect-square size-full overflow-hidden rounded-xl">
-              <Image
-                src="/me.jpeg"
-                alt="Jacob Rees"
-                fill
-                className="rounded-xl object-cover"
-              />
-            </div>
-          </motion.div>
-
+        <div className="flex flex-col items-center gap-8 md:flex-row-reverse lg:gap-12">
           {/* Content Section */}
           <motion.div
             className="flex-1 space-y-6 lg:space-y-8"
@@ -119,6 +97,28 @@ export default function WhyWeBegan() {
                 </Link>
               </Button>
             </motion.div>
+          </motion.div>
+
+          {/* Image Section - Hidden on mobile */}
+          <motion.div
+            className="relative hidden h-full w-full md:block md:w-[453px]"
+            initial={initial}
+            whileInView="visible"
+            viewport={scrollViewport}
+            variants={scaleUp}
+          >
+            {/* Background gradient circles */}
+            <div className="bg-chart-2 absolute top-0 left-0 size-[400px] -translate-x-1/6 rounded-full opacity-100 blur-[70px] will-change-transform" />
+            <div className="bg-chart-3 absolute right-0 bottom-0 size-[400px] -translate-x-1/4 translate-y-1/6 rounded-full opacity-100 blur-[70px] will-change-transform" />
+
+            <div className="relative aspect-square size-full overflow-hidden rounded-xl">
+              <Image
+                src="/me.jpeg"
+                alt="Jacob Rees"
+                fill
+                className="rounded-xl object-cover"
+              />
+            </div>
           </motion.div>
         </div>
       </div>

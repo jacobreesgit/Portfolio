@@ -148,7 +148,7 @@ function ProjectCard({
               {technologies.map((tech) => (
                 <Badge
                   key={tech}
-                  className="border-transparent bg-muted text-muted-foreground text-xs"
+                  className="bg-muted text-muted-foreground border-transparent text-xs"
                 >
                   {tech}
                 </Badge>
