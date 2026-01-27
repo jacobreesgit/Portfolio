@@ -49,6 +49,9 @@ next-env.d.ts
 
 # docs
 /docs
+docs/plans
+code-review-excellence
+docs-write
 
 # Personal notes and todo files
 todo.md

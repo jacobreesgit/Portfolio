@@ -1,43 +1,45 @@
-# Lumen NextJS Template
+# Jacob Rees Portfolio
 
-Lumen NextJS Template is a premium template built by https://www.shadcnblocks.com
+My personal portfolio site showcasing projects and experience.
 
-- [Demo](https://lumen-nextjs-template.vercel.app/)
-- [Documentation](https://docs.shadcnblocks.com/templates/getting-started)
+## Stack
 
-## Screenshot
+- Next.js 16 with App Router
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- MDX for project content
+- Framer Motion for animations
 
-![Lumen NextJS Template screenshot](./public/images/og-image.jpg)
-
-## Getting Started
+## Running Locally
 
 ```bash
 npm install
-```
-
-```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Runs on port 9000 by default.
 
-## Tech Stack
+## Project Structure
 
-- Nextjs 15 / App Router
-- Tailwind 4
-- shadcn/ui
+```
+src/
+├── app/              # Next.js pages
+├── components/       # React components
+├── content/          # MDX project files
+└── lib/             # Utilities
+```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com)
-
-## Static Export Support
-
-This template is configured to support static export by default, making it easy to deploy on various platforms including Cloudflare Pages, GitHub Pages, and other static hosting providers.
-
-To build for static export:
+## Building
 
 ```bash
 npm run build
-# The output will be in the '.next' directory
+npm start
 ```
+
+## Scripts
+
+- `npm run dev` - Start dev server
+- `npm run build` - Build for production
+- `npm run check` - Run all checks (format, type-check, lint, build)
+- `npm run format` - Format with Prettier
