@@ -20,6 +20,9 @@
 # production
 /build
 
+# portfolio images
+/public/portfolio
+
 # misc
 .DS_Store
 *.pem
@@ -46,3 +49,34 @@ next-env.d.ts
 
 # docs
 /docs
+
+# Personal notes and todo files
+todo.md
+*.todo
+notes.md
+*-portfolio.md
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS
+Thumbs.db
+Desktop.ini
+._*
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+.scratch/
+scratch/
+
+# Claude Code
+.claude/

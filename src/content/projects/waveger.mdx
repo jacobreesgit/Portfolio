@@ -1,57 +1,300 @@
 ---
 title: 'Waveger'
-category: 'University Project'
-description: 'Music chart prediction game achieving First class grade'
+category: 'Full-Stack Application'
+description: 'Billboard meets March Madness: Predict the Hot 100, compete for accuracy.'
 technologies:
   [
-    'JavaScript',
-    'HTML',
-    'CSS',
-    'Bootstrap',
-    'Python',
-    'Flask',
+    'React 18',
+    'TypeScript',
+    'Supabase',
     'PostgreSQL',
-    'Firebase',
-    'Spotify API',
+    'Deno Edge Functions',
+    'TanStack Query',
+    'Tailwind CSS',
+    'Framer Motion',
+    'Vitest',
+    'Playwright',
   ]
+link: 'https://waveger.vercel.app'
 image: 'https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Waveger'
-year: '2022'
+year: '2025'
 featured: false
 ---
 
-## Overview
+## The Product
 
-Waveger was my final year project at the University of Leeds, achieving a First class grade. I built a full-stack music chart prediction game that lets users predict which songs will chart each week, competing against friends on leaderboards.
+Waveger is fantasy football for music fans. Each week, users predict where songs will land on the Billboard Hot 100 and earn points based on accuracy. Predictions lock Friday at 5 AM GMT, no take-backs. When the official chart drops Saturday, scores calculate automatically and the leaderboard updates.
 
-## Key Features
+The original version was my final year project at the University of Leeds, built with Flask, vanilla JavaScript, and Bootstrap. It scored a First and was my first proper full-stack project. After graduating I decided to rebuild it from scratch with a modern stack: React, TypeScript, Supabase, proper testing. Same concept, completely different architecture.
 
-### Real-Time Chart Data
+If you spend any time on stan Twitter, you'll know the culture. Everyone's got opinions on whether their fave will debut top 10, whether a song's got the streams to hold #1, whether radio will tank a track's position. Accounts like @ChartData post midweek updates and the replies fill with predictions. But nobody keeps score. It's all talk. I wanted to give people receipts.
 
-Integrated 3+ external chart sources via Python Flask API, aggregating data from Spotify, Apple Music, and UK Official Charts.
+<div className="not-prose my-12">
+  <img
+    alt="Main prediction interface with drag-drop grid and countdown timer"
+    loading="lazy"
+    width="1920"
+    height="1080"
+    decoding="async"
+    className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
+    src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Prediction+Interface"
+  />
+</div>
 
-### Firebase Backend
+---
 
-Implemented Firebase for real-time database, user authentication, and cloud functions.
+## Features
 
-### Prediction Engine
+<div className="not-prose my-12 grid gap-24 lg:gap-32">
 
-Built a points-based prediction system where users submit weekly predictions and earn points based on accuracy.
+{/* Batch Scoring with Edge Functions */}
 
-![Waveger prediction interface showing weekly chart predictions](https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Waveger+Predictions)
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-2 lg:order-1">
+    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+      Batch Scoring with Edge Functions
+    </h3>
+    <p className="text-muted-foreground mb-4 leading-relaxed">
+      When Billboard publishes charts every Saturday, a Deno Edge Function
+      scores all predictions in one go. Rather than updating each prediction
+      individually (the classic N+1 problem), the function uses PostgreSQL's{' '}
+      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">UNNEST</code>{' '}
+      to handle everything in just 2 queries.
+    </p>
+    <p className="text-muted-foreground leading-relaxed">
+      The Edge Function grabs the latest chart, maps predictions against actual
+      positions, works out points using a tiered system (150 for an exact match,
+      100 if you're within 1 position, and so on), then fires off a batch SQL
+      function. Scoring dropped from roughly 30 seconds down to under 2.
+      Genuinely satisfying to watch that number fall.
+    </p>
+  </div>
+  <div className="order-1 lg:order-2">
+    <img
+      alt="Results page showing scored predictions with point breakdown"
+      loading="lazy"
+      width="1920"
+      height="1080"
+      decoding="async"
+      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
+      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Scored+Predictions"
+    />
+  </div>
+</div>
 
-### Social Features
+{/* Prediction Lock-In */}
 
-Developed leaderboards, friend comparisons, achievement badges, and weekly ranking notifications.
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-1">
+    <img
+      alt="Prediction interface with countdown timer"
+      loading="lazy"
+      width="1920"
+      height="1080"
+      decoding="async"
+      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
+      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Countdown+Timer"
+    />
+  </div>
+  <div className="order-2">
+    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+      Prediction Lock-In
+    </h3>
+    <p className="text-muted-foreground leading-relaxed">
+      Users drag and drop songs to predict positions 1-100. A countdown timer
+      (DST-aware, handling timezone conversions properly) ticks down to Friday 5
+      AM GMT. When the deadline hits, predictions lock via a database
+      constraint. No client-side honour system here; the lock is enforced
+      server-side through PostgreSQL{' '}
+      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">CHECK</code>{' '}
+      constraints, so even API manipulation won't help.
+    </p>
+  </div>
+</div>
 
-### Analytics Dashboard
+{/* Three-Layer Caching */}
 
-Created personal statistics dashboard showing prediction history, accuracy trends, and performance metrics.
+<div>
+  <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    Three-Layer Caching
+  </h3>
+  <p className="text-muted-foreground mb-4 leading-relaxed">
+    Billboard chart data is rate-limited and slow (300ms+ latency per request).
+    The API costs were also creeping up faster than I'd expected. To avoid
+    hammering the API, chart data flows through three layers: Upstash Redis with
+    a 7-day TTL, then a PostgreSQL{' '}
+    <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">charts</code>{' '}
+    table, then TanStack Query's client cache with a 30-minute stale time. Most
+    requests never touch the external API at all.
+  </p>
+  <p className="text-muted-foreground leading-relaxed">
+    Apple Music artwork URLs get cached separately with a 30-day TTL since they
+    rarely change. On the client side, TanStack Query handles deduplication so
+    navigating around the app doesn't trigger redundant fetches.
+  </p>
+</div>
 
-## Results
+{/* Leaderboards & Profile Stats */}
 
-- Conducted user research with 50+ survey respondents to validate concept
-- Beta tested with 25 active users over 4-week period
-- Improved user satisfaction by 24% through iterative development based on feedback
-- Achieved First class grade for final year project
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-2 lg:order-1">
+    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+      Leaderboards & Profile Stats
+    </h3>
+    <p className="text-muted-foreground leading-relaxed">
+      Weekly and all-time leaderboards rank users by total points, with streak
+      tracking for consecutive weeks of participation. Profiles show prediction
+      history with Recharts visualisations: points earned per week, accuracy
+      percentage over time, and a histogram of how far off predictions typically
+      land. Leaderboards query against an indexed{' '}
+      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">
+        total_points DESC
+      </code>{' '}
+      column. Profile aggregations use SQL window functions. Badges are stored
+      as JSONB arrays, which means adding new achievement types doesn't require
+      schema changes.
+    </p>
+  </div>
+  <div className="order-1 lg:order-2">
+    <img
+      alt="Leaderboard and profile analytics"
+      loading="lazy"
+      width="1920"
+      height="1080"
+      decoding="async"
+      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
+      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Leaderboard+Profile"
+    />
+  </div>
+</div>
 
-![Waveger leaderboard and social features showing user rankings](https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Waveger+Leaderboard)
+{/* Mobile-First Design */}
+
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-1">
+    <img
+      alt="Mobile view with swipeable cards"
+      loading="lazy"
+      width="1920"
+      height="1080"
+      decoding="async"
+      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
+      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Mobile+Swipeable+Cards"
+    />
+  </div>
+  <div className="order-2">
+    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+      Mobile-First Design
+    </h3>
+    <p className="text-muted-foreground mb-4 leading-relaxed">
+      On desktop, users drag and drop songs in a grid. On mobile, they swipe
+      through a card stack with Framer Motion handling the gesture animations.
+      Both share the same prediction logic underneath, just different input
+      methods.
+    </p>
+    <p className="text-muted-foreground leading-relaxed">
+      A custom{' '}
+      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">
+        useIsMobile()
+      </code>{' '}
+      hook detects screen width at runtime. The drag-drop implementation uses
+      @dnd-kit with keyboard, pointer, and touch sensors so it stays accessible
+      regardless of how someone's interacting with it.
+    </p>
+  </div>
+</div>
+
+{/* Apple Music Integration */}
+
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-2 lg:order-1">
+    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+      Apple Music Integration
+    </h3>
+    <p className="text-muted-foreground mb-4 leading-relaxed">
+      Users can swap any Billboard song for a custom Apple Music track, handy
+      for predicting sleeper hits or viral TikTok songs that haven't charted
+      yet. Search uses Fuse.js for fuzzy matching with debounced queries so it
+      doesn't spam the API.
+    </p>
+    <p className="text-muted-foreground leading-relaxed">
+      Apple Music requires developer tokens generated server-side. The{' '}
+      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">song_id</code>{' '}
+      field supports both Billboard IDs and Apple Music IDs, with a
+      discriminator flag so the scoring logic knows which type it's dealing
+      with.
+    </p>
+  </div>
+  <div className="order-1 lg:order-2">
+    <img
+      alt="Song swap modal with Apple Music search"
+      loading="lazy"
+      width="1920"
+      height="1080"
+      decoding="async"
+      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
+      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Apple+Music+Swap"
+    />
+  </div>
+</div>
+
+</div>
+
+---
+
+## How It's Built
+
+### Architecture Decisions
+
+**Moving Scoring Server-Side:** Early on, I tried scoring predictions client-side. Seemed straightforward enough: fetch the chart, calculate points in React, update the database. I felt quite clever about it until I realised anyone could open DevTools and award themselves full marks. And when multiple people loaded results at the same time, race conditions meant scores weren't even consistent. The fix was moving everything to CRON-triggered Deno Edge Functions. GitHub Actions fires the scoring function every Saturday at 7 PM GMT with a secret header for authentication. The function uses Supabase service role keys to bypass Row Level Security, so scoring happens atomically for everyone at once. No more client trust issues.
+
+**Batch Operations:** The naive approach to scoring looked something like: loop through each prediction, fetch the actual chart position, calculate points, run an UPDATE. With 50 users making 10 predictions each, that's 500 UPDATE queries. The database connection pool couldn't keep up, and scoring runs were taking 30+ seconds. The solution was PostgreSQL's <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">UNNEST</code> operator. Instead of 500 individual queries, the Edge Function builds arrays in memory and calls a batch function once. Two queries total. Scoring time dropped by 93%.
+
+---
+
+### Security
+
+- **Row Level Security:** Users can only touch their own predictions. Leaderboards and charts are public read. Edge Functions use service role credentials for admin operations.
+- **CRON Authentication:** Scheduled functions check for a matching <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">X-Cron-Secret</code> header before running.
+- **CORS:** Edge Functions validate the <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">Origin</code> header against a whitelist.
+- **Rate Limiting:** Apple Music API calls use exponential backoff (500ms → 1s → 2s) to stay within limits.
+- **Parameterised Queries:** Everything goes through Supabase's client, no raw SQL concatenation.
+
+---
+
+### Performance
+
+- **Code Splitting:** Manual chunk splitting keeps the initial bundle around 180KB gzipped. Pages lazy-load as needed.
+- **Redis Caching:** The 7-day TTL on chart data means most requests never hit the external API.
+- **Database Indexing:** A composite index on <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">(user_id, chart_week)</code> makes loading a user's predictions for a specific week fast.
+- **Image Loading:** Album artwork uses lazy loading with placeholder colours to avoid layout shift.
+
+---
+
+### Accessibility
+
+WCAG 2.1 AA compliant. Proper semantic HTML with landmark tags, ARIA labels on interactive elements, full keyboard support for drag-and-drop (Space to grab, Arrow keys to move), 4.5:1 minimum contrast ratio, and visible focus indicators throughout. Tested with VoiceOver on macOS and NVDA on Windows.
+
+---
+
+### Testing
+
+It's easy to skip tests on side projects. But when your users are competitive pop fans who will absolutely notice if scoring is off by a single point, you can't cut corners.
+
+Unit tests with Vitest cover the scoring algorithm and date utilities. Component tests with React Testing Library handle drag interactions and error boundaries. E2E tests with Playwright run through the full prediction flow: login, drag songs, submit, view results.
+
+Supabase is mocked in the test setup with realistic response fixtures. E2E tests run against a staging database with seed data.
+
+CI runs on every commit: dependency audit, Prettier check, ESLint, TypeScript in strict mode, the full test suite, build verification, and coverage upload.
+
+---
+
+## Tech Stack
+
+**Front End:** React 18, TypeScript (strict), Vite + SWC, TanStack Query, shadcn/ui + Radix UI, Tailwind CSS, Framer Motion, @dnd-kit, Recharts, Fuse.js
+
+**Back End:** Supabase (PostgreSQL + Auth), Deno Edge Functions, Upstash Redis
+
+**APIs:** RapidAPI Billboard Charts, Apple Music API, Resend
+
+**DevOps:** GitHub Actions, Vercel, Sentry, Playwright, Vitest

@@ -1,7 +1,9 @@
 placeholder images --> canoncore and waveger seeding
-read through everything
-USE GITHUB HISTORY FOR MY PROJECTS
 
-git contirbutor, and squash commits
+read through everything... including project cards
 
-- use context7, sequential thinking, and front-end design skill to do so
+do waveger
+
+git contirubtor, and squash commits - canoncore
+
+git contirubtor, and squash commits - this website

@@ -6,6 +6,7 @@ import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
 import Noise from '@/components/noise';
+import CarouselStandard2 from '@/components/carousel-standard-2';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
@@ -69,6 +70,7 @@ const projectGradients: Record<
 
 // Custom MDX components for images with captions
 const mdxComponents = {
+  CarouselStandard2,
   img: (props: { src?: string; alt?: string }) => (
     <span className="not-prose my-16 block">
       <Image
@@ -219,6 +221,8 @@ export default async function ProjectPage({ params }: PageProps) {
                   width={1920}
                   height={1080}
                   unoptimized
+                  loading="eager"
+                  priority
                   className="w-full rounded-lg"
                 />
               </div>

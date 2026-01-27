@@ -160,7 +160,8 @@ export default function FeaturesCarousel() {
                   variants={popIn}
                   className={cn(
                     `border-input hover:bg-border/50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-sm border transition-all duration-300`,
-                    isActive && 'bg-border',
+                    isActive &&
+                      'bg-gradient-to-br from-white via-rose-50/50 to-orange-50/50 dark:from-zinc-900 dark:via-zinc-800/50 dark:to-zinc-900',
                   )}
                   aria-label={feature.title}
                 >
@@ -217,7 +218,7 @@ export default function FeaturesCarousel() {
                   key={feature.id}
                   className="h-full md:basis-[60%]"
                 >
-                  <Card className="bg-border border-input aspect-[284/362] h-full !pb-0 transition-all duration-300 hover:shadow-lg lg:aspect-[384/562]">
+                  <Card className="border-input aspect-[284/362] h-full overflow-hidden bg-gradient-to-br from-white via-rose-50/50 to-orange-50/50 !pb-0 transition-all duration-300 hover:shadow-lg lg:aspect-[384/562] dark:from-zinc-900 dark:via-zinc-800/50 dark:to-zinc-900">
                     <CardHeader>
                       <CardTitle className="text-lg leading-tight md:text-2xl lg:text-3xl">
                         {feature.title}
@@ -233,7 +234,7 @@ export default function FeaturesCarousel() {
                         <ArrowRight className="size-4 transition-transform duration-300 group-hover/link:translate-x-0.5" />
                       </Link>
                     </CardHeader>
-                    <CardContent className="relative h-full">
+                    <CardContent className="relative h-full pb-6">
                       <div className="bg-card dark:bg-card-foreground border-input relative h-full overflow-hidden rounded-lg border">
                         <Image
                           src={feature.image.src}
@@ -246,7 +247,7 @@ export default function FeaturesCarousel() {
                           )}
                         />
                       </div>
-                      <div className="to-chart-4 absolute inset-0 bg-gradient-to-b from-transparent from-70%"></div>
+                      <div className="to-border absolute inset-0 bg-gradient-to-b from-transparent from-70%"></div>
                     </CardContent>
                   </Card>
                 </CarouselItem>
@@ -273,7 +274,8 @@ export default function FeaturesCarousel() {
                   variants={popIn}
                   className={cn(
                     `border-input hover:bg-border/50 flex h-16 w-16 cursor-pointer items-center justify-center rounded-sm border transition-all duration-300`,
-                    isActive && 'bg-border',
+                    isActive &&
+                      'bg-gradient-to-br from-white via-rose-50/50 to-orange-50/50 dark:from-zinc-900 dark:via-zinc-800/50 dark:to-zinc-900',
                   )}
                   aria-label={feature.title}
                 >

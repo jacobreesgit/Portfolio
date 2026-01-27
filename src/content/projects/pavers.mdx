@@ -1,7 +1,7 @@
 ---
 title: 'Pavers'
 category: 'E-Commerce'
-description: 'WCAG-compliant component library for UK footwear retailer with 160+ stores'
+description: 'WCAG-compliant component library and personalisation engine for UK footwear retailer with 160+ stores'
 technologies:
   ['Shopify Liquid', 'Sanity CMS', 'jQuery', 'Algolia', 'Jest', 'Bootstrap']
 link: 'https://pavers.co.uk'
@@ -12,30 +12,32 @@ featured: true
 
 ## Overview
 
-As a Web Developer at Pavers, I built front-end solutions for a major UK footwear retailer with 160+ physical stores and an e-commerce platform serving millions of customers. My work focused on creating an accessible, performant shopping experience across multiple brands.
+Front-end development for a major UK footwear retailer with 160+ physical stores and an e-commerce platform serving millions of customers. Work spanned multiple brands in the group including Jones Bootmaker and Herring Shoes, with a focus on accessibility, performance, and creating tools that gave the content team more autonomy.
 
 ## Key Contributions
 
 ### Component Library
 
-Developed a WCAG 2.1 AA-compliant component library using Shopify Liquid and jQuery with Bootstrap grid system. Built reusable components for product cards, navigation menus, promotional banners, and checkout flows. The library enabled content teams to customise pages via Sanity CMS headless architecture, deployed across 5+ brands including Jones Bootmaker and Herring Shoes.
+Built a WCAG 2.1 AA-compliant component library using Shopify Liquid, jQuery, and Bootstrap. The library covered everything from product cards and navigation to promotional banners and checkout flows - around 200 reusable components in total. Hooking this up to Sanity CMS meant the content team could customise pages themselves without waiting on dev work. Rolled out across 5+ brands.
 
-### Search Enhancement
+### Search
 
-Integrated Algolia InstantSearch with faceted filtering, typo tolerance, and synonym handling. Configured relevance ranking based on popularity, stock levels, and margin. Drove a 10% increase in search-driven conversions.
+Integrated Algolia InstantSearch to handle a catalogue of 10,000+ products. Set up faceted filtering, typo tolerance, and synonyms, then configured relevance ranking to factor in popularity, stock levels, and margin. Search-driven conversions went up 10% after launch.
 
-### Personalisation Engine
+### Personalisation
 
-Engineered location-based personalisation combining Lucky Orange session recordings with a weather API. Built recommendation logic showing weather-appropriate footwear (boots in cold/wet, sandals in warm) based on user's location. Achieved 7%+ conversion improvement on personalised recommendations.
+This was a fun one - combined Lucky Orange session data with a weather API to serve location-aware product recommendations. The logic surfaced boots when it was cold or wet, sandals when warm. Simple concept, but it drove a 7%+ conversion lift on those personalised recommendations.
 
-### Testing Infrastructure
+### Testing
 
-Increased front-end test coverage by 40% through Jest-based tests for critical user flows including add-to-cart, checkout, and search. Implemented snapshot testing for component regression prevention.
+Set up a Jest testing framework covering the critical paths: add-to-cart, checkout, search. Added snapshot testing to catch component regressions across the shared library. Took front-end test coverage up by 40%, which made a noticeable dent in production bugs reaching checkout.
 
-## Impact Metrics
+## Impact
 
-- 160+ retail stores supported by e-commerce platform
-- 5+ brands powered by shared component library
-- 10% increase in search-driven conversions
-- 7%+ conversion improvement from weather-based recommendations
-- 40% increase in front-end test coverage
+| Metric                          | Result |
+| ------------------------------- | ------ |
+| Retail stores supported         | 160+   |
+| Brands using shared library     | 5+     |
+| Search conversion increase      | 10%    |
+| Personalisation conversion lift | 7%+    |
+| Test coverage improvement       | 40%    |
