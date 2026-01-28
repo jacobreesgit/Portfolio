@@ -1,5 +1,5 @@
 'use client';
-import { FileText } from 'lucide-react';
+import { FileText, Github } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
@@ -35,6 +35,7 @@ const NAV_LINKS = [
       label: p.title,
       href: `/projects/${p.slug}`,
       description: p.shortDescription,
+      category: p.category,
       icon: p.icon,
     })),
   },
@@ -48,6 +49,12 @@ const ACTION_BUTTONS = [
     href: '/cv.pdf',
     variant: 'default' as const,
     icon: FileText,
+  },
+  {
+    label: 'GitHub',
+    href: 'https://github.com/jacobreesgit',
+    variant: 'outline' as const,
+    icon: Github,
   },
 ];
 const Navbar = () => {
@@ -129,8 +136,8 @@ const Navbar = () => {
                         {item.label}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent className="">
-                        <ul className="grid w-[280px] gap-2">
-                          <li className="border-muted-foreground/5 border-b pb-2">
+                        <ul className="flex w-[280px] flex-col gap-2">
+                          <li className="border-muted-foreground/5 order-0 border-b pb-2">
                             <NavigationMenuLink
                               href={item.href}
                               className="hover:bg-accent/50 flex-row gap-3 p-3 font-medium"
@@ -138,24 +145,40 @@ const Navbar = () => {
                               View All Projects
                             </NavigationMenuLink>
                           </li>
-                          {item.subitems.map((subitem) => (
-                            <li key={subitem.label}>
-                              <NavigationMenuLink
-                                href={subitem.href}
-                                className="hover:bg-accent/50 flex-row items-center gap-3 p-3"
+                          {item.subitems.map((subitem) => {
+                            const getOrder = (label: string) => {
+                              if (label === 'CanonCore') return 1;
+                              if (label === 'Waveger') return 2;
+                              if (label === 'Vepple') return 3;
+                              if (label === 'Pavers') return 4;
+                              return 5;
+                            };
+
+                            return (
+                              <li
+                                key={subitem.label}
+                                style={{ order: getOrder(subitem.label) }}
                               >
-                                <subitem.icon className="text-foreground size-5" />
-                                <div className="flex flex-col gap-1">
-                                  <div className="text-sm font-medium tracking-normal">
-                                    {subitem.label}
+                                <NavigationMenuLink
+                                  href={subitem.href}
+                                  className="hover:bg-accent/50 flex-row items-center gap-3 p-3"
+                                >
+                                  <subitem.icon className="text-foreground size-5" />
+                                  <div className="flex flex-col gap-1">
+                                    <div className="text-sm font-medium tracking-normal">
+                                      {subitem.label}{' '}
+                                      <span className="text-muted-foreground font-normal">
+                                        ({subitem.category})
+                                      </span>
+                                    </div>
+                                    <div className="text-muted-foreground text-xs leading-snug">
+                                      {subitem.description}
+                                    </div>
                                   </div>
-                                  <div className="text-muted-foreground text-xs leading-snug">
-                                    {subitem.description}
-                                  </div>
-                                </div>
-                              </NavigationMenuLink>
-                            </li>
-                          ))}
+                                </NavigationMenuLink>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </NavigationMenuContent>
                     </>
@@ -251,30 +274,46 @@ const Navbar = () => {
                             {item.label}
                           </AccordionTrigger>
                           <AccordionContent className="pb-0">
-                            <div className="space-y-2">
+                            <div className="flex flex-col gap-2">
                               <NavigationMenuLink
                                 href={item.href}
                                 onClick={() => setIsMenuOpen(false)}
-                                className="text-muted-foreground hover:bg-accent/50 flex flex-row items-center gap-2 p-3 font-medium transition-colors"
+                                className="text-muted-foreground hover:bg-accent/50 order-0 flex flex-row items-center gap-2 p-3 font-medium transition-colors"
                               >
                                 View All Projects
                               </NavigationMenuLink>
-                              {item.subitems.map((subitem) => (
-                                <NavigationMenuLink
-                                  key={subitem.label}
-                                  href={subitem.href}
-                                  onClick={() => setIsMenuOpen(false)}
-                                  className={cn(
-                                    'text-muted-foreground hover:bg-accent/50 flex flex-row items-center gap-2 p-3 font-medium transition-colors',
-                                    pathname === subitem.href &&
-                                      'bg-accent font-semibold',
-                                  )}
-                                  suppressHydrationWarning
-                                >
-                                  <subitem.icon className="size-5" />
-                                  <span className="">{subitem.label}</span>
-                                </NavigationMenuLink>
-                              ))}
+                              {item.subitems.map((subitem) => {
+                                const getOrder = (label: string) => {
+                                  if (label === 'CanonCore') return 1;
+                                  if (label === 'Waveger') return 2;
+                                  if (label === 'Vepple') return 3;
+                                  if (label === 'Pavers') return 4;
+                                  return 5;
+                                };
+
+                                return (
+                                  <NavigationMenuLink
+                                    key={subitem.label}
+                                    href={subitem.href}
+                                    onClick={() => setIsMenuOpen(false)}
+                                    className={cn(
+                                      'text-muted-foreground hover:bg-accent/50 flex flex-row items-center gap-2 p-3 font-medium transition-colors',
+                                      pathname === subitem.href &&
+                                        'bg-accent font-semibold',
+                                    )}
+                                    style={{ order: getOrder(subitem.label) }}
+                                    suppressHydrationWarning
+                                  >
+                                    <subitem.icon className="size-5" />
+                                    <span>
+                                      {subitem.label}{' '}
+                                      <span className="text-muted-foreground font-normal">
+                                        ({subitem.category})
+                                      </span>
+                                    </span>
+                                  </NavigationMenuLink>
+                                );
+                              })}
                             </div>
                           </AccordionContent>
                         </AccordionItem>

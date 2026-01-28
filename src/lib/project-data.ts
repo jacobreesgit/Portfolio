@@ -18,6 +18,9 @@ export interface ProjectMeta {
   image: string;
   featured: boolean;
   icon: LucideIcon;
+  link?: string;
+  links?: { label: string; url: string }[];
+  github?: string;
 }
 
 // Filter categories matching homepage Skills & Technologies section
@@ -36,11 +39,28 @@ export type ProjectTag = (typeof PROJECT_TAGS)[number];
  */
 export const PROJECTS: ProjectMeta[] = [
   {
+    slug: 'vepple',
+    title: 'Vepple',
+    category: 'Client Work',
+    description:
+      'Virtual campus tour platform serving 30+ UK universities. Achieved 4x page engagement with 12+ pages per session.',
+    shortDescription: 'Virtual campus tours',
+    technologies: ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL'],
+    tags: ['Front-End', 'Tools & Design'],
+    image: '/images/vepple.webp',
+    featured: true,
+    icon: Globe,
+    links: [
+      { label: 'Product', url: 'https://vepple.com' },
+      { label: 'Demo', url: 'https://demo.vepple.com' },
+    ],
+  },
+  {
     slug: 'canoncore',
     title: 'CanonCore',
-    category: 'Full-Stack Application',
+    category: 'Personal Project',
     description:
-      'Google Drive meets Netflix. Visual browsing, drag-and-drop organisation, watch progress, collections others can fork.',
+      'Google Drive meets Netflix. Visual browsing, drag-and-drop organisation, watch progress, and public collections.',
     shortDescription: 'Full-stack media library',
     technologies: [
       'Next.js 16',
@@ -50,54 +70,49 @@ export const PROJECTS: ProjectMeta[] = [
       'Prisma 7',
     ],
     tags: ['Front-End', 'Full-Stack', 'Tools & Design'],
-    image: '/images/canoncore.jpg',
+    image: '/images/canoncore.webp',
     featured: true,
     icon: MonitorPlay,
-  },
-  {
-    slug: 'vepple',
-    title: 'Vepple',
-    category: 'Enterprise Platform',
-    description:
-      'Architected features for virtual campus tour platform serving 30+ UK universities. 4x more pages per session, 12+ pages and 7 min average visits.',
-    shortDescription: 'Virtual campus tours',
-    technologies: ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL'],
-    tags: ['Front-End', 'Tools & Design'],
-    image: '/images/projects/vepple.jpg',
-    featured: true,
-    icon: Globe,
+    link: 'https://canoncore.com',
+    github: 'https://github.com/jacobreesgit/canoncore-v2',
   },
   {
     slug: 'pavers',
     title: 'Pavers',
-    category: 'E-Commerce',
+    category: 'Client Work',
     description:
-      'WCAG-compliant component library and personalisation engine for UK footwear retailer with 160+ stores.',
+      'WCAG-compliant component library and personalisation engine for a UK footwear retailer with 160+ physical stores.',
     shortDescription: 'E-commerce components',
     technologies: ['Shopify Liquid', 'Sanity CMS', 'Algolia', 'jQuery'],
     tags: ['Front-End', 'Tools & Design'],
-    image: '/images/projects/pavers.jpg',
+    image: '/images/pavers.webp',
     featured: true,
     icon: ShoppingBag,
+    links: [
+      { label: 'Pavers', url: 'https://pavers.co.uk' },
+      { label: 'Jones Bootmaker', url: 'https://www.jonesbootmaker.com' },
+    ],
   },
   {
     slug: 'musiccount',
     title: 'MusicCount',
-    category: 'iOS Application',
-    description: 'Match your play counts before cleaning up duplicates.',
+    category: 'Personal Project',
+    description: 'iOS app to match play counts across duplicate songs before cleanup. Smart detection finds and groups duplicates.',
     shortDescription: 'iOS play count sync',
     technologies: ['Swift 6.1', 'SwiftUI', 'MediaPlayer', 'Swift Testing'],
     tags: ['Mobile'],
     image: '/images/musiccount.png',
     featured: false,
     icon: Music,
+    link: 'https://apps.apple.com/gb/app/musiccount/id6754639829',
+    github: 'https://github.com/jacobreesgit/MusicCount',
   },
   {
     slug: 'waveger',
     title: 'Waveger',
-    category: 'Full-Stack Application',
+    category: 'Personal Project',
     description:
-      'Billboard meets March Madness: Predict the Hot 100, compete for accuracy.',
+      'Billboard meets Fantasy Football. Predict Hot 100 chart positions each week and compete in leagues for accuracy.',
     shortDescription: 'Music prediction game',
     technologies: [
       'React 18',
@@ -110,6 +125,7 @@ export const PROJECTS: ProjectMeta[] = [
     image: '/images/projects/waveger-hero.png',
     featured: false,
     icon: Headphones,
+    link: 'https://waveger.vercel.app',
   },
 ];
 

@@ -1,12 +1,12 @@
 ---
 title: 'MusicCount'
-category: 'iOS Application'
+category: 'Personal Project'
 description: 'Match your play counts before cleaning up duplicates.'
 technologies:
   ['Swift 6.1', 'SwiftUI', 'MediaPlayer', 'Swift Concurrency', 'Swift Testing']
 link: 'https://apps.apple.com/gb/app/musiccount/id6754639829'
 github: 'https://github.com/jacobreesgit/MusicCount'
-image: 'https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=MusicCount'
+image: '/images/musiccount.webp'
 year: '2025'
 featured: false
 ---
@@ -20,11 +20,11 @@ MusicCount scans your library, groups duplicates by normalised title and artist,
 Already looking forward to updating it with Liquid Glass when iOS 26 drops.
 
 <div className="not-prose my-12">
-  <img
+  <ClickableImage
     alt="MusicCount suggestions view"
     loading="lazy"
-    width="1920"
-    height="1080"
+    width={1920}
+    height={1080}
     decoding="async"
     className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
     src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Suggestions+View"
@@ -44,21 +44,14 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Intelligent Duplicate Detection
     </h3>
-    <p className="text-muted-foreground leading-relaxed">
-      Nothing worse than seeing your most-played song split across three
-      versions. The app normalises strings to catch duplicates across case
-      variations, whitespace differences, and encoding quirks. It crunches
-      through thousands of songs on a background thread, grouping by both title
-      and artist so you don't get false positives from different songs with the
-      same name. Groups with the biggest play count gaps float to the top.
-    </p>
+    <p className="text-muted-foreground leading-relaxed">Nothing worse than seeing your most-played song split across three versions. The app normalises strings to catch duplicates across case variations, whitespace differences, and encoding quirks. It crunches through thousands of songs on a background thread, grouping by both title and artist so you don't get false positives from different songs with the same name. Groups with the biggest play count gaps float to the top.</p>
   </div>
   <div className="order-1 lg:order-2">
-    <img
+    <ClickableImage
       alt="Library loading state"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=First+Load"
@@ -70,20 +63,20 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-1 space-y-4">
-    <img
+    <ClickableImage
       alt="Comparison view"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Comparison+Expanded"
     />
-    <img
+    <ClickableImage
       alt="Choosing between versions"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Choosing+Song"
@@ -93,17 +86,10 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Interactive Play Count Comparison
     </h3>
-    <p className="text-muted-foreground mb-4 leading-relaxed">
-      A side-by-side view with blurred album artwork in the background. Tap the
-      card for the version you want to keep, and that's the one that gets
-      queued. Two modes: <strong>Match Mode</strong> queues it enough times to
-      match the duplicate's play count, while <strong>Add Mode</strong> adds
-      plays equal to the duplicate's total.
-    </p>
-    <p className="text-muted-foreground leading-relaxed">
-      Once you've played through the queue, you can delete the duplicate knowing
-      your play history is preserved on the right track.
-    </p>
+    <div className="space-y-4">
+      <p className="text-muted-foreground leading-relaxed">A side-by-side view with blurred album artwork in the background. Tap the card for the version you want to keep, and that's the one that gets queued. Two modes: <strong>Match Mode</strong> queues it enough times to match the duplicate's play count, while <strong>Add Mode</strong> adds plays equal to the duplicate's total.</p>
+      <p className="text-muted-foreground leading-relaxed">Once you've played through the queue, you can delete the duplicate knowing your play history is preserved on the right track.</p>
+    </div>
   </div>
 </div>
 
@@ -114,18 +100,14 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Native Apple Music Integration
     </h3>
-    <p className="text-muted-foreground leading-relaxed">
-      Hooks directly into Apple's music player for queuing. Two behaviours:{' '}
-      <strong>Insert Next</strong> slots songs after whatever's playing, and{' '}
-      <strong>Replace Queue</strong> clears everything and starts fresh.
-    </p>
+    <p className="text-muted-foreground leading-relaxed">Hooks directly into Apple's music player for queuing. Two behaviours: <strong>Insert Next</strong> slots songs after whatever's playing, and <strong>Replace Queue</strong> clears everything and starts fresh.</p>
   </div>
   <div className="order-1 lg:order-2">
-    <img
+    <ClickableImage
       alt="Queue settings"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Settings"
@@ -137,11 +119,11 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-1">
-    <img
+    <ClickableImage
       alt="Selection states"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Selection+States"
@@ -151,11 +133,7 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Smart Dismissal System
     </h3>
-    <p className="text-muted-foreground leading-relaxed">
-      You can dismiss individual songs from groups with 3+ versions, or swipe to
-      bin an entire group. Dismissals persist between launches, because nobody
-      wants to dismiss the same suggestion every time they open the app.
-    </p>
+    <p className="text-muted-foreground leading-relaxed">You can dismiss individual songs from groups with 3+ versions, or swipe to bin an entire group. Dismissals persist between launches, because nobody wants to dismiss the same suggestion every time they open the app.</p>
   </div>
 </div>
 
@@ -165,25 +143,14 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
   <h3 className="mb-4 text-2xl font-semibold tracking-tight">
     Sorting & Search
   </h3>
-  <p className="text-muted-foreground leading-relaxed">
-    Browse your entire library sorted by play count, title, artist, album, or
-    version count, each ascending or descending. Seven sort options in total for
-    the suggestions view. Search is real-time across titles, artists, and albums
-    with proper Unicode handling. Search narrows things down first, then sort
-    reorders what's left.
-  </p>
+  <p className="text-muted-foreground leading-relaxed">Browse your entire library sorted by play count, title, artist, album, or version count, each ascending or descending. Seven sort options in total for the suggestions view. Search is real-time across titles, artists, and albums with proper Unicode handling. Search narrows things down first, then sort reorders what's left.</p>
 </div>
 
 {/* Accessibility */}
 
 <div>
   <h3 className="mb-4 text-2xl font-semibold tracking-tight">Accessibility</h3>
-  <p className="text-muted-foreground leading-relaxed">
-    VoiceOver labels and hints on every interactive element. Tab bar badges show
-    the suggestion count at a glance. Comparison cards are grouped so screen
-    readers don't have to wade through each element individually. Dynamic Type
-    works throughout, and everything uses semantic font styles.
-  </p>
+  <p className="text-muted-foreground leading-relaxed">VoiceOver labels and hints on every interactive element. Tab bar badges show the suggestion count at a glance. Comparison cards are grouped so screen readers don't have to wade through each element individually. Dynamic Type works throughout, and everything uses semantic font styles.</p>
 </div>
 
 </div>

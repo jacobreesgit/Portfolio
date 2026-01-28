@@ -3,6 +3,7 @@
 import { Download } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
+import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
@@ -23,14 +24,43 @@ export default function Experience({ className }: ExperienceProps) {
   const prefersReducedMotion = usePrefersReducedMotion();
   const initial = prefersReducedMotion ? 'visible' : 'hidden';
 
-  const experience = [
+  const experience: Array<{
+    id: string;
+    period: string;
+    title: string;
+    company: string;
+    description: React.ReactNode;
+    technologies: string;
+  }> = [
     {
       id: 'revolution-viewing',
       period: 'Mar 2023 - Present',
       title: 'Front-End Developer',
       company: 'Revolution Viewing',
-      description:
-        'Developed Vepple, a virtual experience platform for 30+ UK universities delivering personalised campus tours, interactive maps, and live events with lead capture. Architected Events Management System with Firebase real-time chat, 1-second status engine, and timezone-aware scheduling. Built production A/B testing framework with GrowthBook SDK, GDPR-compliant tracking, and GTM analytics, reducing bounce rate by 19%. Led mobile navigation overhaul increasing session duration by 41% and mobile engagement by 85%. Developed custom map UI with Mapbox GL and directions API, with map users viewing 68% more pages. Enhanced panorama Guided Tour suite with ambassador video integration, real-time synchronised transcription, and engagement analytics.',
+      description: (
+        <>
+          Developed{' '}
+          <a
+            href="https://vepple.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground underline decoration-muted-foreground/50 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+          >
+            Vepple
+          </a>
+          , a virtual experience platform for 30+ UK universities delivering
+          personalised campus tours, interactive maps, and live events with lead
+          capture. Architected Events Management System with Firebase real-time
+          chat, 1-second status engine, and timezone-aware scheduling. Built
+          production A/B testing framework with GrowthBook SDK, GDPR-compliant
+          tracking, and GTM analytics, reducing bounce rate by 19%. Led mobile
+          navigation overhaul increasing session duration by 41% and mobile
+          engagement by 85%. Developed custom map UI with Mapbox GL and
+          directions API, with map users viewing 68% more pages. Enhanced
+          panorama Guided Tour suite with ambassador video integration,
+          real-time synchronised transcription, and engagement analytics.
+        </>
+      ),
       technologies:
         'Vue.js, Pinia, Quasar, Firebase, Vitest, Figma, GTM, Google Analytics, Bitbucket Pipelines',
     },
@@ -39,8 +69,28 @@ export default function Experience({ className }: ExperienceProps) {
       period: 'Aug 2022 - Mar 2023',
       title: 'Web Developer',
       company: 'Pavers',
-      description:
-        'Built front-end solutions for Pavers, a UK footwear retailer with 160+ stores. Developed a WCAG 2.1 AA-compliant component library using Shopify Liquid and jQuery, enabling content teams to customise pages via Sanity CMS across 5+ brands including Jones Bootmaker and Herring Shoes. Integrated Algolia search, improving search relevance and driving a 10% increase in search-driven conversions. Combined Lucky Orange with a weather API for location-based recommendations, resulting in 7+% conversion. Increased front-end test coverage by 40% through Jest-based tests for critical user flows.',
+      description: (
+        <>
+          Built front-end solutions for{' '}
+          <a
+            href="https://pavers.co.uk"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground underline decoration-muted-foreground/50 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+          >
+            Pavers
+          </a>
+          , a UK footwear retailer with 160+ stores. Developed a WCAG 2.1
+          AA-compliant component library using Shopify Liquid and jQuery,
+          enabling content teams to customise pages via Sanity CMS across 5+
+          brands including Jones Bootmaker and Herring Shoes. Integrated Algolia
+          search, improving search relevance and driving a 10% increase in
+          search-driven conversions. Combined Lucky Orange with a weather API
+          for location-based recommendations, resulting in 7+% conversion.
+          Increased front-end test coverage by 40% through Jest-based tests for
+          critical user flows.
+        </>
+      ),
       technologies:
         'Shopify Liquid, Sanity CMS, Bootstrap, jQuery, Algolia, Jest, Lucky Orange, Google Tag Manager',
     },
@@ -49,8 +99,20 @@ export default function Experience({ className }: ExperienceProps) {
       period: 'Jul 2022',
       title: 'BA in Digital Media',
       company: 'University of Leeds',
-      description:
-        'Achieved a 2:1 overall with a First in the final coding project.',
+      description: (
+        <>
+          Achieved a 2:1 overall with a First in the{' '}
+          <a
+            href="https://waveger.vercel.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-foreground underline decoration-muted-foreground/50 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+          >
+            final coding project
+          </a>
+          .
+        </>
+      ),
       technologies: '',
     },
   ];

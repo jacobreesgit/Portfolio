@@ -12,7 +12,9 @@
     "type-check": "tsc --noEmit",
     "knip": "knip",
     "check": "rm -rf .next && npm run format && npm run type-check && npm run lint:fix && npm run build",
-    "lint:fix": "next lint --fix || true"
+    "lint:fix": "next lint --fix || true",
+    "optimize-image": "node scripts/optimize-image.mjs",
+    "optimize-portfolio": "node scripts/batch-optimize-portfolio.mjs"
   },
   "dependencies": {
     "@faker-js/faker": "^10.2.0",

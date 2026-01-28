@@ -170,23 +170,6 @@ export default function FeaturesCarousel() {
               );
             })}
           </motion.div>
-
-          {/* Dots Indicator */}
-          <div className="mt-6 hidden flex-1 items-end justify-center gap-1 lg:flex">
-            {features.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => handleFeatureClick(index)}
-                className={cn(
-                  'size-1.5 cursor-pointer rounded-full transition-all duration-300',
-                  index === activeIndex
-                    ? 'bg-foreground'
-                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50',
-                )}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
         </div>
 
         {/* Right Content - Carousel Cards */}
@@ -283,30 +266,6 @@ export default function FeaturesCarousel() {
                 </motion.button>
               );
             })}
-          </motion.div>
-
-          {/* Mobile Dots Indicator */}
-          <motion.div
-            className="flex flex-1 items-end justify-center gap-1 lg:hidden"
-            initial={initial}
-            whileInView="visible"
-            viewport={scrollViewport}
-            variants={staggerContainer}
-          >
-            {features.map((_, index) => (
-              <motion.button
-                key={index}
-                onClick={() => handleFeatureClick(index)}
-                variants={popIn}
-                className={cn(
-                  'size-1.5 cursor-pointer rounded-full transition-all duration-300',
-                  index === activeIndex
-                    ? 'bg-foreground'
-                    : 'bg-muted-foreground/30 hover:bg-muted-foreground/50',
-                )}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
           </motion.div>
         </motion.div>
       </div>

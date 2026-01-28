@@ -1,6 +1,6 @@
 ---
 title: 'Waveger'
-category: 'Full-Stack Application'
+category: 'Personal Project'
 description: 'Billboard meets March Madness: Predict the Hot 100, compete for accuracy.'
 technologies:
   [
@@ -16,7 +16,7 @@ technologies:
     'Playwright',
   ]
 link: 'https://waveger.vercel.app'
-image: 'https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Waveger'
+image: '/images/waveger.webp'
 year: '2025'
 featured: false
 ---
@@ -30,11 +30,11 @@ The original version was my final year project at the University of Leeds, built
 If you spend any time on stan Twitter, you'll know the culture. Everyone's got opinions on whether their fave will debut top 10, whether a song's got the streams to hold #1, whether radio will tank a track's position. Accounts like @ChartData post midweek updates and the replies fill with predictions. But nobody keeps score. It's all talk. I wanted to give people receipts.
 
 <div className="not-prose my-12">
-  <img
+  <ClickableImage
     alt="Main prediction interface with drag-drop grid and countdown timer"
     loading="lazy"
-    width="1920"
-    height="1080"
+    width={1920}
+    height={1080}
     decoding="async"
     className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
     src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Prediction+Interface"
@@ -54,27 +54,17 @@ If you spend any time on stan Twitter, you'll know the culture. Everyone's got o
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Batch Scoring with Edge Functions
     </h3>
-    <p className="text-muted-foreground mb-4 leading-relaxed">
-      When Billboard publishes charts every Saturday, a Deno Edge Function
-      scores all predictions in one go. Rather than updating each prediction
-      individually (the classic N+1 problem), the function uses PostgreSQL's{' '}
-      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">UNNEST</code>{' '}
-      to handle everything in just 2 queries.
-    </p>
-    <p className="text-muted-foreground leading-relaxed">
-      The Edge Function grabs the latest chart, maps predictions against actual
-      positions, works out points using a tiered system (150 for an exact match,
-      100 if you're within 1 position, and so on), then fires off a batch SQL
-      function. Scoring dropped from roughly 30 seconds down to under 2.
-      Genuinely satisfying to watch that number fall.
-    </p>
+    <div className="space-y-4">
+      <p className="text-muted-foreground leading-relaxed">When Billboard publishes charts every Saturday, a Deno Edge Function scores all predictions in one go. Rather than updating each prediction individually (the classic N+1 problem), the function uses PostgreSQL's <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">UNNEST</code> to handle everything in just 2 queries.</p>
+      <p className="text-muted-foreground leading-relaxed">The Edge Function grabs the latest chart, maps predictions against actual positions, works out points using a tiered system (150 for an exact match, 100 if you're within 1 position, and so on), then fires off a batch SQL function. Scoring dropped from roughly 30 seconds down to under 2. Genuinely satisfying to watch that number fall.</p>
+    </div>
   </div>
   <div className="order-1 lg:order-2">
-    <img
+    <ClickableImage
       alt="Results page showing scored predictions with point breakdown"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Scored+Predictions"
@@ -86,11 +76,11 @@ If you spend any time on stan Twitter, you'll know the culture. Everyone's got o
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-1">
-    <img
+    <ClickableImage
       alt="Prediction interface with countdown timer"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Countdown+Timer"
@@ -100,15 +90,7 @@ If you spend any time on stan Twitter, you'll know the culture. Everyone's got o
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Prediction Lock-In
     </h3>
-    <p className="text-muted-foreground leading-relaxed">
-      Users drag and drop songs to predict positions 1-100. A countdown timer
-      (DST-aware, handling timezone conversions properly) ticks down to Friday 5
-      AM GMT. When the deadline hits, predictions lock via a database
-      constraint. No client-side honour system here; the lock is enforced
-      server-side through PostgreSQL{' '}
-      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">CHECK</code>{' '}
-      constraints, so even API manipulation won't help.
-    </p>
+    <p className="text-muted-foreground leading-relaxed">Users drag and drop songs to predict positions 1-100. A countdown timer (DST-aware, handling timezone conversions properly) ticks down to Friday 5 AM GMT. When the deadline hits, predictions lock via a database constraint. No client-side honour system here; the lock is enforced server-side through PostgreSQL <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">CHECK</code> constraints, so even API manipulation won't help.</p>
   </div>
 </div>
 
@@ -118,20 +100,10 @@ If you spend any time on stan Twitter, you'll know the culture. Everyone's got o
   <h3 className="mb-4 text-2xl font-semibold tracking-tight">
     Three-Layer Caching
   </h3>
-  <p className="text-muted-foreground mb-4 leading-relaxed">
-    Billboard chart data is rate-limited and slow (300ms+ latency per request).
-    The API costs were also creeping up faster than I'd expected. To avoid
-    hammering the API, chart data flows through three layers: Upstash Redis with
-    a 7-day TTL, then a PostgreSQL{' '}
-    <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">charts</code>{' '}
-    table, then TanStack Query's client cache with a 30-minute stale time. Most
-    requests never touch the external API at all.
-  </p>
-  <p className="text-muted-foreground leading-relaxed">
-    Apple Music artwork URLs get cached separately with a 30-day TTL since they
-    rarely change. On the client side, TanStack Query handles deduplication so
-    navigating around the app doesn't trigger redundant fetches.
-  </p>
+  <div className="space-y-4">
+    <p className="text-muted-foreground leading-relaxed">Billboard chart data is rate-limited and slow (300ms+ latency per request). The API costs were also creeping up faster than I'd expected. To avoid hammering the API, chart data flows through three layers: Upstash Redis with a 7-day TTL, then a PostgreSQL <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">charts</code> table, then TanStack Query's client cache with a 30-minute stale time. Most requests never touch the external API at all.</p>
+    <p className="text-muted-foreground leading-relaxed">Apple Music artwork URLs get cached separately with a 30-day TTL since they rarely change. On the client side, TanStack Query handles deduplication so navigating around the app doesn't trigger redundant fetches.</p>
+  </div>
 </div>
 
 {/* Leaderboards & Profile Stats */}
@@ -141,26 +113,14 @@ If you spend any time on stan Twitter, you'll know the culture. Everyone's got o
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Leaderboards & Profile Stats
     </h3>
-    <p className="text-muted-foreground leading-relaxed">
-      Weekly and all-time leaderboards rank users by total points, with streak
-      tracking for consecutive weeks of participation. Profiles show prediction
-      history with Recharts visualisations: points earned per week, accuracy
-      percentage over time, and a histogram of how far off predictions typically
-      land. Leaderboards query against an indexed{' '}
-      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">
-        total_points DESC
-      </code>{' '}
-      column. Profile aggregations use SQL window functions. Badges are stored
-      as JSONB arrays, which means adding new achievement types doesn't require
-      schema changes.
-    </p>
+    <p className="text-muted-foreground leading-relaxed">Weekly and all-time leaderboards rank users by total points, with streak tracking for consecutive weeks of participation. Profiles show prediction history with Recharts visualisations: points earned per week, accuracy percentage over time, and a histogram of how far off predictions typically land. Leaderboards query against an indexed <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">total_points DESC</code> column. Profile aggregations use SQL window functions. Badges are stored as JSONB arrays, which means adding new achievement types doesn't require schema changes.</p>
   </div>
   <div className="order-1 lg:order-2">
-    <img
+    <ClickableImage
       alt="Leaderboard and profile analytics"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Leaderboard+Profile"
@@ -172,11 +132,11 @@ If you spend any time on stan Twitter, you'll know the culture. Everyone's got o
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-1">
-    <img
+    <ClickableImage
       alt="Mobile view with swipeable cards"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Mobile+Swipeable+Cards"
@@ -186,21 +146,10 @@ If you spend any time on stan Twitter, you'll know the culture. Everyone's got o
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Mobile-First Design
     </h3>
-    <p className="text-muted-foreground mb-4 leading-relaxed">
-      On desktop, users drag and drop songs in a grid. On mobile, they swipe
-      through a card stack with Framer Motion handling the gesture animations.
-      Both share the same prediction logic underneath, just different input
-      methods.
-    </p>
-    <p className="text-muted-foreground leading-relaxed">
-      A custom{' '}
-      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">
-        useIsMobile()
-      </code>{' '}
-      hook detects screen width at runtime. The drag-drop implementation uses
-      @dnd-kit with keyboard, pointer, and touch sensors so it stays accessible
-      regardless of how someone's interacting with it.
-    </p>
+    <div className="space-y-4">
+      <p className="text-muted-foreground leading-relaxed">On desktop, users drag and drop songs in a grid. On mobile, they swipe through a card stack with Framer Motion handling the gesture animations. Both share the same prediction logic underneath, just different input methods.</p>
+      <p className="text-muted-foreground leading-relaxed">A custom <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">useIsMobile()</code> hook detects screen width at runtime. The drag-drop implementation uses @dnd-kit with keyboard, pointer, and touch sensors so it stays accessible regardless of how someone's interacting with it.</p>
+    </div>
   </div>
 </div>
 
@@ -211,26 +160,17 @@ If you spend any time on stan Twitter, you'll know the culture. Everyone's got o
     <h3 className="mb-4 text-2xl font-semibold tracking-tight">
       Apple Music Integration
     </h3>
-    <p className="text-muted-foreground mb-4 leading-relaxed">
-      Users can swap any Billboard song for a custom Apple Music track, handy
-      for predicting sleeper hits or viral TikTok songs that haven't charted
-      yet. Search uses Fuse.js for fuzzy matching with debounced queries so it
-      doesn't spam the API.
-    </p>
-    <p className="text-muted-foreground leading-relaxed">
-      Apple Music requires developer tokens generated server-side. The{' '}
-      <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">song_id</code>{' '}
-      field supports both Billboard IDs and Apple Music IDs, with a
-      discriminator flag so the scoring logic knows which type it's dealing
-      with.
-    </p>
+    <div className="space-y-4">
+      <p className="text-muted-foreground leading-relaxed">Users can swap any Billboard song for a custom Apple Music track, handy for predicting sleeper hits or viral TikTok songs that haven't charted yet. Search uses Fuse.js for fuzzy matching with debounced queries so it doesn't spam the API.</p>
+      <p className="text-muted-foreground leading-relaxed">Apple Music requires developer tokens generated server-side. The <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">song_id</code> field supports both Billboard IDs and Apple Music IDs, with a discriminator flag so the scoring logic knows which type it's dealing with.</p>
+    </div>
   </div>
   <div className="order-1 lg:order-2">
-    <img
+    <ClickableImage
       alt="Song swap modal with Apple Music search"
       loading="lazy"
-      width="1920"
-      height="1080"
+      width={1920}
+      height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
       src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Apple+Music+Swap"

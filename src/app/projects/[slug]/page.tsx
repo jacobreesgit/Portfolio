@@ -10,6 +10,11 @@ import CarouselStandard2 from '@/components/carousel-standard-2';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
+import { LightboxProvider } from '@/components/lightbox-provider';
+import { ClickableImage } from '@/components/clickable-image';
+import { ImpactMetrics } from '@/components/impact-metrics';
+import { ProjectPageAnimated } from '@/components/project-page-animated';
+import { ProjectSidebar } from '@/components/project-sidebar';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -49,12 +54,10 @@ const projectGradients: Record<
   vepple: {
     color1: 'bg-teal-500/15',
     color2: 'bg-cyan-400/15',
-    color3: 'bg-emerald-400/10',
   },
   pavers: {
     color1: 'bg-amber-500/15',
     color2: 'bg-orange-400/15',
-    color3: 'bg-yellow-400/10',
   },
   musiccount: {
     color1: 'bg-violet-500/15',
@@ -71,22 +74,26 @@ const projectGradients: Record<
 // Custom MDX components for images with captions
 const mdxComponents = {
   CarouselStandard2,
-  img: (props: { src?: string; alt?: string }) => (
-    <span className="not-prose my-16 block">
-      <Image
-        src={props.src || ''}
-        alt={props.alt || ''}
-        width={1920}
-        height={1080}
-        unoptimized
-        className="w-full rounded-lg"
-      />
-      {props.alt && (
-        <span className="text-muted-foreground mt-4 block text-center text-sm italic">
-          {props.alt}
-        </span>
-      )}
-    </span>
+  ClickableImage,
+  ImpactMetrics,
+  img: (props: {
+    src?: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    className?: string;
+    loading?: 'lazy' | 'eager';
+    decoding?: 'async' | 'auto' | 'sync';
+  }) => (
+    <ClickableImage
+      src={props.src || ''}
+      alt={props.alt || ''}
+      width={props.width}
+      height={props.height}
+      className={props.className}
+      loading={props.loading}
+      decoding={props.decoding}
+    />
   ),
 };
 
@@ -103,8 +110,14 @@ export default async function ProjectPage({ params }: PageProps) {
     color2: 'bg-orange-400/15',
   };
 
+  // Generate lightbox version of hero image if it's a WebP in /images/
+  const heroLightboxSrc = project.image.includes('/images/') && project.image.endsWith('.webp')
+    ? project.image.replace('.webp', '-lightbox.webp')
+    : undefined;
+
   return (
-    <div className="relative overflow-hidden">
+    <LightboxProvider>
+      <div className="relative overflow-hidden">
       {/* Background Gradient */}
       <div className="pointer-events-none absolute inset-0">
         <div
@@ -134,110 +147,45 @@ export default async function ProjectPage({ params }: PageProps) {
       </div>
       <Noise />
 
-      <section className="relative z-10 py-16">
-        <div className="container max-w-7xl">
-          {/* Back Button */}
-          <Button variant="ghost" size="sm" className="mb-8" asChild>
-            <Link href="/projects">
-              <ArrowLeft className="mr-2 size-4" />
+      <ProjectPageAnimated
+        backButton={
+          <Link
+            href="/projects"
+            className="group mb-8 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-foreground"
+          >
+            <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
+            <span className="relative">
               Back to Projects
-            </Link>
-          </Button>
-
-          <div className="grid grid-cols-1 gap-16 lg:grid-cols-4">
-            {/* Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="space-y-8 lg:sticky lg:top-8">
-                {/* Project Info */}
-                <div>
-                  <p className="text-muted-foreground mb-4 text-xs font-semibold tracking-widest uppercase">
-                    {project.category}
-                  </p>
-                  <h1 className="mb-4 text-4xl font-bold">{project.title}</h1>
-                  <p className="text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                {/* Metadata */}
-                <div className="space-y-6 border-t pt-8">
-                  <div>
-                    <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
-                      Year
-                    </p>
-                    <p className="font-medium">{project.year}</p>
-                  </div>
-                  <div>
-                    <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
-                      Technologies
-                    </p>
-                    <p className="font-medium">
-                      {project.technologies.slice(0, 4).join(', ')}
-                    </p>
-                  </div>
-                  {project.github && (
-                    <div>
-                      <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
-                        Source
-                      </p>
-                      <Link
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-primary flex items-center gap-2 font-medium"
-                      >
-                        <Github className="size-4" />
-                        GitHub
-                      </Link>
-                    </div>
-                  )}
-                  {project.link && (
-                    <div>
-                      <p className="text-muted-foreground mb-1 text-xs font-semibold tracking-wider uppercase">
-                        Live Site
-                      </p>
-                      <Link
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-primary flex items-center gap-2 font-medium"
-                      >
-                        <ExternalLink className="size-4" />
-                        Visit
-                      </Link>
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="lg:col-span-3">
-              {/* Hero Image */}
-              <div className="mb-16">
-                <Image
+              <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-gradient-to-r from-foreground to-foreground/30 transition-transform duration-300 ease-out group-hover:scale-x-100" />
+            </span>
+          </Link>
+        }
+        sidebar={<ProjectSidebar project={project} />}
+        mainContent={
+          <>
+            {slug !== 'vepple' && slug !== 'pavers' && (
+              <div className="mb-12">
+                <ClickableImage
                   src={project.image}
                   alt={project.title}
-                  width={1920}
-                  height={1080}
-                  unoptimized
-                  loading="eager"
-                  priority
-                  className="w-full rounded-lg"
+                  showCaption={false}
+                  showShadow={false}
+                  lightboxSrc={heroLightboxSrc}
                 />
               </div>
+            )}
 
-              {/* Content */}
-              <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">
-                <MDXRemote
-                  source={project.content}
-                  components={mdxComponents}
-                />
-              </article>
-            </div>
-          </div>
-        </div>
-      </section>
+            {/* Content */}
+            <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">
+              <MDXRemote
+                source={project.content}
+                components={mdxComponents}
+              />
+            </article>
+          </>
+        }
+      />
     </div>
+    </LightboxProvider>
   );
 }

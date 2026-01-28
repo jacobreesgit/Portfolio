@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'motion/react';
+import Link from 'next/link';
 
 import Noise from '@/components/noise';
 import usePrefersReducedMotion from '@/hooks/usePrefersReducedMotion';
@@ -40,12 +41,37 @@ export default function MyStory() {
 
             <p>
               After studying Digital Media at Leeds (graduating with a First in
-              my final coding project), I&apos;ve spent the last 3+ years as a
-              Front-End Developer working on products used by millions. At
-              Pavers, I developed accessible component libraries powering 160+
-              retail stores. At Revolution Viewing, I built Vepple, a platform
-              serving 30+ UK universities, architecting everything from
-              real-time event systems to A/B testing frameworks.
+              my{' '}
+              <Link
+                href="https://waveger.vercel.app"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+              >
+                final coding project
+              </Link>
+              ), I&apos;ve spent the last 3+ years as a Front-End Developer
+              working on products used by millions. At{' '}
+              <Link
+                href="https://pavers.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+              >
+                Pavers
+              </Link>
+              , I developed accessible component libraries powering 160+ retail
+              stores. At Revolution Viewing, I built{' '}
+              <Link
+                href="https://vepple.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline decoration-muted-foreground/30 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+              >
+                Vepple
+              </Link>
+              , a platform serving 30+ UK universities, architecting everything
+              from real-time event systems to A/B testing frameworks.
             </p>
 
             <p>

@@ -58,6 +58,7 @@ todo.md
 *.todo
 notes.md
 *-portfolio.md
+claude.md
 
 # IDE
 .vscode/

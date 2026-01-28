@@ -37,9 +37,9 @@ export default function Hero() {
 
   return (
     <section className="section-padding relative flex flex-col items-center overflow-hidden">
-      {/* Mesh Gradient Background */}
+      {/* Mesh Gradient Background - Fixed height to prevent recalculation */}
       {mounted && (
-        <div className="absolute inset-0">
+        <div className="absolute inset-x-0 top-0 h-[150vh]">
           <MeshGradient
             width="100%"
             height="100%"
@@ -66,23 +66,24 @@ export default function Hero() {
         animate="visible"
       >
         <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-          {/* Conditional render order: Mobile = Image first, Desktop = Text first */}
-          {mounted && !isDesktop && (
-            <motion.div variants={scaleUp} className="flex justify-center">
-              <div className="relative aspect-square w-full overflow-hidden rounded-full border-4 border-white/10 shadow-2xl">
-                <Image
-                  src="/me.jpeg"
-                  alt="Jacob Rees"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              </div>
-            </motion.div>
-          )}
+          {/* Profile Image - Shows first on mobile, second on desktop */}
+          <motion.div
+            variants={scaleUp}
+            className="flex justify-center lg:order-2 lg:justify-end"
+          >
+            <div className="relative aspect-square w-full overflow-hidden rounded-full border-4 border-white/10 shadow-2xl md:w-80 lg:w-96">
+              <Image
+                src="/me.jpeg"
+                alt="Jacob Rees"
+                fill
+                priority
+                className="object-cover"
+              />
+            </div>
+          </motion.div>
 
           {/* Text Content */}
-          <div>
+          <div className="lg:order-1">
             <motion.h1
               variants={fadeUp}
               className="text-4xl font-medium tracking-tight md:text-5xl lg:text-6xl"
@@ -133,24 +134,6 @@ export default function Hero() {
               </Button>
             </motion.div>
           </div>
-
-          {/* Profile Image - Desktop only (after text for animation order) */}
-          {(!mounted || isDesktop) && (
-            <motion.div
-              variants={scaleUp}
-              className="flex justify-center lg:justify-end"
-            >
-              <div className="relative aspect-square w-64 overflow-hidden rounded-full border-4 border-white/10 shadow-2xl md:w-80 lg:w-96">
-                <Image
-                  src="/me.jpeg"
-                  alt="Jacob Rees"
-                  fill
-                  priority
-                  className="object-cover"
-                />
-              </div>
-            </motion.div>
-          )}
         </div>
 
         {/* GitHub Contributions Calendar */}
@@ -205,7 +188,7 @@ export default function Hero() {
                   }}
                 />
               ) : (
-                <div className="text-muted-foreground h-[130px] animate-pulse text-base">
+                <div className="text-muted-foreground flex h-[180px] items-center justify-center animate-pulse text-base">
                   Loading contributions...
                 </div>
               )}

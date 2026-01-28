@@ -11,6 +11,7 @@ export interface ProjectFrontmatter {
   technologies: string[];
   github?: string;
   link?: string;
+  links?: { label: string; url: string }[];
   image: string;
   year: string;
   featured: boolean;
