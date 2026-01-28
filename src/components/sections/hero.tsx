@@ -129,8 +129,8 @@ export default function Hero() {
                 asChild
               >
                 <Link href="/cv.pdf" target="_blank">
-                  <Download className="mr-2 size-4" />
                   Download CV
+                  <Download className="ml-2 size-4" />
                 </Link>
               </Button>
             </motion.div>
