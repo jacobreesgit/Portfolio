@@ -1,6 +1,6 @@
-import sharp from 'sharp';
 import { statSync } from 'fs';
 import { resolve } from 'path';
+import sharp from 'sharp';
 
 /**
  * Image optimization script
@@ -12,7 +12,9 @@ const args = process.argv.slice(2);
 
 if (args.length < 2) {
   console.error('Usage: npm run optimize-image -- <input> <output> [quality]');
-  console.error('Example: npm run optimize-image -- "input.png" "public/images/output.webp" 85');
+  console.error(
+    'Example: npm run optimize-image -- "input.png" "public/images/output.webp" 85',
+  );
   process.exit(1);
 }
 

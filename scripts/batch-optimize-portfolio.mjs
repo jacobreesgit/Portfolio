@@ -1,9 +1,9 @@
-import sharp from 'sharp';
 import { readdirSync, statSync } from 'fs';
 import { join } from 'path';
+import sharp from 'sharp';
 
 const portfolioDir = 'public/portfolio';
-const files = readdirSync(portfolioDir).filter(f => f.endsWith('.png'));
+const files = readdirSync(portfolioDir).filter((f) => f.endsWith('.png'));
 
 console.log(`Found ${files.length} PNG files to optimize\n`);
 
@@ -22,20 +22,18 @@ for (const file of files) {
     console.log(`📸 ${file} (${(inputSize / 1024 / 1024).toFixed(2)}MB)`);
 
     // Generate thumbnail
-    await sharp(inputPath)
-      .webp({ quality: 60, effort: 6 })
-      .toFile(thumbPath);
+    await sharp(inputPath).webp({ quality: 60, effort: 6 }).toFile(thumbPath);
 
     const thumbSize = statSync(thumbPath).size;
     console.log(`  → thumb: ${(thumbSize / 1024).toFixed(0)}KB (quality 60)`);
 
     // Generate high-res
-    await sharp(inputPath)
-      .webp({ quality: 85, effort: 6 })
-      .toFile(highResPath);
+    await sharp(inputPath).webp({ quality: 85, effort: 6 }).toFile(highResPath);
 
     const highResSize = statSync(highResPath).size;
-    console.log(`  → high-res: ${(highResSize / 1024).toFixed(0)}KB (quality 85)`);
+    console.log(
+      `  → high-res: ${(highResSize / 1024).toFixed(0)}KB (quality 85)`,
+    );
     console.log();
   } catch (error) {
     console.error(`  ❌ Error: ${error.message}\n`);

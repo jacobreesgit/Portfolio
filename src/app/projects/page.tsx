@@ -4,8 +4,8 @@ import { Code, Database, Palette, Smartphone } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSearchParams, useRouter } from 'next/navigation';
-import { useMemo, useCallback, Suspense, useRef, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 
 import Noise from '@/components/noise';
 import { Badge } from '@/components/ui/badge';
@@ -17,7 +17,7 @@ import {
   heroContainer,
   staggerContainerFast,
 } from '@/lib/animations';
-import { PROJECTS, PROJECT_TAGS } from '@/lib/project-data';
+import { PROJECT_TAGS, PROJECTS } from '@/lib/project-data';
 import { cn } from '@/lib/utils';
 
 // Map tags to icons (matching homepage skills-carousel)
@@ -27,6 +27,24 @@ const tagIcons = {
   Mobile: Smartphone,
   'Tools & Design': Palette,
 } as const;
+
+// Grid class helpers (hoisted for performance)
+const getCompactGridClasses = (count: number) => {
+  if (count === 1) return 'grid-cols-1 max-w-2xl mx-auto';
+  if (count === 2) return 'grid-cols-1 md:grid-cols-2';
+  return 'grid-cols-1 md:grid-cols-3';
+};
+
+const getHeroGridClasses = (count: number) => {
+  if (count === 1) return 'grid-cols-1 max-w-2xl mx-auto';
+  return 'grid-cols-1 md:grid-cols-2';
+};
+
+const getSecondaryGridClasses = (count: number) => {
+  if (count === 1) return 'grid-cols-1 max-w-md mx-auto';
+  if (count === 2) return 'grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto';
+  return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
+};
 
 export default function ProjectsPage() {
   return (
@@ -80,17 +98,17 @@ function ProjectsPageContent() {
   const router = useRouter();
 
   // Track if initial animation has completed to prevent re-animation on filter change
-  const hasAnimatedRef = useRef(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   useEffect(() => {
     // Mark as animated after initial render
     const timer = setTimeout(() => {
-      hasAnimatedRef.current = true;
+      setHasAnimated(true);
     }, 1200); // After all stagger animations complete
     return () => clearTimeout(timer);
   }, []);
 
   // Use 'visible' initial state after first animation to prevent re-animation
-  const gridInitial = hasAnimatedRef.current ? 'visible' : initial;
+  const gridInitial = hasAnimated ? 'visible' : initial;
 
   // Read filter from URL query param
   const filterParam = searchParams.get('filter');
@@ -135,24 +153,6 @@ function ProjectsPageContent() {
         ...filteredProjects.filter((p) => p.featured).slice(2),
         ...filteredProjects.filter((p) => !p.featured),
       ];
-
-  // Get adaptive grid classes based on item count
-  const getCompactGridClasses = (count: number) => {
-    if (count === 1) return 'grid-cols-1 max-w-2xl mx-auto';
-    if (count === 2) return 'grid-cols-1 md:grid-cols-2';
-    return 'grid-cols-1 md:grid-cols-3';
-  };
-
-  const getHeroGridClasses = (count: number) => {
-    if (count === 1) return 'grid-cols-1 max-w-2xl mx-auto';
-    return 'grid-cols-1 md:grid-cols-2';
-  };
-
-  const getSecondaryGridClasses = (count: number) => {
-    if (count === 1) return 'grid-cols-1 max-w-md mx-auto';
-    if (count === 2) return 'grid-cols-1 md:grid-cols-2 max-w-3xl mx-auto';
-    return 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3';
-  };
 
   return (
     <div className="relative overflow-hidden">
@@ -217,6 +217,7 @@ function ProjectsPageContent() {
             >
               <button
                 onClick={() => setSelectedTag(null)}
+                aria-pressed={selectedTag === null}
                 className={cn(
                   'flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ease-out active:scale-95',
                   selectedTag === null
@@ -233,6 +234,7 @@ function ProjectsPageContent() {
                   <button
                     key={tag}
                     onClick={() => setSelectedTag(tag)}
+                    aria-pressed={isActive}
                     className={cn(
                       'flex cursor-pointer items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all duration-200 ease-out active:scale-95',
                       isActive
@@ -409,7 +411,6 @@ function ProjectCard({
                 alt={title}
                 width={800}
                 height={600}
-                unoptimized
                 className={cn(
                   'w-full object-cover transition-transform duration-300 group-hover:scale-105',
                   aspectClass,

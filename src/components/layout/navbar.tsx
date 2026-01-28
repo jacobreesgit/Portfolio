@@ -87,7 +87,7 @@ const Navbar = () => {
       setIsScrolled(scrollTop > 0);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -217,7 +217,7 @@ const Navbar = () => {
             <ThemeToggle />
             <button
               className="text-muted-foreground relative flex size-8 rounded-sm border lg:hidden"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              onClick={() => setIsMenuOpen((prev) => !prev)}
             >
               <span className="sr-only">Open main menu</span>
               <div

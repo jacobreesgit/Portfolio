@@ -2,8 +2,9 @@
 
 import Image from 'next/image';
 
-import { useLightbox } from './lightbox-provider';
 import { cn } from '@/lib/utils';
+
+import { useLightbox } from './lightbox-provider';
 
 interface ClickableImageProps {
   src: string;
@@ -28,7 +29,7 @@ export function ClickableImage({
   decoding,
   showCaption = true,
   showShadow = true,
-  lightboxSrc
+  lightboxSrc,
 }: ClickableImageProps) {
   const { openLightbox } = useLightbox();
 
@@ -36,7 +37,8 @@ export function ClickableImage({
     <span className="not-prose block">
       <button
         onClick={() => openLightbox(lightboxSrc || src, alt, showCaption)}
-        className="group relative block w-full cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        aria-label={`View larger version of ${alt}`}
+        className="group focus:ring-primary relative block w-full cursor-pointer overflow-hidden rounded-xl bg-white focus:ring-2 focus:ring-offset-2 focus:outline-none dark:bg-black"
         type="button"
       >
         <Image
@@ -44,13 +46,12 @@ export function ClickableImage({
           alt={alt}
           width={width}
           height={height}
-          unoptimized
           loading={loading}
           decoding={decoding}
           className={cn(
-            "w-full rounded-xl",
-            showShadow && "shadow-2xl ring-1 ring-white/10",
-            className
+            'w-full rounded-xl',
+            showShadow && 'shadow-2xl ring-1 ring-white/10',
+            className,
           )}
         />
         {/* Zoom hint overlay */}
@@ -61,7 +62,7 @@ export function ClickableImage({
         </div>
       </button>
       {showCaption && alt && (
-        <span className="mt-4 block text-center text-sm italic" style={{ color: 'var(--tw-prose-body)' }}>
+        <span className="text-foreground mt-4 block text-center text-sm italic">
           {alt}
         </span>
       )}

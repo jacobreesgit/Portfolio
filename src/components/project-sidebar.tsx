@@ -1,7 +1,7 @@
 'use client';
 
-import { motion } from 'motion/react';
 import { ExternalLink, Github } from 'lucide-react';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 
 import { fadeUp } from '@/lib/animations';

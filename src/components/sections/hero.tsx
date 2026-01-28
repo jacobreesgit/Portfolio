@@ -3,9 +3,9 @@
 import { MeshGradient } from '@paper-design/shaders-react';
 import { ChevronRight, Download } from 'lucide-react';
 import { motion } from 'motion/react';
-import { useTheme } from 'next-themes';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { GitHubCalendar } from 'react-github-calendar';
 
@@ -20,12 +20,13 @@ export default function Hero() {
   const initial = prefersReducedMotion ? 'visible' : 'hidden';
   const { resolvedTheme } = useTheme();
   const { isAtLeast } = useMediaQuery();
+  // Initialize mounted to false, will be true after hydration
   const [mounted, setMounted] = useState(false);
   const isDesktop = isAtLeast('lg');
 
   // Ensure component only renders on client to fetch fresh GitHub data
   useEffect(() => {
-    setMounted(true);
+    queueMicrotask(() => setMounted(true));
   }, []);
 
   // Light theme colors matching the original gradient
@@ -188,7 +189,7 @@ export default function Hero() {
                   }}
                 />
               ) : (
-                <div className="text-muted-foreground flex h-[180px] items-center justify-center animate-pulse text-base">
+                <div className="text-muted-foreground flex h-[180px] animate-pulse items-center justify-center text-base">
                   Loading contributions...
                 </div>
               )}

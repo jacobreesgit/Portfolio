@@ -8,7 +8,9 @@ export default function usePrefersReducedMotion(): boolean {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPrefersReducedMotion(mediaQuery.matches);
+
+    // Use queueMicrotask to avoid setState during effect
+    queueMicrotask(() => setPrefersReducedMotion(mediaQuery.matches));
 
     const handleChange = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(event.matches);

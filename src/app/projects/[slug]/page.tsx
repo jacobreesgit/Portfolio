@@ -5,16 +5,16 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 
-import Noise from '@/components/noise';
 import CarouselStandard2 from '@/components/carousel-standard-2';
-import { Button } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
-import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
-import { LightboxProvider } from '@/components/lightbox-provider';
 import { ClickableImage } from '@/components/clickable-image';
-import { ImpactMetrics } from '@/components/impact-metrics';
+import { LightboxProvider } from '@/components/lightbox-provider';
+import Noise from '@/components/noise';
 import { ProjectPageAnimated } from '@/components/project-page-animated';
 import { ProjectSidebar } from '@/components/project-sidebar';
+import { ImpactMetrics } from '@/components/stats-grid';
+import { Button } from '@/components/ui/button';
+import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
+import { cn } from '@/lib/utils';
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -97,6 +97,43 @@ const mdxComponents = {
   ),
 };
 
+// Helper to extract high-res image URLs from MDX content
+function extractHighResImages(
+  content: string,
+  heroLightboxSrc?: string,
+): string[] {
+  const images: string[] = [];
+
+  // Add hero lightbox image if exists
+  if (heroLightboxSrc) {
+    images.push(heroLightboxSrc);
+  }
+
+  // Extract all thumbnail images and convert to high-res versions
+  const thumbRegex = /\/portfolio\/[^"'\s]+-thumb\.webp/g;
+  const thumbMatches = content.match(thumbRegex) || [];
+
+  thumbMatches.forEach((thumb) => {
+    const highRes = thumb.replace('-thumb.webp', '.webp');
+    if (!images.includes(highRes)) {
+      images.push(highRes);
+    }
+  });
+
+  // Extract explicit lightboxSrc/highResImages from MDX
+  const lightboxRegex =
+    /(?:lightboxSrc|highResImages)=\{?\["?([^"'\]]+)"?\]?\}?/g;
+  let match;
+  while ((match = lightboxRegex.exec(content)) !== null) {
+    const src = match[1];
+    if (src && !images.includes(src)) {
+      images.push(src);
+    }
+  }
+
+  return images;
+}
+
 export default async function ProjectPage({ params }: PageProps) {
   const { slug } = await params;
   const project = getProjectBySlug(slug);
@@ -111,81 +148,87 @@ export default async function ProjectPage({ params }: PageProps) {
   };
 
   // Generate lightbox version of hero image if it's a WebP in /images/
-  const heroLightboxSrc = project.image.includes('/images/') && project.image.endsWith('.webp')
-    ? project.image.replace('.webp', '-lightbox.webp')
-    : undefined;
+  const heroLightboxSrc =
+    project.image.includes('/images/') && project.image.endsWith('.webp')
+      ? project.image.replace('.webp', '-lightbox.webp')
+      : undefined;
+
+  // Extract all high-res images to preload after animations
+  const preloadImages = extractHighResImages(project.content, heroLightboxSrc);
 
   return (
     <LightboxProvider>
       <div className="relative overflow-hidden">
-      {/* Background Gradient */}
-      <div className="pointer-events-none absolute inset-0">
-        <div
-          className={cn(
-            gradient.color1,
-            'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
-            'top-0 left-0 -translate-y-1/3 md:-translate-x-1/4',
-          )}
-        />
-        {/* Middle blob for tall pages */}
-        {gradient.color3 && (
+        {/* Background Gradient */}
+        <div className="pointer-events-none absolute inset-0">
           <div
             className={cn(
-              gradient.color3,
+              gradient.color1,
               'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
-              'top-[35%] left-0 md:-translate-x-1/4',
+              'top-0 left-0 -translate-y-1/3 md:-translate-x-1/4',
             )}
           />
-        )}
-        <div
-          className={cn(
-            gradient.color2,
-            'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
-            'right-0 bottom-0 translate-y-1/2 md:translate-x-1/4',
+          {/* Middle blob for tall pages */}
+          {gradient.color3 && (
+            <div
+              className={cn(
+                gradient.color3,
+                'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
+                'top-[35%] left-0 md:-translate-x-1/4',
+              )}
+            />
           )}
+          <div
+            className={cn(
+              gradient.color2,
+              'absolute h-[60vh] w-full rounded-full blur-3xl will-change-transform',
+              'right-0 bottom-0 translate-y-1/2 md:translate-x-1/4',
+            )}
+          />
+        </div>
+        <Noise />
+
+        <ProjectPageAnimated
+          backButton={
+            <Link
+              href="/projects"
+              className="group text-foreground hover:text-foreground mb-8 inline-flex items-center gap-2 text-sm font-medium transition-colors"
+            >
+              <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
+              <span className="relative">
+                Back to Projects
+                <span className="from-foreground to-foreground/30 absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-gradient-to-r transition-transform duration-300 ease-out group-hover:scale-x-100" />
+              </span>
+            </Link>
+          }
+          sidebar={<ProjectSidebar project={project} />}
+          preloadImages={preloadImages}
+          mainContent={
+            <>
+              {slug !== 'vepple' && slug !== 'pavers' && (
+                <div className="mb-12">
+                  <ClickableImage
+                    src={project.image}
+                    alt={project.title}
+                    showCaption={false}
+                    showShadow={false}
+                    lightboxSrc={heroLightboxSrc}
+                    loading="eager"
+                  />
+                </div>
+              )}
+
+              {/* Content */}
+              <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-foreground prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">
+                <MDXRemote
+                  source={project.content}
+                  components={mdxComponents}
+                />
+              </article>
+            </>
+          }
         />
       </div>
-      <Noise />
-
-      <ProjectPageAnimated
-        backButton={
-          <Link
-            href="/projects"
-            className="group mb-8 inline-flex items-center gap-2 text-sm font-medium text-foreground transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="size-4 transition-transform duration-300 group-hover:-translate-x-1" />
-            <span className="relative">
-              Back to Projects
-              <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-gradient-to-r from-foreground to-foreground/30 transition-transform duration-300 ease-out group-hover:scale-x-100" />
-            </span>
-          </Link>
-        }
-        sidebar={<ProjectSidebar project={project} />}
-        mainContent={
-          <>
-            {slug !== 'vepple' && slug !== 'pavers' && (
-              <div className="mb-12">
-                <ClickableImage
-                  src={project.image}
-                  alt={project.title}
-                  showCaption={false}
-                  showShadow={false}
-                  lightboxSrc={heroLightboxSrc}
-                />
-              </div>
-            )}
-
-            {/* Content */}
-            <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">
-              <MDXRemote
-                source={project.content}
-                components={mdxComponents}
-              />
-            </article>
-          </>
-        }
-      />
-    </div>
     </LightboxProvider>
   );
 }

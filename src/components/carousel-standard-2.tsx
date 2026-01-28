@@ -1,36 +1,62 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useState } from "react";
+import Image from 'next/image';
+import { useCallback, useState } from 'react';
 
-import { Button } from "@/components/ui/button";
+import { useLightbox } from '@/components/lightbox-provider';
+import { Button } from '@/components/ui/button';
 import {
   Carousel,
   type CarouselApi,
   CarouselContent,
   CarouselItem,
-} from "@/components/ui/carousel";
-import { useLightbox } from "@/components/lightbox-provider";
+} from '@/components/ui/carousel';
 
-export const title = "Carousel with Thumbnails";
+export const title = 'Carousel with Thumbnails';
 
 interface CarouselStandard2Props {
   images: string[];
   alt?: string | string[]; // Single alt or array of alts for each image
+  highResImages?: string[]; // Optional high-res versions for lightbox
+  buttonLabels?: string[]; // Optional custom labels for carousel buttons (e.g., ["Desktop", "Mobile"])
 }
 
-const CarouselStandard2 = ({ images, alt = "Carousel image" }: CarouselStandard2Props) => {
+const CarouselStandard2 = ({
+  images,
+  alt = 'Carousel image',
+  highResImages,
+  buttonLabels,
+}: CarouselStandard2Props) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const { openLightbox } = useLightbox();
 
   // Helper to get alt text for a specific image
-  const getAltText = (index: number) => {
-    if (Array.isArray(alt)) {
-      return alt[index] || `Image ${index + 1}`;
-    }
-    return `${alt} ${index + 1}`;
-  };
+  const getAltText = useCallback(
+    (index: number) => {
+      if (Array.isArray(alt)) {
+        return alt[index] || `Image ${index + 1}`;
+      }
+      return `${alt} ${index + 1}`;
+    },
+    [alt],
+  );
+
+  // Helper to get lightbox image (high-res if available, otherwise auto-detect or use thumbnail)
+  const getLightboxImage = useCallback(
+    (index: number) => {
+      if (highResImages && highResImages[index]) {
+        return highResImages[index];
+      }
+      // Auto-detect: if image ends with -thumb.webp, replace with .webp for high-res
+      const thumbImage = images[index];
+      if (thumbImage.endsWith('-thumb.webp')) {
+        return thumbImage.replace('-thumb.webp', '.webp');
+      }
+      return thumbImage;
+    },
+    [images, highResImages],
+  );
 
   const handleApiChange = (newApi: CarouselApi) => {
     setApi(newApi);
@@ -38,7 +64,7 @@ const CarouselStandard2 = ({ images, alt = "Carousel image" }: CarouselStandard2
     if (newApi) {
       setCurrent(newApi.selectedScrollSnap());
 
-      newApi.on("select", () => {
+      newApi.on('select', () => {
         setCurrent(newApi.selectedScrollSnap());
       });
     }
@@ -46,13 +72,19 @@ const CarouselStandard2 = ({ images, alt = "Carousel image" }: CarouselStandard2
 
   return (
     <div className="not-prose mx-auto w-full space-y-4">
-      <Carousel setApi={handleApiChange} className="rounded-xl shadow-2xl ring-1 ring-white/10">
+      <Carousel
+        setApi={handleApiChange}
+        className="rounded-xl shadow-2xl ring-1 ring-white/10"
+      >
         <CarouselContent>
           {images.map((image, index) => (
             <CarouselItem key={index}>
               <button
-                onClick={() => openLightbox(image, getAltText(index), true)}
-                className="group relative flex aspect-video cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                onClick={() =>
+                  openLightbox(getLightboxImage(index), getAltText(index), true)
+                }
+                aria-label={`View larger version of ${getAltText(index)}`}
+                className="group focus:ring-primary relative flex aspect-[4/3] cursor-pointer items-center justify-center overflow-hidden rounded-xl bg-white focus:ring-2 focus:ring-offset-2 focus:outline-none dark:bg-black"
                 type="button"
               >
                 <Image
@@ -60,7 +92,6 @@ const CarouselStandard2 = ({ images, alt = "Carousel image" }: CarouselStandard2
                   alt={getAltText(index)}
                   width={1920}
                   height={1080}
-                  unoptimized
                   className="h-full w-full object-cover"
                 />
                 {/* Zoom hint overlay */}
@@ -75,7 +106,7 @@ const CarouselStandard2 = ({ images, alt = "Carousel image" }: CarouselStandard2
         </CarouselContent>
       </Carousel>
 
-      <span className="block text-center text-sm italic" style={{ color: 'var(--tw-prose-body)' }}>
+      <span className="text-foreground block text-center text-sm italic">
         {getAltText(current)}
       </span>
 
@@ -84,10 +115,12 @@ const CarouselStandard2 = ({ images, alt = "Carousel image" }: CarouselStandard2
           <Button
             key={index}
             onClick={() => api?.scrollTo(index)}
-            variant={current === index ? "default" : "outline"}
+            variant={current === index ? 'default' : 'outline'}
             size="sm"
           >
-            {index + 1}
+            {buttonLabels && buttonLabels[index]
+              ? buttonLabels[index]
+              : index + 1}
           </Button>
         ))}
       </div>

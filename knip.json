@@ -1,4 +1,6 @@
 {
   "$schema": "https://unpkg.com/knip@latest/schema.json",
-  "ignore": ["Help Files/**"]
+  "ignore": ["Help Files/**"],
+  "ignoreExportsUsedInFile": true,
+  "ignoreDependencies": []
 }

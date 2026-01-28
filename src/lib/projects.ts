@@ -1,6 +1,7 @@
+import { cache } from 'react';
 import fs from 'fs';
-import path from 'path';
 import matter from 'gray-matter';
+import path from 'path';
 
 const projectsDirectory = path.join(process.cwd(), 'src/content/projects');
 
@@ -29,7 +30,7 @@ export function getProjectSlugs(): string[] {
     .map((file) => file.replace(/\.mdx$/, ''));
 }
 
-export function getProjectBySlug(slug: string): Project | null {
+export const getProjectBySlug = cache((slug: string): Project | null => {
   const fullPath = path.join(projectsDirectory, `${slug}.mdx`);
 
   if (!fs.existsSync(fullPath)) {
@@ -44,9 +45,9 @@ export function getProjectBySlug(slug: string): Project | null {
     content,
     ...(data as ProjectFrontmatter),
   };
-}
+});
 
-export function getAllProjects(): Project[] {
+export const getAllProjects = cache((): Project[] => {
   const slugs = getProjectSlugs();
   return slugs
     .map((slug) => getProjectBySlug(slug))
@@ -58,4 +59,4 @@ export function getAllProjects(): Project[] {
       }
       return b.year.localeCompare(a.year);
     });
-}
+});

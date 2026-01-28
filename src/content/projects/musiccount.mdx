@@ -17,17 +17,17 @@ I built this because my own library was a mess. Years of re-importing albums and
 
 MusicCount scans your library, groups duplicates by normalised title and artist, and lets you pick the version you want to keep. Queue it enough times to match the play count of the duplicate, then delete the duplicate yourself. Your listening history stays intact on the song that matters.
 
-Already looking forward to updating it with Liquid Glass when iOS 26 drops.
-
 <div className="not-prose my-12">
   <ClickableImage
-    alt="MusicCount suggestions view"
+    alt="Library view sorted by play count on first load"
     loading="lazy"
     width={1920}
     height={1080}
     decoding="async"
     className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-    src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Suggestions+View"
+    src="/portfolio/musiccount-02-first-load-thumb.webp"
+    lightboxSrc="/portfolio/musiccount-02-first-load.webp"
+    showCaption={true}
   />
 </div>
 
@@ -41,20 +41,28 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Intelligent Duplicate Detection
     </h3>
-    <p className="text-muted-foreground leading-relaxed">Nothing worse than seeing your most-played song split across three versions. The app normalises strings to catch duplicates across case variations, whitespace differences, and encoding quirks. It crunches through thousands of songs on a background thread, grouping by both title and artist so you don't get false positives from different songs with the same name. Groups with the biggest play count gaps float to the top.</p>
+    <div className="text-muted-foreground leading-relaxed">
+      Nothing worse than seeing your most-played song split across three
+      versions. The app normalises strings to catch duplicates across case
+      variations, whitespace differences, and encoding quirks. It crunches
+      through thousands of songs on a background thread, grouping by both title
+      and artist so you don't get false positives from different songs with the
+      same name. Groups with the biggest play count gaps float to the top.
+    </div>
   </div>
   <div className="order-1 lg:order-2">
     <ClickableImage
-      alt="Library loading state"
+      alt="Suggestions tab showing duplicate groups sorted by play count difference"
       loading="lazy"
       width={1920}
       height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=First+Load"
+      src="/portfolio/musiccount-01-suggestions-thumb.webp"
+      lightboxSrc="/portfolio/musiccount-01-suggestions.webp"
     />
   </div>
 </div>
@@ -62,7 +70,7 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
 {/* Interactive Play Count Comparison */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-1 space-y-4">
+  <div className="order-1">
     <ClickableImage
       alt="Comparison view"
       loading="lazy"
@@ -70,87 +78,88 @@ Already looking forward to updating it with Liquid Glass when iOS 26 drops.
       height={1080}
       decoding="async"
       className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Comparison+Expanded"
-    />
-    <ClickableImage
-      alt="Choosing between versions"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Choosing+Song"
+      src="/portfolio/musiccount-03-comparison-expanded-thumb.webp"
+      lightboxSrc="/portfolio/musiccount-03-comparison-expanded.webp"
     />
   </div>
   <div className="order-2">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Interactive Play Count Comparison
     </h3>
     <div className="space-y-4">
-      <p className="text-muted-foreground leading-relaxed">A side-by-side view with blurred album artwork in the background. Tap the card for the version you want to keep, and that's the one that gets queued. Two modes: <strong>Match Mode</strong> queues it enough times to match the duplicate's play count, while <strong>Add Mode</strong> adds plays equal to the duplicate's total.</p>
-      <p className="text-muted-foreground leading-relaxed">Once you've played through the queue, you can delete the duplicate knowing your play history is preserved on the right track.</p>
+      <div className="text-muted-foreground leading-relaxed">
+        A side-by-side view with blurred album artwork in the background. Tap
+        the card for the version you want to keep, and that's the one that gets
+        queued. Two modes: <strong>Match Mode</strong> queues it enough times to
+        match the duplicate's play count, while <strong>Add Mode</strong> adds
+        plays equal to the duplicate's total.
+      </div>
+      <div className="text-muted-foreground leading-relaxed">
+        Hooks directly into Apple's music player with two queue behaviours:{' '}
+        <strong>Insert Next</strong> slots songs after whatever's playing, and{' '}
+        <strong>Replace Queue</strong> clears everything and starts fresh. Once
+        you've played through the queue, you can delete the duplicate knowing
+        your play history is preserved on the right track.
+      </div>
     </div>
-  </div>
-</div>
-
-{/* Native Apple Music Integration */}
-
-<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-2 lg:order-1">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
-      Native Apple Music Integration
-    </h3>
-    <p className="text-muted-foreground leading-relaxed">Hooks directly into Apple's music player for queuing. Two behaviours: <strong>Insert Next</strong> slots songs after whatever's playing, and <strong>Replace Queue</strong> clears everything and starts fresh.</p>
-  </div>
-  <div className="order-1 lg:order-2">
-    <ClickableImage
-      alt="Queue settings"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Settings"
-    />
   </div>
 </div>
 
 {/* Smart Dismissal System */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-1">
-    <ClickableImage
-      alt="Selection states"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="https://placehold.co/1920x1080/1a1a2e/FFFFFF?text=Selection+States"
-    />
-  </div>
-  <div className="order-2">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+  <div className="order-2 lg:order-1">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Smart Dismissal System
     </h3>
-    <p className="text-muted-foreground leading-relaxed">You can dismiss individual songs from groups with 3+ versions, or swipe to bin an entire group. Dismissals persist between launches, because nobody wants to dismiss the same suggestion every time they open the app.</p>
+    <div className="text-muted-foreground leading-relaxed">
+      You can dismiss individual songs from groups with 3+ versions, or swipe to
+      bin an entire group. Dismissals persist between launches, because nobody
+      wants to dismiss the same suggestion every time they open the app.
+    </div>
+  </div>
+  <div className="order-1 lg:order-2">
+    <CarouselStandard2
+      images={[
+        '/portfolio/musiccount-dismissal-single-thumb.webp',
+        '/portfolio/musiccount-dismissal-multiple-thumb.webp',
+      ]}
+      alt={[
+        'Dismissing a single song from a duplicate group',
+        'Dismissing an entire duplicate group with swipe gesture',
+      ]}
+      buttonLabels={['Single', 'Multiple']}
+    />
   </div>
 </div>
 
 {/* Sorting & Search */}
 
 <div>
-  <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+  <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
     Sorting & Search
   </h3>
-  <p className="text-muted-foreground leading-relaxed">Browse your entire library sorted by play count, title, artist, album, or version count, each ascending or descending. Seven sort options in total for the suggestions view. Search is real-time across titles, artists, and albums with proper Unicode handling. Search narrows things down first, then sort reorders what's left.</p>
+  <div className="text-muted-foreground leading-relaxed">
+    Browse your entire library sorted by play count, title, artist, album, or
+    version count, each ascending or descending. Seven sort options in total for
+    the suggestions view. Search is real-time across titles, artists, and albums
+    with proper Unicode handling. Search narrows things down first, then sort
+    reorders what's left.
+  </div>
 </div>
 
 {/* Accessibility */}
 
 <div>
-  <h3 className="mb-4 text-2xl font-semibold tracking-tight">Accessibility</h3>
-  <p className="text-muted-foreground leading-relaxed">VoiceOver labels and hints on every interactive element. Tab bar badges show the suggestion count at a glance. Comparison cards are grouped so screen readers don't have to wade through each element individually. Dynamic Type works throughout, and everything uses semantic font styles.</p>
+  <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    Accessibility
+  </h3>
+  <div className="text-muted-foreground leading-relaxed">
+    VoiceOver labels and hints on every interactive element. Tab bar badges show
+    the suggestion count at a glance. Comparison cards are grouped so screen
+    readers don't have to wade through each element individually. Dynamic Type
+    works throughout, and everything uses semantic font styles.
+  </div>
 </div>
 
 </div>

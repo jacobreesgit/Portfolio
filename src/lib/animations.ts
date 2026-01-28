@@ -46,12 +46,10 @@ export const fadeUp: Variants = {
   hidden: {
     opacity: 0,
     y: 30,
-    filter: 'blur(2px)',
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: {
       type: 'spring',
       stiffness: 100,
@@ -66,12 +64,10 @@ export const fadeUpSmall: Variants = {
   hidden: {
     opacity: 0,
     y: 20,
-    filter: 'blur(1px)',
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
     transition: {
       type: 'spring',
       stiffness: 80,
@@ -85,12 +81,10 @@ export const scaleUp: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.95,
-    filter: 'blur(2px)',
   },
   visible: {
     opacity: 1,
     scale: 1,
-    filter: 'blur(0px)',
     transition: {
       type: 'spring',
       stiffness: 100,
@@ -114,13 +108,11 @@ export const slideInRight: Variants = {
     opacity: 0,
     x: 60,
     scale: 0.95,
-    filter: 'blur(3px)',
   },
   visible: {
     opacity: 1,
     x: 0,
     scale: 1,
-    filter: 'blur(0px)',
     transition: {
       type: 'spring',
       stiffness: 80,
@@ -134,12 +126,10 @@ export const popIn: Variants = {
   hidden: {
     opacity: 0,
     scale: 0.9,
-    filter: 'blur(1px)',
   },
   visible: {
     opacity: 1,
     scale: 1,
-    filter: 'blur(0px)',
     transition: {
       type: 'spring',
       stiffness: 100,

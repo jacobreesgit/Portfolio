@@ -37,21 +37,31 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Browsing & Organisation
     </h3>
     <div className="space-y-4">
-      <p className="text-muted-foreground leading-relaxed">Two views: Grid is Netflix-style with poster cards and progress bars. Tree is file explorer-style showing all descendants at once. Every item page has a hero banner. I wanted it to feel like browsing a streaming service, not a file manager.</p>
-      <p className="text-muted-foreground leading-relaxed">Edit mode enables drag-and-drop, bulk selection, and full keyboard navigation with screen reader announcements. Pinned items (max 10) appear in the sidebar for quick access. dnd-kit only loads in edit mode to keep browsing fast.</p>
+      <div className="text-muted-foreground leading-relaxed">
+        Two views: Grid is Netflix-style with poster cards and progress bars.
+        Tree is file explorer-style showing all descendants at once. Every item
+        page has a hero banner. I wanted it to feel like browsing a streaming
+        service, not a file manager.
+      </div>
+      <div className="text-muted-foreground leading-relaxed">
+        Edit mode enables drag-and-drop, bulk selection, and full keyboard
+        navigation with screen reader announcements. Pinned items (max 10)
+        appear in the sidebar for quick access. dnd-kit only loads in edit mode
+        to keep browsing fast.
+      </div>
     </div>
   </div>
   <div className="order-1 lg:order-2">
     <CarouselStandard2
       images={[
-        "/portfolio/01-library-grid-thumb.webp",
-        "/portfolio/02-tree-view-thumb.webp"
+        '/portfolio/01-library-grid-thumb.webp',
+        '/portfolio/02-tree-view-thumb.webp',
       ]}
-      alt={["Grid View", "Tree View"]}
+      alt={['Grid View', 'Tree View']}
     />
   </div>
 </div>
@@ -72,12 +82,21 @@ I use this daily for my own movie and TV library. Active development continues w
     />
   </div>
   <div className="order-2">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Public Sharing
     </h3>
     <div className="space-y-4">
-      <p className="text-muted-foreground leading-relaxed">Make items public to share them. Your profile page shows your public items. The explore page shows public items from everyone with a featured banner carousel.</p>
-      <p className="text-muted-foreground leading-relaxed">Visibility inherits through the hierarchy. Items can be public, private, or inherit from a parent. A public item with a private ancestor stays inaccessible. Moving a public item into a private folder triggers a confirmation dialogue.</p>
+      <div className="text-muted-foreground leading-relaxed">
+        Make items public to share them. Your profile page shows your public
+        items. The explore page shows public items from everyone with a featured
+        banner carousel.
+      </div>
+      <div className="text-muted-foreground leading-relaxed">
+        Visibility inherits through the hierarchy. Items can be public, private,
+        or inherit from a parent. A public item with a private ancestor stays
+        inaccessible. Moving a public item into a private folder triggers a
+        confirmation dialogue.
+      </div>
     </div>
   </div>
 </div>
@@ -86,10 +105,15 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Forking
     </h3>
-    <p className="text-muted-foreground leading-relaxed">Other users can fork your collections into their own library. Forking copies names, descriptions, artwork, and hierarchy. Media files and subtitles stay private. Think of it like sharing a Spotify playlist: the structure is public, the files aren't.</p>
+    <div className="text-muted-foreground leading-relaxed">
+      Other users can fork your collections into their own library. Forking
+      copies names, descriptions, artwork, and hierarchy. Media files and
+      subtitles stay private. Think of it like sharing a Spotify playlist: the
+      structure is public, the files aren't.
+    </div>
   </div>
   <div className="order-1 lg:order-2">
     <ClickableImage
@@ -121,10 +145,15 @@ I use this daily for my own movie and TV library. Active development continues w
     />
   </div>
   <div className="order-2">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Media Playback
     </h3>
-    <p className="text-muted-foreground leading-relaxed">Vidstack-powered player streams media directly from Google Drive via HTTP range requests. Playback position auto-saves and resumes where you left off. Supports SRT, VTT, SUB, and ASS subtitle tracks. I always want to use subtitles. I watch a lot of anime.</p>
+    <div className="text-muted-foreground leading-relaxed">
+      Vidstack-powered player streams media directly from Google Drive via HTTP
+      range requests. Playback position auto-saves and resumes where you left
+      off. Supports SRT, VTT, SUB, and ASS subtitle tracks. I always want to use
+      subtitles. I watch a lot of anime.
+    </div>
   </div>
 </div>
 
@@ -132,10 +161,14 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       One-Click Metadata
     </h3>
-    <p className="text-muted-foreground leading-relaxed">You can enrich movies and TV shows with TMDB metadata. A three-step wizard lets you search for a title, select from multiple poster options, and choose a backdrop image for hero banners.</p>
+    <div className="text-muted-foreground leading-relaxed">
+      You can enrich movies and TV shows with TMDB metadata. A three-step wizard
+      lets you search for a title, select from multiple poster options, and
+      choose a backdrop image for hero banners.
+    </div>
   </div>
   <div className="order-1 lg:order-2">
     <ClickableImage
@@ -167,12 +200,20 @@ I use this daily for my own movie and TV library. Active development continues w
     />
   </div>
   <div className="order-2">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Progress Tracking
     </h3>
     <div className="space-y-4">
-      <p className="text-muted-foreground leading-relaxed">I built progress tracking because I kept losing my place in long series. Folders display watched and total counts for themselves and all descendant items, using a 90 percent completion threshold to account for credit skipping.</p>
-      <p className="text-muted-foreground leading-relaxed">The "Go to next" action performs a depth-first traversal of the tree to locate your first incomplete item automatically.</p>
+      <div className="text-muted-foreground leading-relaxed">
+        I built progress tracking because I kept losing my place in long series.
+        Folders display watched and total counts for themselves and all
+        descendant items, using a 90 percent completion threshold to account for
+        credit skipping.
+      </div>
+      <div className="text-muted-foreground leading-relaxed">
+        The "Go to next" action performs a depth-first traversal of the tree to
+        locate your first incomplete item automatically.
+      </div>
     </div>
   </div>
 </div>
@@ -181,12 +222,22 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Google Drive Sync
     </h3>
     <div className="space-y-4">
-      <p className="text-muted-foreground leading-relaxed">All your media files stay in your Drive. I use Google's Changes API for incremental syncs, fetching only changed items since the last update. If incremental sync returns no results, a verification step triggers a full sync.</p>
-      <p className="text-muted-foreground leading-relaxed">Conflict detection compares timestamps bidirectionally: if Drive's modifiedTime is newer than our stored value, local changes are rejected with a notification. Errors are isolated per file, so individual failures don't interrupt the overall process.</p>
+      <div className="text-muted-foreground leading-relaxed">
+        All your media files stay in your Drive. I use Google's Changes API for
+        incremental syncs, fetching only changed items since the last update. If
+        incremental sync returns no results, a verification step triggers a full
+        sync.
+      </div>
+      <div className="text-muted-foreground leading-relaxed">
+        Conflict detection compares timestamps bidirectionally: if Drive's
+        modifiedTime is newer than our stored value, local changes are rejected
+        with a notification. Errors are isolated per file, so individual
+        failures don't interrupt the overall process.
+      </div>
     </div>
   </div>
   <div className="order-1 lg:order-2">
@@ -219,10 +270,16 @@ I use this daily for my own movie and TV library. Active development continues w
     />
   </div>
   <div className="order-2">
-    <h3 className="mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
       Spotlight Search
     </h3>
-    <p className="text-muted-foreground leading-relaxed">Press <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">/</code> to open Spotlight Search anywhere in the app. Results load in parallel across three sections: Your Items, Public Collections, and People. A module-level cache with a 60-second TTL gives you instant responses on repeat searches. Breadcrumb paths reveal each item's full hierarchy.</p>
+    <div className="text-muted-foreground leading-relaxed">
+      Press <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">/</code>{' '}
+      to open Spotlight Search anywhere in the app. Results load in parallel
+      across three sections: Your Items, Public Collections, and People. A
+      module-level cache with a 60-second TTL gives you instant responses on
+      repeat searches. Breadcrumb paths reveal each item's full hierarchy.
+    </div>
   </div>
 </div>
 

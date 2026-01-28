@@ -44,7 +44,7 @@ export default function Experience({ className }: ExperienceProps) {
             href="https://vepple.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground underline decoration-muted-foreground/50 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+            className="text-foreground decoration-muted-foreground/50 hover:decoration-foreground underline underline-offset-2 transition-all duration-300"
           >
             Vepple
           </a>
@@ -76,7 +76,7 @@ export default function Experience({ className }: ExperienceProps) {
             href="https://pavers.co.uk"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground underline decoration-muted-foreground/50 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+            className="text-foreground decoration-muted-foreground/50 hover:decoration-foreground underline underline-offset-2 transition-all duration-300"
           >
             Pavers
           </a>
@@ -106,7 +106,7 @@ export default function Experience({ className }: ExperienceProps) {
             href="https://waveger.vercel.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-foreground underline decoration-muted-foreground/50 underline-offset-2 transition-all duration-300 hover:decoration-foreground"
+            className="text-foreground decoration-muted-foreground/50 hover:decoration-foreground underline underline-offset-2 transition-all duration-300"
           >
             final coding project
           </a>

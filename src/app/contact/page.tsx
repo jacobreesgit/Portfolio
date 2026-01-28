@@ -1,7 +1,7 @@
 'use client';
 
-import { Download, Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
+import { Download, Github, Linkedin, Mail, MapPin } from 'lucide-react';
 import { motion } from 'motion/react';
 import Link from 'next/link';
 
@@ -16,28 +16,28 @@ const contactLinks = [
     label: 'Email',
     value: 'jacobrees@icloud.com',
     href: 'mailto:jacobrees@icloud.com',
-    image: '/images/contact/email.jpg',
+    gradient: 'from-blue-500/80 via-cyan-500/80 to-blue-600/80',
   },
   {
     icon: Linkedin,
     label: 'LinkedIn',
     value: '/in/jacobdanielrees',
     href: 'https://linkedin.com/in/jacobdanielrees',
-    image: '/images/contact/linkedin.jpg',
+    gradient: 'from-blue-600/80 via-indigo-600/80 to-blue-700/80',
   },
   {
     icon: Github,
     label: 'GitHub',
     value: '/jacobreesgit',
     href: 'https://github.com/jacobreesgit',
-    image: '/images/contact/github.jpg',
+    gradient: 'from-purple-600/80 via-violet-600/80 to-purple-700/80',
   },
   {
     icon: Download,
     label: 'CV',
     value: 'Download PDF',
     href: '/cv.pdf',
-    image: '/images/contact/cv.jpg',
+    gradient: 'from-orange-500/80 via-amber-500/80 to-orange-600/80',
   },
 ];
 
@@ -46,7 +46,7 @@ interface ContactCardProps {
   label: string;
   value: string;
   href: string;
-  image: string;
+  gradient: string;
 }
 
 function ContactCard({
@@ -54,7 +54,7 @@ function ContactCard({
   label,
   value,
   href,
-  image,
+  gradient,
 }: ContactCardProps) {
   const isExternal = href.startsWith('http');
 
@@ -66,17 +66,18 @@ function ContactCard({
         rel={isExternal ? 'noopener noreferrer' : undefined}
         className="group relative block aspect-video w-full cursor-pointer overflow-hidden rounded-lg"
       >
-        <img
-          src={image}
-          alt={label}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        <div
+          className={cn(
+            'absolute inset-0 bg-gradient-to-br transition-transform duration-500 group-hover:scale-105',
+            gradient,
+          )}
         />
-        <div className="absolute inset-0 bg-black/50 transition-all duration-500 group-hover:bg-black/40" />
+        <div className="absolute inset-0 bg-black/40 transition-all duration-500 group-hover:bg-black/30" />
         <div className="absolute inset-0 flex items-end p-6 sm:p-8">
           <div className="text-left text-white">
             <div className="mb-3 flex items-center gap-2">
-              <Icon className="size-5 opacity-80" />
-              <p className="text-sm font-medium tracking-wider uppercase opacity-80">
+              <Icon className="size-5 opacity-90" />
+              <p className="text-sm font-medium tracking-wider uppercase opacity-90">
                 {label}
               </p>
             </div>

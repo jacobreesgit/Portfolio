@@ -223,7 +223,6 @@ export default function FeaturesCarousel() {
                           src={feature.image.src}
                           alt={feature.image.alt}
                           fill
-                          unoptimized
                           className={cn(
                             'object-cover transition-transform duration-300 hover:scale-105',
                             feature.image.className,

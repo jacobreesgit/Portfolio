@@ -12,6 +12,9 @@ const SCREEN_SIZES = {
 
 type ScreenSize = keyof typeof SCREEN_SIZES;
 
+// Breakpoint order for comparison helpers (hoisted for performance)
+const BREAKPOINT_ORDER: ScreenSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
+
 // Debounce utility function
 const debounce = <T extends (...args: unknown[]) => void>(
   func: T,
@@ -56,11 +59,11 @@ export const useMediaQuery = (debounceMs = 100) => {
     // Create debounced handler
     const debouncedHandler = debounce(updateScreenSize, debounceMs);
 
-    // Initial check without debounce
-    updateScreenSize();
+    // Initial check without debounce - use queueMicrotask to avoid cascading
+    queueMicrotask(updateScreenSize);
 
-    // Add event listener with debounced handler
-    window.addEventListener('resize', debouncedHandler);
+    // Add event listener with debounced handler (passive for better performance)
+    window.addEventListener('resize', debouncedHandler, { passive: true });
 
     // Cleanup
     return () => window.removeEventListener('resize', debouncedHandler);
@@ -76,15 +79,13 @@ export const useMediaQuery = (debounceMs = 100) => {
     is2Xl: screenSize === '2xl',
     // Helper methods for comparisons
     isAtLeast: (size: ScreenSize) => {
-      const breakpoints: ScreenSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
-      const currentIndex = breakpoints.indexOf(screenSize);
-      const targetIndex = breakpoints.indexOf(size);
+      const currentIndex = BREAKPOINT_ORDER.indexOf(screenSize);
+      const targetIndex = BREAKPOINT_ORDER.indexOf(size);
       return currentIndex >= targetIndex;
     },
     isAtMost: (size: ScreenSize) => {
-      const breakpoints: ScreenSize[] = ['xs', 'sm', 'md', 'lg', 'xl', '2xl'];
-      const currentIndex = breakpoints.indexOf(screenSize);
-      const targetIndex = breakpoints.indexOf(size);
+      const currentIndex = BREAKPOINT_ORDER.indexOf(screenSize);
+      const targetIndex = BREAKPOINT_ORDER.indexOf(size);
       return currentIndex <= targetIndex;
     },
   };

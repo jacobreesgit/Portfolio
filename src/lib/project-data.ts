@@ -1,10 +1,10 @@
 import {
   Globe,
   Headphones,
-  Music,
-  MonitorPlay,
-  ShoppingBag,
   type LucideIcon,
+  MonitorPlay,
+  Music,
+  ShoppingBag,
 } from 'lucide-react';
 
 export interface ProjectMeta {
@@ -97,11 +97,12 @@ export const PROJECTS: ProjectMeta[] = [
     slug: 'musiccount',
     title: 'MusicCount',
     category: 'Personal Project',
-    description: 'iOS app to match play counts across duplicate songs before cleanup. Smart detection finds and groups duplicates.',
+    description:
+      'iOS app to match play counts across duplicate songs before cleanup. Smart detection finds and groups duplicates.',
     shortDescription: 'iOS play count sync',
     technologies: ['Swift 6.1', 'SwiftUI', 'MediaPlayer', 'Swift Testing'],
     tags: ['Mobile'],
-    image: '/images/musiccount.png',
+    image: '/images/musiccount.webp',
     featured: false,
     icon: Music,
     link: 'https://apps.apple.com/gb/app/musiccount/id6754639829',
@@ -122,7 +123,7 @@ export const PROJECTS: ProjectMeta[] = [
       'Deno Edge Functions',
     ],
     tags: ['Front-End', 'Full-Stack'],
-    image: '/images/projects/waveger-hero.png',
+    image: '/images/waveger.webp',
     featured: false,
     icon: Headphones,
     link: 'https://waveger.vercel.app',
