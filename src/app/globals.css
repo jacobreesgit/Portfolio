@@ -219,30 +219,19 @@
   }
 }
 
-/* Toggle Theme View Transitions */
-@keyframes theme-mask {
-  0% {
-    clip-path: circle(0% at var(--x, 50%) var(--y, 50%));
-  }
-
-  100% {
-    clip-path: circle(150% at var(--x, 50%) var(--y, 50%));
-  }
+/* Consistent link styling in not-prose sections (matches prose typography) */
+.not-prose a[href^="http"] {
+  @apply text-foreground underline underline-offset-2 transition-colors;
 }
 
-html.theme-transition::view-transition-old(root),
-html.theme-transition::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
+/* Smooth theme transitions using CSS transitions (no View Transitions API) */
+html {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-html.theme-transition::view-transition-old(root) {
-  z-index: 1;
-}
-
-html.theme-transition::view-transition-new(root) {
-  z-index: 2;
-  animation: theme-mask 0.5s ease-in forwards;
+body {
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Handle reduced motion preference globally */

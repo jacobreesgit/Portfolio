@@ -145,20 +145,8 @@ const Navbar = () => {
                               View All Projects
                             </NavigationMenuLink>
                           </li>
-                          {item.subitems.map((subitem) => {
-                            const getOrder = (label: string) => {
-                              if (label === 'CanonCore') return 1;
-                              if (label === 'Waveger') return 2;
-                              if (label === 'Vepple') return 3;
-                              if (label === 'Pavers') return 4;
-                              return 5;
-                            };
-
-                            return (
-                              <li
-                                key={subitem.label}
-                                style={{ order: getOrder(subitem.label) }}
-                              >
+                          {item.subitems.map((subitem) => (
+                              <li key={subitem.label}>
                                 <NavigationMenuLink
                                   href={subitem.href}
                                   className="hover:bg-accent/50 flex-row items-center gap-3 p-3"
@@ -177,8 +165,7 @@ const Navbar = () => {
                                   </div>
                                 </NavigationMenuLink>
                               </li>
-                            );
-                          })}
+                          ))}
                         </ul>
                       </NavigationMenuContent>
                     </>
@@ -282,16 +269,7 @@ const Navbar = () => {
                               >
                                 View All Projects
                               </NavigationMenuLink>
-                              {item.subitems.map((subitem) => {
-                                const getOrder = (label: string) => {
-                                  if (label === 'CanonCore') return 1;
-                                  if (label === 'Waveger') return 2;
-                                  if (label === 'Vepple') return 3;
-                                  if (label === 'Pavers') return 4;
-                                  return 5;
-                                };
-
-                                return (
+                              {item.subitems.map((subitem) => (
                                   <NavigationMenuLink
                                     key={subitem.label}
                                     href={subitem.href}
@@ -301,7 +279,6 @@ const Navbar = () => {
                                       pathname === subitem.href &&
                                         'bg-accent font-semibold',
                                     )}
-                                    style={{ order: getOrder(subitem.label) }}
                                     suppressHydrationWarning
                                   >
                                     <subitem.icon className="size-5" />
@@ -312,8 +289,7 @@ const Navbar = () => {
                                       </span>
                                     </span>
                                   </NavigationMenuLink>
-                                );
-                              })}
+                              ))}
                             </div>
                           </AccordionContent>
                         </AccordionItem>

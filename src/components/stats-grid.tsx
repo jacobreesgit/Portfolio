@@ -18,7 +18,7 @@ export function ImpactMetrics({ metrics, className }: ImpactMetricsProps) {
         {metrics.map((metric) => (
           <div
             key={metric.label}
-            className="group border-border/50 bg-card/50 hover:bg-card/80 relative flex flex-col gap-2 rounded-lg border p-5 backdrop-blur-sm transition-all duration-300 hover:border-amber-500/30 hover:shadow-lg"
+            className="group border-border/50 bg-card/50 hover:bg-card/80 relative flex flex-col gap-2 rounded-lg border p-5 backdrop-blur-sm transition-colors duration-300 hover:border-amber-500/30 hover:shadow-lg"
           >
             {/* Metric value */}
             <div className="text-4xl font-bold tracking-tight tabular-nums">

@@ -23,21 +23,21 @@ featured: true
 
 ## The Product
 
-CanonCore turns Google Drive into a fully featured media library: visual browsing, metadata enrichment, progress tracking, and public sharing, without moving or duplicating your files. Create folder structures for movies and TV shows, reorganise with drag and drop, enrich items from TMDB, track what you've watched, and share collections publicly. Your files live in your storage, not ours.
+CanonCore turns Google Drive into a fully featured media library: visual browsing, metadata enrichment, progress tracking, and public sharing, without moving or duplicating your files. Create folder structures for movies and TV shows, reorganise with drag and drop, enrich items from [TMDB](https://www.themoviedb.org), track what you've watched, and share collections publicly. Your files live in your storage, not ours.
 
-I use this daily for my own movie and TV library. Active development continues with planned features including character tagging and native iOS and tvOS apps.
+I use this daily for my own movie and TV library. Active development continues with planned features including Fandom/MediaWiki integration and native iOS and tvOS apps.
 
 ---
 
 ## Features
 
-<div className="not-prose my-12 grid gap-24 lg:gap-32">
+<div className="not-prose mt-6 grid gap-24 lg:gap-32">
 
 {/* Browsing & Organisation */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Browsing & Organisation
     </h3>
     <div className="space-y-4">
@@ -50,7 +50,7 @@ I use this daily for my own movie and TV library. Active development continues w
       <div className="text-muted-foreground leading-relaxed">
         Edit mode enables drag-and-drop, bulk selection, and full keyboard
         navigation with screen reader announcements. Pinned items (max 10)
-        appear in the sidebar for quick access. dnd-kit only loads in edit mode
+        appear in the sidebar for quick access. [dnd-kit](https://dndkit.com) only loads in edit mode
         to keep browsing fast.
       </div>
     </div>
@@ -104,12 +104,12 @@ I use this daily for my own movie and TV library. Active development continues w
     />
   </div>
   <div className="order-2">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Media Playback
     </h3>
     <div className="space-y-4">
       <div className="text-muted-foreground leading-relaxed">
-        Vidstack-powered player streams media directly from Google Drive via
+        [Vidstack](https://vidstack.io)-powered player streams media directly from Google Drive via
         HTTP range requests. Playback position auto-saves and resumes where you
         left off. Supports SRT, VTT, SUB, and ASS subtitle tracks. I always want
         to use subtitles. I watch a lot of anime.
@@ -122,7 +122,7 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Progress Tracking
     </h3>
     <div className="text-muted-foreground leading-relaxed">
@@ -173,11 +173,11 @@ I use this daily for my own movie and TV library. Active development continues w
     />
   </div>
   <div className="order-2">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       One-Click Metadata
     </h3>
     <div className="text-muted-foreground leading-relaxed">
-      You can enrich movies and TV shows with TMDB metadata. A three-step wizard
+      You can enrich movies and TV shows with [TMDB](https://www.themoviedb.org) metadata. A three-step wizard
       lets you search for a title, select from multiple poster options, and
       choose a backdrop image for hero banners.
     </div>
@@ -188,7 +188,7 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Google Drive Sync
     </h3>
     <div className="space-y-4">
@@ -199,10 +199,8 @@ I use this daily for my own movie and TV library. Active development continues w
         sync.
       </div>
       <div className="text-muted-foreground leading-relaxed">
-        Conflict detection compares timestamps bidirectionally: if Drive's
-        modifiedTime is newer than our stored value, local changes are rejected
-        with a notification. Errors are isolated per file, so individual
-        failures don't interrupt the overall process.
+        If a file changed in Drive since your last sync, local changes are
+        rejected with a notification. Errors are isolated per file.
       </div>
     </div>
   </div>
@@ -246,7 +244,7 @@ I use this daily for my own movie and TV library. Active development continues w
     />
   </div>
   <div className="order-2">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Public Sharing
     </h3>
     <div className="space-y-4">
@@ -269,7 +267,7 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Forking
     </h3>
     <div className="text-muted-foreground leading-relaxed">
@@ -313,12 +311,11 @@ I use this daily for my own movie and TV library. Active development continues w
     />
   </div>
   <div className="order-2">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Spotlight Search
     </h3>
     <div className="text-muted-foreground leading-relaxed">
-      Press <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">/</code>{' '}
-      to open Spotlight Search anywhere in the app. Results load in parallel
+      Press / to open Spotlight Search anywhere in the app. Results load in parallel
       across three sections: Your Items, Public Collections, and People. A
       module-level cache with a 60-second TTL gives you instant responses on
       repeat searches. Breadcrumb paths reveal each item's full hierarchy.
@@ -330,26 +327,11 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-2 lg:order-1">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+    <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Built-in Documentation
     </h3>
-    <div className="space-y-4">
-      <div className="text-muted-foreground leading-relaxed">
-        CanonCore includes a complete documentation site built with Fumadocs.
-        Write docs in MDX, get automatic navigation, search, and table of
-        contents. Content lives in{' '}
-        <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">
-          content/docs/
-        </code>{' '}
-        with sections for getting started, file management, Google Drive sync,
-        sharing, and account settings.
-      </div>
-      <div className="text-muted-foreground leading-relaxed">
-        Server-rendered for fast load times and SEO. Hot reload during
-        development, type-safe frontmatter validation, and zero configuration
-        needed. The docs are version-controlled alongside the code, so they stay
-        in sync with features.
-      </div>
+    <div className="text-muted-foreground leading-relaxed">
+      Includes a documentation site built with [Fumadocs](https://fumadocs.vercel.app).
     </div>
   </div>
   <div className="order-1 lg:order-2">
@@ -380,41 +362,19 @@ I use this daily for my own movie and TV library. Active development continues w
 
 **Google Drive migration:** I originally built this on SFTP, but path-based matching meant every rename or move created duplicates. No stable IDs, no change detection API, read-only from the web. Google Drive solved all of it: permanent file IDs survive renames and moves, Changes API for incremental sync, full read/write access so users can create folders directly from CanonCore. Should have started here.
 
-**Stack Auth → NextAuth.js v5:** I started with managed auth, then migrated to self-hosted JWT sessions after hitting rate limits. I added 15+ rate limiters via Upstash Redis with different thresholds per action (strict for auth, generous for browsing).
+**Stack Auth → NextAuth.js v5:** I started with managed auth, then migrated to self-hosted JWT sessions after hitting rate limits. I added **15+ rate limiters** via [Upstash Redis](https://upstash.com) with different thresholds per action (strict for auth, generous for browsing).
 
 ---
 
 ### Security & Resilience
 
-**OAuth Token Encryption:** AES-256-GCM with random IVs per encryption.
-
-**Upload Security:** HMAC-SHA256 signed session tokens with timing-safe comparison, token expiry validation, and filename sanitisation.
-
-**Circuit Breaker:** I wrapped TMDB and Google Drive calls in a custom circuit breaker that opens after consecutive failures and tests recovery in half-open state.
-
-**Security Headers:** OWASP-compliant headers including HSTS with preload, CSP with trusted sources, and X-Frame-Options: DENY.
-
-**CSRF Protection:** Signed OAuth state parameter to prevent authorization code interception.
-
-**Bot Protection:** Edge-level defense blocks 35+ aggressive AI crawlers (Meta, OpenAI, Perplexity) with zero cost while rate-limiting beneficial bots to 120 req/min, using fast-path optimization for 99% of traffic.
+Circuit breaker on [TMDB](https://www.themoviedb.org) and Google Drive calls to handle failures gracefully. Edge-level bot protection blocks **35+ AI crawlers** while rate-limiting beneficial bots.
 
 ---
 
 ### Performance
 
-**Edit Mode Separation:** I extracted a view-only Grid from SortableGrid to avoid dnd-kit overhead in browse mode.
-
-**Bulk Delete:** Recursive CTE for deleting nested hierarchies in a single query.
-
-**Lazy Loading:** Intersection Observer with 200px preload margin and priority mode for above-fold images.
-
-**Request Deduplication:** React.cache() on the server, module-level caching on client for search results.
-
-**Offline Queue:** Actions queue to IndexedDB when offline, replay on reconnect with exponential backoff and jitter.
-
-**Structured Logging:** Pino with request ID injection for distributed tracing.
-
-**Batch API:** Google Drive operations batched up to 100 per request. Reduced sync time for large folders from ~45s to ~3s.
+Extracted a view-only Grid from SortableGrid to avoid [dnd-kit](https://dndkit.com) overhead in browse mode. Actions queue to IndexedDB when offline and replay on reconnect. Google Drive operations batched up to **100 per request**, reducing sync time from **~45s to ~3s**.
 
 ---
 
@@ -426,16 +386,16 @@ WCAG 2.1 AA compliant throughout. Reduced motion support via a custom hook that 
 
 ### Testing
 
-Over 2,300 unit tests with Vitest cover auth, items, Google Drive sync, and crypto operations. Integration tests run against real PostgreSQL. E2E tests with Playwright use the Page Object Model pattern and test against a real Google Drive account, not mocked. Tests automatically create missing fixtures for self-healing reliability.
+Over **2,300 unit tests** with [Vitest](https://vitest.dev) cover auth, items, Google Drive sync, and crypto operations. Integration tests run against real PostgreSQL. E2E tests with [Playwright](https://playwright.dev) use the Page Object Model pattern and test against a real Google Drive account, not mocked. Tests automatically create missing fixtures for self-healing reliability.
 
 ---
 
 ## Tech Stack
 
-**Front End:** Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/ui, Vidstack, dnd-kit, cmdk
+**Front End:** Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/ui, Vidstack, [dnd-kit](https://dndkit.com), cmdk
 
 **Back End:** Prisma 7, NextAuth.js v5, Server Actions
 
 **APIs:** Google Drive (OAuth 2.0, Changes API), TMDB
 
-**Infrastructure:** Vercel, Neon PostgreSQL (serverless branching), Upstash Redis
+**Infrastructure:** Vercel, Neon PostgreSQL (serverless branching), Upstash Redis, Pino

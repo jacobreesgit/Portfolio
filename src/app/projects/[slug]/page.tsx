@@ -14,6 +14,7 @@ import { ProjectSidebar } from '@/components/project-sidebar';
 import { ImpactMetrics } from '@/components/stats-grid';
 import { ThemeAwareCarousel } from '@/components/theme-aware-carousel';
 import { ThemeAwareCarousel2 } from '@/components/theme-aware-carousel-2';
+import { ThemeAwareImage } from '@/components/theme-aware-image';
 import { Button } from '@/components/ui/button';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 import { cn } from '@/lib/utils';
@@ -80,6 +81,10 @@ const mdxComponents = {
   ImpactMetrics,
   ThemeAwareCarousel,
   ThemeAwareCarousel2,
+  ThemeAwareImage,
+  a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
+    <a {...props} target="_blank" rel="noopener noreferrer" />
+  ),
   img: (props: {
     src?: string;
     alt?: string;
@@ -209,18 +214,16 @@ export default async function ProjectPage({ params }: PageProps) {
           preloadImages={preloadImages}
           mainContent={
             <>
-              {slug !== 'vepple' && slug !== 'pavers' && (
-                <div className="mb-12">
-                  <ClickableImage
-                    src={project.image}
-                    alt={project.title}
-                    showCaption={false}
-                    showShadow={false}
-                    lightboxSrc={heroLightboxSrc}
-                    loading="eager"
-                  />
-                </div>
-              )}
+              <div className="mb-12">
+                <ClickableImage
+                  src={project.image}
+                  alt={project.title}
+                  showCaption={false}
+                  showShadow={false}
+                  lightboxSrc={heroLightboxSrc}
+                  loading="eager"
+                />
+              </div>
 
               {/* Content */}
               <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-foreground prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">

@@ -3,30 +3,42 @@
 import { useTheme } from 'next-themes';
 import { useEffect, useSyncExternalStore } from 'react';
 
-import CarouselStandard2 from '@/components/carousel-standard-2';
+import { ClickableImage } from '@/components/clickable-image';
 
 // Empty subscribe function for useSyncExternalStore
 const emptySubscribe = () => () => {};
 
-interface ThemeAwareCarouselProps {
-  lightImages: {
-    desktop: string;
-    mobile: string;
+interface ThemeAwareImageProps {
+  light: {
+    src: string;
+    lightboxSrc?: string;
   };
-  darkImages: {
-    desktop: string;
-    mobile: string;
+  dark: {
+    src: string;
+    lightboxSrc?: string;
   };
-  alt: [string, string]; // [desktop alt, mobile alt]
-  buttonLabels?: [string, string]; // Optional custom labels, defaults to ["Desktop", "Mobile"]
+  alt: string;
+  width?: number;
+  height?: number;
+  className?: string;
+  loading?: 'lazy' | 'eager';
+  decoding?: 'async' | 'auto' | 'sync';
+  showCaption?: boolean;
+  showShadow?: boolean;
 }
 
-export function ThemeAwareCarousel({
-  lightImages,
-  darkImages,
+export function ThemeAwareImage({
+  light,
+  dark,
   alt,
-  buttonLabels = ['Desktop', 'Mobile'],
-}: ThemeAwareCarouselProps) {
+  width,
+  height,
+  className,
+  loading,
+  decoding,
+  showCaption = true,
+  showShadow = true,
+}: ThemeAwareImageProps) {
   // Track hydration state using useSyncExternalStore (React 18+ recommended pattern)
   // Returns false during SSR, true after hydration on client
   const mounted = useSyncExternalStore(
@@ -37,14 +49,13 @@ export function ThemeAwareCarousel({
   const { theme, resolvedTheme } = useTheme();
 
   // Preload both theme variants using browser-native <link rel="preload">
-  // This keeps images in cache with high priority (better than JavaScript Image objects)
   useEffect(() => {
     const allImages = [
-      lightImages.desktop,
-      lightImages.mobile,
-      darkImages.desktop,
-      darkImages.mobile,
-    ];
+      light.src,
+      light.lightboxSrc,
+      dark.src,
+      dark.lightboxSrc,
+    ].filter(Boolean) as string[];
 
     // Create <link rel="preload"> tags to hint to browser to keep these in cache
     const preloadLinks = allImages.map((src) => {
@@ -59,7 +70,6 @@ export function ThemeAwareCarousel({
     });
 
     // Cleanup: remove preload hints when component unmounts
-    // Images stay in browser cache even after links are removed
     return () => {
       preloadLinks.forEach((link) => {
         if (link.parentNode) {
@@ -67,37 +77,33 @@ export function ThemeAwareCarousel({
         }
       });
     };
-  }, [
-    lightImages.desktop,
-    lightImages.mobile,
-    darkImages.desktop,
-    darkImages.mobile,
-  ]);
+  }, [light.src, light.lightboxSrc, dark.src, dark.lightboxSrc]);
 
   // Determine current theme, handling 'system' theme
   const currentTheme = theme === 'system' ? resolvedTheme : theme;
   const isDark = currentTheme === 'dark';
 
   // Select images based on theme
-  // No fallback needed - preloading ensures images are ready
-  // View Transition handles the smooth animation
-  const images = isDark
-    ? [darkImages.desktop, darkImages.mobile]
-    : [lightImages.desktop, lightImages.mobile];
+  const currentImages = isDark ? dark : light;
 
   // Show light theme images during SSR/initial render to avoid flicker
   if (!mounted) {
     return (
-      <CarouselStandard2
-        images={[lightImages.desktop, lightImages.mobile]}
+      <ClickableImage
+        src={light.src}
+        lightboxSrc={light.lightboxSrc}
         alt={alt}
-        buttonLabels={buttonLabels}
+        width={width}
+        height={height}
+        className={className}
+        loading={loading}
+        decoding={decoding}
+        showCaption={showCaption}
+        showShadow={showShadow}
       />
     );
   }
 
-  // Browser-native preload hints keep images in cache
-  // CSS transition handles smooth theme switching
   return (
     <div
       data-theme-aware
@@ -105,10 +111,17 @@ export function ThemeAwareCarousel({
         transition: 'opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
       }}
     >
-      <CarouselStandard2
-        images={images}
+      <ClickableImage
+        src={currentImages.src}
+        lightboxSrc={currentImages.lightboxSrc}
         alt={alt}
-        buttonLabels={buttonLabels}
+        width={width}
+        height={height}
+        className={className}
+        loading={loading}
+        decoding={decoding}
+        showCaption={showCaption}
+        showShadow={showShadow}
       />
     </div>
   );

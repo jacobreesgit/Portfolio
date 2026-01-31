@@ -90,3 +90,4 @@ scratch/
 # Claude Code
 .claude/
 skills/
+.playwright-mcp

@@ -60,8 +60,8 @@ export default function MyStory() {
               >
                 Pavers
               </Link>
-              , I developed accessible component libraries powering 160+ retail
-              shops. At Revolution Viewing, I built{' '}
+              , I helped build and improve accessible component libraries
+              powering 160+ retail shops. At Revolution Viewing, I worked on{' '}
               <Link
                 href="https://vepple.com"
                 target="_blank"

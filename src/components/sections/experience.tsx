@@ -67,14 +67,14 @@ export default function Experience({ className }: ExperienceProps) {
           increasing session duration by 41%.
         </>,
         <>
-          Engineered Explore by Map feature with Mapbox GL JS, directions API,
-          and GPS tracking, driving 21 pages per session with 64% longer
-          engagement.
+          Engineered Explore by Map feature with Mapbox GL JS, directions API
+          (walking/cycling/driving), and GPS tracking. Map users averaged 21
+          pages per session with 64% longer engagement.
         </>,
         <>
-          Enhanced panorama Guided Tour suite with intro/end screens, mini-map
-          navigation, ambassador video integration, and real-time synchronised
-          transcription, driving 65% more pages per session.
+          Enhanced panorama Guided Tour suite (WCAG 2.2 AA) with ambassador
+          intro/end screens with real-time captions and in-panorama social media
+          Content Spots, driving 65% more pages and 50% longer engagement.
         </>,
       ],
       technologies:

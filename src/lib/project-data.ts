@@ -39,23 +39,6 @@ export type ProjectTag = (typeof PROJECT_TAGS)[number];
  */
 export const PROJECTS: ProjectMeta[] = [
   {
-    slug: 'vepple',
-    title: 'Vepple',
-    category: 'Client Work',
-    description:
-      'Virtual campus tour platform serving 30+ UK universities. Achieved 4x page engagement with 12+ pages per session.',
-    shortDescription: 'Virtual campus tours',
-    technologies: ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL'],
-    tags: ['Front-End', 'Tools & Design'],
-    image: '/images/vepple.webp',
-    featured: true,
-    icon: Globe,
-    links: [
-      { label: 'Product', url: 'https://vepple.com' },
-      { label: 'Demo', url: 'https://demo.vepple.com' },
-    ],
-  },
-  {
     slug: 'canoncore',
     title: 'CanonCore',
     category: 'Personal Project',
@@ -77,6 +60,43 @@ export const PROJECTS: ProjectMeta[] = [
     github: 'https://github.com/jacobreesgit/canoncore-v2',
   },
   {
+    slug: 'vepple',
+    title: 'Vepple',
+    category: 'Client Work',
+    description:
+      'Virtual campus tour platform serving 30+ UK universities. Achieved 4x page engagement with 12+ pages per session.',
+    shortDescription: 'Virtual campus tours',
+    technologies: ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL'],
+    tags: ['Front-End', 'Tools & Design'],
+    image: '/images/vepple.webp',
+    featured: true,
+    icon: Globe,
+    links: [
+      { label: 'Product', url: 'https://vepple.com' },
+      { label: 'Demo', url: 'https://demo.vepple.com' },
+    ],
+  },
+  {
+    slug: 'waveger',
+    title: 'Waveger',
+    category: 'Personal Project',
+    description:
+      'Billboard meets Fantasy Football. Predict Hot 100 chart positions each week and compete in leagues for accuracy.',
+    shortDescription: 'Music prediction game',
+    technologies: [
+      'React 18',
+      'TypeScript',
+      'Supabase',
+      'PostgreSQL',
+      'Deno Edge Functions',
+    ],
+    tags: ['Front-End', 'Full-Stack'],
+    image: '/images/waveger.webp',
+    featured: true,
+    icon: Headphones,
+    link: 'https://waveger.vercel.app',
+  },
+  {
     slug: 'pavers',
     title: 'Pavers',
     category: 'Client Work',
@@ -86,7 +106,7 @@ export const PROJECTS: ProjectMeta[] = [
     technologies: ['Shopify Liquid', 'Sanity CMS', 'Algolia', 'jQuery'],
     tags: ['Front-End', 'Tools & Design'],
     image: '/images/pavers.webp',
-    featured: true,
+    featured: false,
     icon: ShoppingBag,
     links: [
       { label: 'Pavers', url: 'https://pavers.co.uk' },
@@ -107,26 +127,6 @@ export const PROJECTS: ProjectMeta[] = [
     icon: Music,
     link: 'https://apps.apple.com/gb/app/musiccount/id6754639829',
     github: 'https://github.com/jacobreesgit/MusicCount',
-  },
-  {
-    slug: 'waveger',
-    title: 'Waveger',
-    category: 'Personal Project',
-    description:
-      'Billboard meets Fantasy Football. Predict Hot 100 chart positions each week and compete in leagues for accuracy.',
-    shortDescription: 'Music prediction game',
-    technologies: [
-      'React 18',
-      'TypeScript',
-      'Supabase',
-      'PostgreSQL',
-      'Deno Edge Functions',
-    ],
-    tags: ['Front-End', 'Full-Stack'],
-    image: '/images/waveger.webp',
-    featured: false,
-    icon: Headphones,
-    link: 'https://waveger.vercel.app',
   },
 ];
 

@@ -1,13 +1,13 @@
 ---
 title: 'Vepple'
-category: 'Client Work'
+category: 'Enterprise Platform'
 description: 'Virtual experience platform powering campus tours for 30+ UK universities'
 technologies:
-  ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL', 'GTM', 'Figma']
+  ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL', 'Vitest', 'GTM', 'Figma']
 links:
-  - label: 'Product'
+  - label: 'Vepple'
     url: 'https://vepple.com'
-  - label: 'Demo'
+  - label: 'Live Demo'
     url: 'https://demo.vepple.com'
 image: '/images/vepple.webp'
 year: '2023-Present'
@@ -20,33 +20,37 @@ Vepple is a virtual experience platform used by 30+ UK universities including Im
 
 ## Key Contributions
 
-### Mobile Navigation Redesign
+### Mobile Navigation
 
-The original header-based navigation wasn't cutting it on mobile. I led a complete architecture overhaul, replacing it with a 3-tier footer navigation system (Explore, Maps, Events, Checklist, More). This involved engineering custom bottom sheet filter components and building TikTok-inspired session pages with smart caption truncation and landscape handling. The result: 85% increase in mobile engagement and 41% longer session duration.
+The original header-based navigation wasn't cutting it on mobile. I designed and built a completely new system from scratch: a fixed bottom tab bar with five contextual actions—Menu, Map, Personalise, Checklist, and Chat. Each tab opens custom swipeable bottom sheet panels built with [VueUse](https://vueuse.org), surfacing expanded navigation, Open Day schedule tracking, filter controls, and direct access to Explore by Map. The result: **85% increase** in mobile engagement and **41% longer** session duration.
 
 ### Events Management System
 
-Universities needed a way to host hybrid virtual and on-campus open days. I architected a comprehensive events system with Firebase Firestore real-time chat, 1-second status updates, session scheduling with timezone-aware validation, itinerary management, and iCal export. The system supports session booking, live/scheduled/on-demand filtering, and map marker integration. This drove a 108% increase in views per session with users staying 3+ minutes longer on average.
+Universities needed a way to host hybrid virtual and on-campus open days. I architected a comprehensive events system with full calendar views (day/week/month), [Firebase](https://firebase.google.com) Firestore-backed personal agendas, real-time countdown timers, iCal export, and URL-persisted filters. Built TikTok-inspired session pages to cycle through open day talks with swipeable navigation. Integrated [Firebase](https://firebase.google.com) real-time chat alongside Q&A platforms like [Slido](https://www.slido.com) and [Chatify](https://chatify.com). This drove a **108% increase** in views per session with users staying **3+ minutes longer** on average.
 
 ### Explore by Map
 
-Built interactive maps using Mapbox GL JS with directions API (walking, cycling, driving), location categorisation with grouped pins, points of interest overlays, and GPS-enabled tracking. Map users now average 21 pages per session, a 64% increase in engagement time compared to non-map users.
-
-### A/B Testing Framework
-
-Designed and implemented a production A/B testing framework supporting six UI variants with device/browser targeting, query parameter overrides for QA, and GTM data layer integration. Data-driven navigation pattern testing reduced bounce rate by 19%.
+Built interactive maps using [Mapbox GL JS](https://www.mapbox.com/mapbox-gljs) with custom 3D/2D controls, turn-by-turn directions (walking, cycling, driving), geolocation, location clustering with grouped pins, and fuzzy search. Map users now average **21 pages per session**, a **64% increase** in engagement time compared to non-map users.
 
 ### Guided Tours
 
-Enhanced the panorama viewer with dynamic zoom logic across nine aspect ratio categories. Built the Guided Tour suite featuring intro/end screens, autoplay with accessibility integration, mini-map navigation, progress tracking, and multi-CTA support. Over 1 million students have used Guided Tours, viewing 65% more pages per session.
+Enhanced the Guided Tour suite built on [Pannellum](https://pannellum.org) for 360° panoramas, adding interactive hotspots, intro/end screens featuring ambassador videos with real-time captioning, mini-map navigation, and content spots embedding reels, galleries, and videos. Added dynamic FOV logic that adjusts zoom bounds based on panorama aspect ratio. Over **1 million students** have used Guided Tours, viewing **65% more pages** per session.
+
+### Home Screen Designs
+
+Architected a modular home page system with four interchangeable designs, configurable via each client's dedicated [WordPress](https://wordpress.org) instance with [GraphQL](https://graphql.org). Variants include a typewriter animation with layered opacity, gesture-based filter panels with glassmorphism styling, and an embedded Guided Tour preview reusing the [Pannellum](https://pannellum.org) viewer and ambassador video captioning system mentioned above.
+
+### Analytics and A/B Testing
+
+Improved the [GTM](https://tagmanager.google.com) analytics infrastructure across the frontend and shared component library. Built a centralised data layer module to capture user interactions, enabling the marketing team to measure engagement with video content, interactive tours, and navigation flows.
+
+Integrated [GrowthBook](https://www.growthbook.io) A/B testing for various experiments including home page variants and different UI approaches for guided tours, enabling data-driven design decisions.
 
 ### Accessibility Mode
 
-Built a WCAG 2.2 AA compliant accessibility system: automatic background video pausing, transcript expansion for audio/video content, audio descriptions, and `prefers-reduced-motion` detection for automatic activation. Preferences persist via cookies/localStorage, with shareable accessible mode links via query parameters.
+Architected a comprehensive WCAG-compliant accessibility layer with centralised [Pinia](https://pinia.vuejs.org) state management. Supports OS preference detection and shareable accessible URLs via query parameters.
 
-### Video Analytics
-
-Engineered granular video engagement tracking capturing duration, watch progress, video type classification (intro/stop/outro), and exit reasons (navigated away/completed) with GTM data layer integration.
+When enabled, accessibility mode activates global audio-described video track switching across embedded video platforms, auto-expanding transcripts, and 360° panorama motion suppression. Integrated [@vue-a11y/announcer](https://vue-a11y.com/announcer) for screen reader live region announcements, with a keyboard-navigable toggle, visible focus states, and analytics tracking.
 
 ## Impact Metrics
 
@@ -59,7 +63,6 @@ Engineered granular video engagement tracking capturing duration, watch progress
 
 ## Sources
 
-- [Live Demo](https://demo.vepple.com): Interactive platform demo
 - [Vepple Features & Pricing](https://www.vepple.com/product/features-pricing/): Platform metrics
 - [Explore by Map](https://www.vepple.com/product/features-pricing/explore-by-map/): Map engagement stats
 - [Events System](https://www.vepple.com/product/features-pricing/events-system/): Events metrics

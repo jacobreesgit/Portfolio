@@ -38,7 +38,7 @@ export function ClickableImage({
       <button
         onClick={() => openLightbox(lightboxSrc || src, alt, showCaption)}
         aria-label={`View larger version of ${alt}`}
-        className="group focus:ring-primary relative block w-full cursor-pointer overflow-hidden rounded-xl bg-white focus:ring-2 focus:ring-offset-2 focus:outline-none dark:bg-black"
+        className="group focus:ring-primary relative block w-full cursor-zoom-in overflow-hidden rounded-xl bg-white focus:ring-2 focus:ring-offset-2 focus:outline-none dark:bg-black"
         type="button"
       >
         <Image
