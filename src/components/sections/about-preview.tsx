@@ -30,9 +30,9 @@ const stats = [
     label: 'Universities',
   },
   {
-    id: 'stores',
+    id: 'shops',
     value: '160+',
-    label: 'Stores',
+    label: 'Shops',
   },
 ];
 

@@ -29,7 +29,7 @@ export default function Experience({ className }: ExperienceProps) {
     period: string;
     title: string;
     company: string;
-    description: React.ReactNode;
+    bullets: React.ReactNode[];
     technologies: string;
   }> = [
     {
@@ -37,7 +37,7 @@ export default function Experience({ className }: ExperienceProps) {
       period: 'Mar 2023 - Present',
       title: 'Front-End Developer',
       company: 'Revolution Viewing',
-      description: (
+      bullets: [
         <>
           Developed{' '}
           <a
@@ -48,28 +48,44 @@ export default function Experience({ className }: ExperienceProps) {
           >
             Vepple
           </a>
-          , a virtual experience platform for 30+ UK universities delivering
-          personalised campus tours, interactive maps, and live events with lead
-          capture. Architected Events Management System with Firebase real-time
-          chat, 1-second status engine, and timezone-aware scheduling. Built
-          production A/B testing framework with GrowthBook SDK, GDPR-compliant
-          tracking, and GTM analytics, reducing bounce rate by 19%. Led mobile
-          navigation overhaul increasing session duration by 41% and mobile
-          engagement by 85%. Developed custom map UI with Mapbox GL and
-          directions API, with map users viewing 68% more pages. Enhanced
-          panorama Guided Tour suite with ambassador video integration,
-          real-time synchronised transcription, and engagement analytics.
-        </>
-      ),
+          , a virtual experience platform for 30+ UK universities including
+          Imperial College London and Nottingham Trent, reaching 1M+ prospective
+          students with users averaging 12+ pages and 7 minutes per visit.
+        </>,
+        <>
+          Architected Events Management System with Firebase real-time chat,
+          1-second status engine, and timezone-aware scheduling, delivering 108%
+          increase in views per session.
+        </>,
+        <>
+          Built production A/B testing framework with GrowthBook SDK,
+          GDPR-compliant tracking, and GTM analytics, enabling data-driven
+          design decisions.
+        </>,
+        <>
+          Led mobile navigation overhaul with 3-tier footer architecture,
+          increasing session duration by 41%.
+        </>,
+        <>
+          Engineered Explore by Map feature with Mapbox GL JS, directions API,
+          and GPS tracking, driving 21 pages per session with 64% longer
+          engagement.
+        </>,
+        <>
+          Enhanced panorama Guided Tour suite with intro/end screens, mini-map
+          navigation, ambassador video integration, and real-time synchronised
+          transcription, driving 65% more pages per session.
+        </>,
+      ],
       technologies:
-        'Vue.js, Pinia, Quasar, Firebase, Vitest, Figma, GTM, Google Analytics, Bitbucket Pipelines',
+        'Vue.js, Pinia, Quasar, Firebase, Mapbox GL JS, Vitest, Figma, GTM, Google Analytics',
     },
     {
       id: 'pavers',
       period: 'Aug 2022 - Mar 2023',
       title: 'Web Developer',
       company: 'Pavers',
-      description: (
+      bullets: [
         <>
           Built front-end solutions for{' '}
           <a
@@ -83,14 +99,21 @@ export default function Experience({ className }: ExperienceProps) {
           , a UK footwear retailer with 160+ stores. Developed a WCAG 2.1
           AA-compliant component library using Shopify Liquid and jQuery,
           enabling content teams to customise pages via Sanity CMS across 5+
-          brands including Jones Bootmaker and Herring Shoes. Integrated Algolia
-          search, improving search relevance and driving a 10% increase in
-          search-driven conversions. Combined Lucky Orange with a weather API
-          for location-based recommendations, resulting in 7+% conversion.
+          brands including Jones Bootmaker and Herring Shoes.
+        </>,
+        <>
+          Integrated Algolia search, improving search relevance and driving a
+          10% increase in search-driven conversions.
+        </>,
+        <>
+          Combined Lucky Orange with a weather API for location-based
+          recommendations, resulting in 7+% conversion.
+        </>,
+        <>
           Increased front-end test coverage by 40% through Jest-based tests for
           critical user flows.
-        </>
-      ),
+        </>,
+      ],
       technologies:
         'Shopify Liquid, Sanity CMS, Bootstrap, jQuery, Algolia, Jest, Lucky Orange, Google Tag Manager',
     },
@@ -99,7 +122,7 @@ export default function Experience({ className }: ExperienceProps) {
       period: 'Jul 2022',
       title: 'BA in Digital Media',
       company: 'University of Leeds',
-      description: (
+      bullets: [
         <>
           Achieved a 2:1 overall with a First in the{' '}
           <a
@@ -111,8 +134,8 @@ export default function Experience({ className }: ExperienceProps) {
             final coding project
           </a>
           .
-        </>
-      ),
+        </>,
+      ],
       technologies: '',
     },
   ];
@@ -180,9 +203,17 @@ export default function Experience({ className }: ExperienceProps) {
                 <p className="text-muted-foreground mb-4 text-base font-medium">
                   {exp.company}
                 </p>
-                <p className="text-muted-foreground/80 mb-3 text-sm lg:text-base">
-                  {exp.description}
-                </p>
+                <ul className="mb-3 space-y-2">
+                  {exp.bullets.map((bullet, index) => (
+                    <li
+                      key={index}
+                      className="text-muted-foreground/80 flex gap-2 text-sm lg:text-base"
+                    >
+                      <span className="text-muted-foreground/40 mt-1.5 h-1 w-1 shrink-0 rounded-full bg-current" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
                 {exp.technologies && (
                   <p className="text-muted-foreground/60 text-xs lg:text-sm">
                     <span className="font-medium">Technologies:</span>{' '}

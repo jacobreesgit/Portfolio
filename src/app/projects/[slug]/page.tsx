@@ -12,6 +12,8 @@ import Noise from '@/components/noise';
 import { ProjectPageAnimated } from '@/components/project-page-animated';
 import { ProjectSidebar } from '@/components/project-sidebar';
 import { ImpactMetrics } from '@/components/stats-grid';
+import { ThemeAwareCarousel } from '@/components/theme-aware-carousel';
+import { ThemeAwareCarousel2 } from '@/components/theme-aware-carousel-2';
 import { Button } from '@/components/ui/button';
 import { getProjectBySlug, getProjectSlugs } from '@/lib/projects';
 import { cn } from '@/lib/utils';
@@ -76,6 +78,8 @@ const mdxComponents = {
   CarouselStandard2,
   ClickableImage,
   ImpactMetrics,
+  ThemeAwareCarousel,
+  ThemeAwareCarousel2,
   img: (props: {
     src?: string;
     alt?: string;

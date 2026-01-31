@@ -17,7 +17,7 @@ import {
 const stats = [
   { id: 'years', number: '3+', label: 'Years Professional' },
   { id: 'universities', number: '30+', label: 'Universities' },
-  { id: 'stores', number: '160+', label: 'Stores' },
+  { id: 'shops', number: '160+', label: 'Shops' },
 ];
 
 export default function AboutHero() {

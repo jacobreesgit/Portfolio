@@ -56,12 +56,172 @@ I use this daily for my own movie and TV library. Active development continues w
     </div>
   </div>
   <div className="order-1 lg:order-2">
-    <CarouselStandard2
-      images={[
-        '/portfolio/01-library-grid-thumb.webp',
-        '/portfolio/02-tree-view-thumb.webp',
+    <ThemeAwareCarousel2
+      feature1={{
+        light: {
+          desktop: '/portfolio/canoncore-01-library-grid-desktop-thumb.webp',
+          mobile: '/portfolio/canoncore-01-library-grid-mobile-thumb.webp',
+        },
+        dark: {
+          desktop:
+            '/portfolio/canoncore-01-library-grid-dark-desktop-thumb.webp',
+          mobile: '/portfolio/canoncore-01-library-grid-dark-mobile-thumb.webp',
+        },
+      }}
+      feature2={{
+        light: {
+          desktop: '/portfolio/canoncore-02-tree-view-desktop-thumb.webp',
+          mobile: '/portfolio/canoncore-02-tree-view-mobile-thumb.webp',
+        },
+        dark: {
+          desktop: '/portfolio/canoncore-02-tree-view-dark-desktop-thumb.webp',
+          mobile: '/portfolio/canoncore-02-tree-view-dark-mobile-thumb.webp',
+        },
+      }}
+      alt={['Grid view', 'Tree view']}
+      buttonLabels={['Grid', 'Tree']}
+    />
+  </div>
+</div>
+
+{/* Media Playback */}
+
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-1">
+    <ThemeAwareCarousel
+      lightImages={{
+        desktop: '/portfolio/canoncore-03-video-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-03-video-mobile-thumb.webp',
+      }}
+      darkImages={{
+        desktop: '/portfolio/canoncore-03-video-dark-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-03-video-dark-mobile-thumb.webp',
+      }}
+      alt={[
+        'Desktop video player with subtitle tracks',
+        'Mobile video player with subtitle tracks',
       ]}
-      alt={['Grid View', 'Tree View']}
+    />
+  </div>
+  <div className="order-2">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+      Media Playback
+    </h3>
+    <div className="space-y-4">
+      <div className="text-muted-foreground leading-relaxed">
+        Vidstack-powered player streams media directly from Google Drive via
+        HTTP range requests. Playback position auto-saves and resumes where you
+        left off. Supports SRT, VTT, SUB, and ASS subtitle tracks. I always want
+        to use subtitles. I watch a lot of anime.
+      </div>
+    </div>
+  </div>
+</div>
+
+{/* Progress Tracking */}
+
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-2 lg:order-1">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+      Progress Tracking
+    </h3>
+    <div className="text-muted-foreground leading-relaxed">
+      I built progress tracking because I kept losing my place in long series.
+      Folders display watched and total counts for themselves and all descendant
+      items, using a 90 percent completion threshold to account for credit
+      skipping. The "Go to next" action performs a depth-first traversal of the
+      tree to locate your first incomplete item automatically.
+    </div>
+  </div>
+  <div className="order-1 lg:order-2">
+    <ThemeAwareCarousel
+      lightImages={{
+        desktop: '/portfolio/canoncore-05-progress-tracking-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-05-progress-tracking-mobile-thumb.webp',
+      }}
+      darkImages={{
+        desktop:
+          '/portfolio/canoncore-05-progress-tracking-dark-desktop-thumb.webp',
+        mobile:
+          '/portfolio/canoncore-05-progress-tracking-dark-mobile-thumb.webp',
+      }}
+      alt={[
+        'Desktop progress tracking interface with watch counts',
+        'Mobile progress tracking interface with watch counts',
+      ]}
+    />
+  </div>
+</div>
+
+{/* One-Click Metadata */}
+
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-1">
+    <ThemeAwareCarousel
+      lightImages={{
+        desktop: '/portfolio/canoncore-04-tmdb-wizard-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-04-tmdb-wizard-mobile-thumb.webp',
+      }}
+      darkImages={{
+        desktop: '/portfolio/canoncore-04-tmdb-wizard-dark-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-04-tmdb-wizard-dark-mobile-thumb.webp',
+      }}
+      alt={[
+        'Desktop TMDB search wizard with poster selection',
+        'Mobile TMDB search wizard with poster selection',
+      ]}
+    />
+  </div>
+  <div className="order-2">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+      One-Click Metadata
+    </h3>
+    <div className="text-muted-foreground leading-relaxed">
+      You can enrich movies and TV shows with TMDB metadata. A three-step wizard
+      lets you search for a title, select from multiple poster options, and
+      choose a backdrop image for hero banners.
+    </div>
+  </div>
+</div>
+
+{/* Google Drive Sync */}
+
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-2 lg:order-1">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+      Google Drive Sync
+    </h3>
+    <div className="space-y-4">
+      <div className="text-muted-foreground leading-relaxed">
+        All your media files stay in your Drive. I use Google's Changes API for
+        incremental syncs, fetching only changed items since the last update. If
+        incremental sync returns no results, a verification step triggers a full
+        sync.
+      </div>
+      <div className="text-muted-foreground leading-relaxed">
+        Conflict detection compares timestamps bidirectionally: if Drive's
+        modifiedTime is newer than our stored value, local changes are rejected
+        with a notification. Errors are isolated per file, so individual
+        failures don't interrupt the overall process.
+      </div>
+    </div>
+  </div>
+  <div className="order-1 lg:order-2">
+    <ThemeAwareCarousel
+      lightImages={{
+        desktop: '/portfolio/canoncore-06-google-drive-sync-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-06-google-drive-sync-mobile-thumb.webp',
+      }}
+      darkImages={{
+        desktop:
+          '/portfolio/canoncore-06-google-drive-sync-dark-desktop-thumb.webp',
+        mobile:
+          '/portfolio/canoncore-06-google-drive-sync-dark-mobile-thumb.webp',
+      }}
+      alt={[
+        'Desktop sync panel and Drive connection UI',
+        'Mobile sync panel and Drive connection UI',
+      ]}
     />
   </div>
 </div>
@@ -70,15 +230,19 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-1">
-    <ClickableImage
-      alt="Explore page with featured carousel"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="/portfolio/07-explore-page-thumb.webp"
-      lightboxSrc="/portfolio/07-explore-page.webp"
+    <ThemeAwareCarousel
+      lightImages={{
+        desktop: '/portfolio/canoncore-07-explore-page-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-07-explore-page-mobile-thumb.webp',
+      }}
+      darkImages={{
+        desktop: '/portfolio/canoncore-07-explore-page-dark-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-07-explore-page-dark-mobile-thumb.webp',
+      }}
+      alt={[
+        'Desktop explore page with featured carousel',
+        'Mobile explore page with featured carousel',
+      ]}
     />
   </div>
   <div className="order-2">
@@ -116,140 +280,16 @@ I use this daily for my own movie and TV library. Active development continues w
     </div>
   </div>
   <div className="order-1 lg:order-2">
-    <ClickableImage
-      alt="Fork to Library dialog"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="/portfolio/32-fork-dialog-thumb.webp"
-      lightboxSrc="/portfolio/32-fork-dialog.webp"
-    />
-  </div>
-</div>
-
-{/* Media Playback */}
-
-<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-1">
-    <ClickableImage
-      alt="Video player with subtitle tracks"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="/portfolio/03-video-player-thumb.webp"
-      lightboxSrc="/portfolio/03-video-player.webp"
-    />
-  </div>
-  <div className="order-2">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
-      Media Playback
-    </h3>
-    <div className="text-muted-foreground leading-relaxed">
-      Vidstack-powered player streams media directly from Google Drive via HTTP
-      range requests. Playback position auto-saves and resumes where you left
-      off. Supports SRT, VTT, SUB, and ASS subtitle tracks. I always want to use
-      subtitles. I watch a lot of anime.
-    </div>
-  </div>
-</div>
-
-{/* One-Click Metadata */}
-
-<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-2 lg:order-1">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
-      One-Click Metadata
-    </h3>
-    <div className="text-muted-foreground leading-relaxed">
-      You can enrich movies and TV shows with TMDB metadata. A three-step wizard
-      lets you search for a title, select from multiple poster options, and
-      choose a backdrop image for hero banners.
-    </div>
-  </div>
-  <div className="order-1 lg:order-2">
-    <ClickableImage
-      alt="TMDB search wizard with poster selection"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="/portfolio/04-tmdb-wizard-thumb.webp"
-      lightboxSrc="/portfolio/04-tmdb-wizard.webp"
-    />
-  </div>
-</div>
-
-{/* Progress Tracking */}
-
-<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-1">
-    <ClickableImage
-      alt="Folder with progress bar and Go to next button"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="/portfolio/05-progress-tracking-thumb.webp"
-      lightboxSrc="/portfolio/05-progress-tracking.webp"
-    />
-  </div>
-  <div className="order-2">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
-      Progress Tracking
-    </h3>
-    <div className="space-y-4">
-      <div className="text-muted-foreground leading-relaxed">
-        I built progress tracking because I kept losing my place in long series.
-        Folders display watched and total counts for themselves and all
-        descendant items, using a 90 percent completion threshold to account for
-        credit skipping.
-      </div>
-      <div className="text-muted-foreground leading-relaxed">
-        The "Go to next" action performs a depth-first traversal of the tree to
-        locate your first incomplete item automatically.
-      </div>
-    </div>
-  </div>
-</div>
-
-{/* Google Drive Sync */}
-
-<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-2 lg:order-1">
-    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
-      Google Drive Sync
-    </h3>
-    <div className="space-y-4">
-      <div className="text-muted-foreground leading-relaxed">
-        All your media files stay in your Drive. I use Google's Changes API for
-        incremental syncs, fetching only changed items since the last update. If
-        incremental sync returns no results, a verification step triggers a full
-        sync.
-      </div>
-      <div className="text-muted-foreground leading-relaxed">
-        Conflict detection compares timestamps bidirectionally: if Drive's
-        modifiedTime is newer than our stored value, local changes are rejected
-        with a notification. Errors are isolated per file, so individual
-        failures don't interrupt the overall process.
-      </div>
-    </div>
-  </div>
-  <div className="order-1 lg:order-2">
-    <ClickableImage
-      alt="Sync panel and Drive connection UI"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="/portfolio/06-google-drive-sync-thumb.webp"
-      lightboxSrc="/portfolio/06-google-drive-sync.webp"
+    <ThemeAwareCarousel
+      lightImages={{
+        desktop: '/portfolio/canoncore-32-fork-dialog-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-32-fork-dialog-mobile-thumb.webp',
+      }}
+      darkImages={{
+        desktop: '/portfolio/canoncore-32-fork-dialog-dark-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-32-fork-dialog-dark-mobile-thumb.webp',
+      }}
+      alt={['Desktop fork to library dialog', 'Mobile fork to library dialog']}
     />
   </div>
 </div>
@@ -258,15 +298,18 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-1">
-    <ClickableImage
-      alt="Spotlight search modal"
-      loading="lazy"
-      width={1920}
-      height={1080}
-      decoding="async"
-      className="w-full rounded-xl shadow-2xl ring-1 ring-white/10"
-      src="/portfolio/08-spotlight-search-thumb.webp"
-      lightboxSrc="/portfolio/08-spotlight-search.webp"
+    <ThemeAwareCarousel
+      lightImages={{
+        desktop: '/portfolio/canoncore-08-spotlight-search-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-08-spotlight-search-mobile-thumb.webp',
+      }}
+      darkImages={{
+        desktop:
+          '/portfolio/canoncore-08-spotlight-search-dark-desktop-thumb.webp',
+        mobile:
+          '/portfolio/canoncore-08-spotlight-search-dark-mobile-thumb.webp',
+      }}
+      alt={['Desktop spotlight search modal', 'Mobile spotlight search modal']}
     />
   </div>
   <div className="order-2">
@@ -280,6 +323,50 @@ I use this daily for my own movie and TV library. Active development continues w
       module-level cache with a 60-second TTL gives you instant responses on
       repeat searches. Breadcrumb paths reveal each item's full hierarchy.
     </div>
+  </div>
+</div>
+
+{/* Built-in Documentation */}
+
+<div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+  <div className="order-2 lg:order-1">
+    <h3 className="text-foreground mb-4 text-2xl font-semibold tracking-tight">
+      Built-in Documentation
+    </h3>
+    <div className="space-y-4">
+      <div className="text-muted-foreground leading-relaxed">
+        CanonCore includes a complete documentation site built with Fumadocs.
+        Write docs in MDX, get automatic navigation, search, and table of
+        contents. Content lives in{' '}
+        <code className="rounded bg-white/10 px-1.5 py-0.5 text-sm">
+          content/docs/
+        </code>{' '}
+        with sections for getting started, file management, Google Drive sync,
+        sharing, and account settings.
+      </div>
+      <div className="text-muted-foreground leading-relaxed">
+        Server-rendered for fast load times and SEO. Hot reload during
+        development, type-safe frontmatter validation, and zero configuration
+        needed. The docs are version-controlled alongside the code, so they stay
+        in sync with features.
+      </div>
+    </div>
+  </div>
+  <div className="order-1 lg:order-2">
+    <ThemeAwareCarousel
+      lightImages={{
+        desktop: '/portfolio/canoncore-36-docs-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-36-docs-mobile-thumb.webp',
+      }}
+      darkImages={{
+        desktop: '/portfolio/canoncore-36-docs-dark-desktop-thumb.webp',
+        mobile: '/portfolio/canoncore-36-docs-dark-mobile-thumb.webp',
+      }}
+      alt={[
+        'Desktop documentation with navigation and search',
+        'Mobile documentation with navigation and search',
+      ]}
+    />
   </div>
 </div>
 
@@ -308,6 +395,8 @@ I use this daily for my own movie and TV library. Active development continues w
 **Security Headers:** OWASP-compliant headers including HSTS with preload, CSP with trusted sources, and X-Frame-Options: DENY.
 
 **CSRF Protection:** Signed OAuth state parameter to prevent authorization code interception.
+
+**Bot Protection:** Edge-level defense blocks 35+ aggressive AI crawlers (Meta, OpenAI, Perplexity) with zero cost while rate-limiting beneficial bots to 120 req/min, using fast-path optimization for 99% of traffic.
 
 ---
 

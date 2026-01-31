@@ -155,13 +155,34 @@ export function ThemeToggle() {
             variants={prefersReducedMotion ? {} : rayVariant}
             d="M50 2V11"
           />
-          <m.path variants={prefersReducedMotion ? {} : rayVariant} d="M85 15L78 22" />
-          <m.path variants={prefersReducedMotion ? {} : rayVariant} d="M98 50H89" />
-          <m.path variants={prefersReducedMotion ? {} : rayVariant} d="M85 85L78 78" />
-          <m.path variants={prefersReducedMotion ? {} : rayVariant} d="M50 98V89" />
-          <m.path variants={prefersReducedMotion ? {} : rayVariant} d="M23 78L16 84" />
-          <m.path variants={prefersReducedMotion ? {} : rayVariant} d="M11 50H2" />
-          <m.path variants={prefersReducedMotion ? {} : rayVariant} d="M23 23L16 16" />
+          <m.path
+            variants={prefersReducedMotion ? {} : rayVariant}
+            d="M85 15L78 22"
+          />
+          <m.path
+            variants={prefersReducedMotion ? {} : rayVariant}
+            d="M98 50H89"
+          />
+          <m.path
+            variants={prefersReducedMotion ? {} : rayVariant}
+            d="M85 85L78 78"
+          />
+          <m.path
+            variants={prefersReducedMotion ? {} : rayVariant}
+            d="M50 98V89"
+          />
+          <m.path
+            variants={prefersReducedMotion ? {} : rayVariant}
+            d="M23 78L16 84"
+          />
+          <m.path
+            variants={prefersReducedMotion ? {} : rayVariant}
+            d="M11 50H2"
+          />
+          <m.path
+            variants={prefersReducedMotion ? {} : rayVariant}
+            d="M23 23L16 16"
+          />
         </m.g>
 
         <m.path

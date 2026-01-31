@@ -61,7 +61,7 @@ export default function MyStory() {
                 Pavers
               </Link>
               , I developed accessible component libraries powering 160+ retail
-              stores. At Revolution Viewing, I built{' '}
+              shops. At Revolution Viewing, I built{' '}
               <Link
                 href="https://vepple.com"
                 target="_blank"
@@ -75,11 +75,10 @@ export default function MyStory() {
             </p>
 
             <p>
-              What I love about this work is the variety. One day I&apos;m
-              refining a micro-interaction until it feels perfect; the next
-              I&apos;m solving a complex state management problem or debugging a
-              tricky edge case. That blend of craft and problem-solving keeps me
-              engaged.
+              What keeps me interested is the mix of visual polish and technical
+              problem-solving. Some days I&apos;m tweaking animations and
+              getting interactions just right, other days I&apos;m figuring out
+              complex logic or tracking down a weird bug.
             </p>
 
             <p>

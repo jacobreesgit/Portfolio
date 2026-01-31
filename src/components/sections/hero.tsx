@@ -103,10 +103,10 @@ export default function Hero() {
               variants={fadeUp}
               className="text-muted-foreground dark:text-foreground my-4 text-sm md:my-6 md:text-lg"
             >
-              Front-End Developer with full-stack experience and a strong
-              background in UI &amp; UX design. 3+ years building products used
-              by millions, including Vepple (30+ UK universities, 4x engagement)
-              and Pavers e-commerce (160+ stores).
+              Front-End Developer with full-stack and iOS development
+              experience, and a strong background in UI &amp; UX design. 3+
+              years building products used by millions, including Vepple (30+ UK
+              universities, 4x engagement) and Pavers e-commerce (160+ shops).
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">

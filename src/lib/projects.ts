@@ -1,7 +1,7 @@
-import { cache } from 'react';
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
+import { cache } from 'react';
 
 const projectsDirectory = path.join(process.cwd(), 'src/content/projects');
 

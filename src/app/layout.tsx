@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     template: '%s | Jacob Rees',
   },
   description:
-    'Front-End Developer building products used by millions. Built Vepple (30+ universities, 4x engagement) and Pavers e-commerce (160+ stores). Vue.js, React, Next.js.',
+    'Front-End Developer building products used by millions. Built Vepple (30+ universities, 4x engagement) and Pavers e-commerce (160+ shops). Vue.js, React, Next.js.',
   keywords: [
     'Front-End Developer',
     'Vue.js',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Jacob Rees | Front-End Developer',
     description:
-      'Front-End Developer building products used by millions. Built Vepple (30+ universities) and Pavers e-commerce (160+ stores).',
+      'Front-End Developer building products used by millions. Built Vepple (30+ universities) and Pavers e-commerce (160+ shops).',
     siteName: 'Jacob Rees',
     images: [
       {
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Jacob Rees | Front-End Developer',
     description:
-      'Front-End Developer building products used by millions. Built Vepple (30+ universities) and Pavers e-commerce (160+ stores).',
+      'Front-End Developer building products used by millions. Built Vepple (30+ universities) and Pavers e-commerce (160+ shops).',
     images: ['/images/og-image.jpg'],
   },
 };

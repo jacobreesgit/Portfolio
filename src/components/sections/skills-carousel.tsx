@@ -38,7 +38,7 @@ const features = [
     description: 'Vue.js, React, Next.js, TypeScript, Tailwind, Sass',
     filterTag: 'Front-End',
     image: {
-      src: '/images/skills/front end.png',
+      src: '/images/skills/front-end.webp',
       alt: 'Front-End Development',
       width: 400,
       height: 400,
@@ -49,10 +49,11 @@ const features = [
     id: 'fullstack',
     icon: Database,
     title: 'Full-Stack Development',
-    description: 'Node.js, PostgreSQL, Prisma, REST APIs, GraphQL',
+    description:
+      'Node.js, PostgreSQL, Prisma, Firebase, Supabase, NextAuth.js, REST APIs, GraphQL, Vitest, Playwright',
     filterTag: 'Full-Stack',
     image: {
-      src: '/images/skills/full stack.png',
+      src: '/images/skills/full-stack.webp',
       alt: 'Full-Stack Development',
       width: 400,
       height: 400,
@@ -67,7 +68,7 @@ const features = [
       'Native iOS apps with Swift, SwiftUI, UIKit, Core Data, and Combine',
     filterTag: 'Mobile',
     image: {
-      src: '/images/skills/mobile development.png',
+      src: '/images/skills/mobile.webp',
       alt: 'Mobile Development',
       width: 400,
       height: 400,
@@ -81,7 +82,7 @@ const features = [
     description: 'Figma, Docker, Git, Vercel, GTM, Google Analytics',
     filterTag: 'Tools & Design',
     image: {
-      src: '/images/skills/ux ui.png',
+      src: '/images/skills/design.webp',
       alt: 'UX/UI Design',
       width: 400,
       height: 400,
