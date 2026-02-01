@@ -106,7 +106,7 @@ export default function Hero() {
               Front-End Developer with full-stack and iOS development
               experience, and a strong background in UI &amp; UX design. 3+
               years building products used by millions, including Vepple (1M+
-              students, helped achieve 4x engagement) and Pavers (75+ components powering 160+ shops).
+              students, my work increased engagement by nearly 70%) and Pavers (75+ components powering 160+ shops).
             </motion.p>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-4">
