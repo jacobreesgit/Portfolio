@@ -44,6 +44,7 @@ const technologies = [
   { name: 'Jest', color: 'text-red-600' },
   // Tools
   { name: 'Figma', color: 'text-purple-500' },
+  { name: 'Storybook', color: 'text-pink-500' },
   { name: 'Shopify Liquid', color: 'text-green-500' },
   { name: 'jQuery', color: 'text-blue-500' },
 ];
