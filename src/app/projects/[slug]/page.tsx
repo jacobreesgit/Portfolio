@@ -226,7 +226,7 @@ export default async function ProjectPage({ params }: PageProps) {
               </div>
 
               {/* Content */}
-              <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-foreground prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground max-w-none">
+              <article className="prose prose-lg prose-headings:font-semibold prose-headings:tracking-tight prose-headings:text-foreground prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h2:text-foreground prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-h3:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-strong:text-foreground prose-ol:text-muted-foreground prose-a:text-foreground prose-a:underline prose-a:underline-offset-2 max-w-none">
                 <MDXRemote
                   source={project.content}
                   components={mdxComponents}
