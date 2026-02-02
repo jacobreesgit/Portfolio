@@ -20,8 +20,8 @@
 # production
 /build
 
-# portfolio images
-/public/portfolio
+# portfolio source images (keep PNGs for re-optimization, only commit WebP)
+/public/portfolio/*.png
 
 # source images (kept for re-optimization, not committed)
 /public/images/skills/*.png
