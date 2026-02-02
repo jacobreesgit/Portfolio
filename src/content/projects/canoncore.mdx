@@ -13,6 +13,7 @@ technologies:
     'NextAuth.js v5',
     'Vitest',
     'Playwright',
+    'Storybook',
   ]
 link: 'https://canoncore.com'
 github: 'https://github.com/jacobreesgit/canoncore-v2'
@@ -23,9 +24,9 @@ featured: true
 
 ## The Product
 
-CanonCore turns Google Drive into a fully featured media library: visual browsing, metadata enrichment, progress tracking, and public sharing, without moving or duplicating your files. Create folder structures for movies and TV shows, reorganise with drag and drop, enrich items from [TMDB](https://www.themoviedb.org), track what you've watched, and share collections publicly. Your files live in your storage, not ours.
+CanonCore turns Google Drive into a fully featured media library: visual browsing, metadata enrichment, progress tracking, and public sharing, without moving or duplicating your files. The name comes from "canon" - the app pulls canonical metadata from sources like [TMDB](https://www.themoviedb.org), with planned support for Fandom/MediaWiki and more. Create folder structures for movies and TV shows, reorganise with drag and drop, enrich items from [TMDB](https://www.themoviedb.org), track what you've watched, and share collections publicly. Your files live in your storage, not ours.
 
-I use this daily for my own movie and TV library. Active development continues with planned features including Fandom/MediaWiki integration and native iOS and tvOS apps.
+I use this daily for my own movie and TV library. Active development continues with planned features including native iOS and tvOS apps.
 
 ---
 
@@ -387,6 +388,12 @@ WCAG 2.1 AA compliant throughout. Reduced motion support via a custom hook that 
 ### Testing
 
 **2,400+ tests** across unit, integration, and E2E layers. [Vitest](https://vitest.dev) unit tests cover auth, items, Google Drive sync, and crypto operations. Integration tests run against real PostgreSQL. E2E tests with [Playwright](https://playwright.dev) use the Page Object Model pattern and test against a real Google Drive account, not mocked. Tests automatically create missing fixtures for self-healing reliability.
+
+---
+
+### Component Documentation
+
+All custom components are documented in [Storybook](https://storybook.js.org).
 
 ---
 
