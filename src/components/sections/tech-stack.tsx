@@ -46,7 +46,6 @@ const technologies = [
   { name: 'Figma', color: 'text-purple-500' },
   { name: 'Storybook', color: 'text-pink-500' },
   { name: 'Shopify Liquid', color: 'text-green-500' },
-  { name: 'jQuery', color: 'text-blue-500' },
 ];
 
 export default function Logos() {

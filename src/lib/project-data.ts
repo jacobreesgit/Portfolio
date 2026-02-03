@@ -103,7 +103,7 @@ export const PROJECTS: ProjectMeta[] = [
     description:
       'WCAG-compliant component library and personalisation engine for a UK footwear retailer with 160+ shops.',
     shortDescription: 'E-commerce components',
-    technologies: ['Shopify Liquid', 'Sanity CMS', 'Algolia', 'jQuery'],
+    technologies: ['Shopify Liquid', 'Sanity CMS', 'Algolia', 'React'],
     tags: ['Front-End', 'Tools & Design'],
     image: '/images/pavers.webp',
     featured: false,

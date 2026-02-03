@@ -97,7 +97,7 @@ export default function Experience({ className }: ExperienceProps) {
             Pavers
           </a>
           , a UK footwear retailer with 160+ stores. Developed a WCAG 2.1
-          AA-compliant component library using Shopify Liquid and jQuery,
+          AA-compliant component library using Shopify Liquid and React,
           enabling content teams to customise pages via Sanity CMS across 5+
           brands including Jones Bootmaker and Herring Shoes.
         </>,
@@ -115,7 +115,7 @@ export default function Experience({ className }: ExperienceProps) {
         </>,
       ],
       technologies:
-        'Shopify Liquid, Sanity CMS, Bootstrap, jQuery, Algolia, Jest, Lucky Orange, Google Tag Manager',
+        'Shopify Liquid, Sanity CMS, Bootstrap, React, Algolia, Jest, Lucky Orange, Google Tag Manager',
     },
     {
       id: 'university-leeds',
