@@ -3,7 +3,7 @@ title: 'Vepple'
 category: 'Enterprise Platform'
 description: 'Virtual experience platform powering campus tours for 30+ UK universities'
 technologies:
-  ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'Mapbox GL', 'Histoire', 'Vitest', 'Figma', 'GTM', 'Google Analytics']
+  ['Vue.js', 'Pinia', 'Quasar', 'Firebase', 'GraphQL', 'WordPress', 'Mapbox GL JS', 'Histoire', 'Vitest', 'GTM']
 links:
   - label: 'Vepple'
     url: 'https://vepple.com'
@@ -16,7 +16,7 @@ featured: true
 
 ## Overview
 
-Vepple is a virtual experience platform used by 30+ UK universities including Imperial College London, Nottingham Trent, and Queen's University Belfast. As Front-End Developer at Revolution Viewing, I've architected and shipped major platform features, resulting in 4x more pages viewed per session compared to standard university websites. Users now average 12+ pages and nearly 7 minutes per visit, with over 1 million students having interacted with the platform.
+Vepple is a virtual experience platform used by 30+ UK universities including Imperial College London, Nottingham Trent, and Queen's University Belfast. As Front-End Developer at Revolution Viewing, my work extends beyond typical frontend—I write GraphQL queries, build ACF blocks in WordPress, and implement features across the Vue.js/Quasar frontend. The platform has delivered 4x more pages viewed per session compared to standard university websites, with users averaging 12+ pages and nearly 7 minutes per visit. Over 1 million students have interacted with the platform.
 
 ## Key Contributions
 
@@ -49,6 +49,10 @@ Integrated [GrowthBook](https://www.growthbook.io) A/B testing for various exper
 ### Component Library
 
 Built reusable content blocks for universities to customise their experiences, documented in [Histoire](https://histoire.dev) (Storybook for Vue). Blocks include carousels, video embeds, testimonials, and call-to-action sections that universities can configure via their CMS.
+
+### Headless CMS Architecture
+
+Developed custom [ACF](https://www.advancedcustomfields.com) blocks and [GraphQL](https://graphql.org) queries for the headless [WordPress](https://wordpress.org) CMS using [WPGraphQL](https://www.wpgraphql.com). Each university has a dedicated WordPress instance where content editors configure their experience, with the Vue.js frontend fetching content via GraphQL through [Stellate](https://stellate.co) CDN for edge caching. I write queries and mutations across both the CMS and frontend, ensuring performant content delivery and seamless editor workflows.
 
 ### Accessibility Mode
 
