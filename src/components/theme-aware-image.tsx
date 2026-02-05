@@ -44,7 +44,7 @@ export function ThemeAwareImage({
   const mounted = useSyncExternalStore(
     emptySubscribe,
     () => true,
-    () => false
+    () => false,
   );
   const { theme, resolvedTheme } = useTheme();
 

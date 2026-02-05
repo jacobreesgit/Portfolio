@@ -32,7 +32,7 @@ export function ThemeAwareCarousel({
   const mounted = useSyncExternalStore(
     emptySubscribe,
     () => true,
-    () => false
+    () => false,
   );
   const { theme, resolvedTheme } = useTheme();
 

@@ -220,7 +220,7 @@
 }
 
 /* Consistent link styling in not-prose sections (matches prose typography) */
-.not-prose a[href^="http"] {
+.not-prose a[href^='http'] {
   @apply text-foreground underline underline-offset-2 transition-colors;
 }
 
@@ -230,7 +230,8 @@ html {
 }
 
 body {
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+  transition:
+    background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 

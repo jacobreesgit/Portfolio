@@ -97,17 +97,27 @@ const Navbar = () => {
     <header
       className={cn(
         'isolate z-50 transition-all duration-300 ease-in-out',
-        isScrolled && isAtLeast('lg')
-          ? 'fixed top-0 right-0 left-0 translate-y-2 px-5.5'
-          : 'relative',
+        // Mobile: fixed glass header when scrolled
+        isScrolled && !isAtLeast('lg') && 'fixed top-0 right-0 left-0',
+        // Desktop: floating pill nav when scrolled
+        isScrolled &&
+          isAtLeast('lg') &&
+          'fixed top-0 right-0 left-0 translate-y-2 px-5.5',
+        !isScrolled && 'relative',
       )}
     >
       <div
         className={cn(
-          'bg-background navbar-container relative z-50 flex h-[var(--header-height)] items-center justify-between gap-4 transition-all duration-300 ease-in-out',
+          'navbar-container relative z-50 flex h-[var(--header-height)] items-center justify-between gap-4 transition-all duration-300 ease-in-out',
+          // Mobile: glass effect when scrolled
+          isScrolled &&
+            !isAtLeast('lg') &&
+            'bg-background/80 backdrop-blur-[10px]',
+          // Desktop: pill style when scrolled
           isScrolled &&
             isAtLeast('lg') &&
-            'h-[calc(var(--header-height)-20px)] max-w-7xl rounded-full shadow-sm backdrop-blur-md',
+            'bg-background h-[calc(var(--header-height)-20px)] max-w-7xl rounded-full shadow-sm backdrop-blur-md',
+          !isScrolled && 'bg-background',
         )}
       >
         <Logo className="" />
@@ -146,25 +156,25 @@ const Navbar = () => {
                             </NavigationMenuLink>
                           </li>
                           {item.subitems.map((subitem) => (
-                              <li key={subitem.label}>
-                                <NavigationMenuLink
-                                  href={subitem.href}
-                                  className="hover:bg-accent/50 flex-row items-center gap-3 p-3"
-                                >
-                                  <subitem.icon className="text-foreground size-5" />
-                                  <div className="flex flex-col gap-1">
-                                    <div className="text-sm font-medium tracking-normal">
-                                      {subitem.label}{' '}
-                                      <span className="text-muted-foreground font-normal">
-                                        ({subitem.category})
-                                      </span>
-                                    </div>
-                                    <div className="text-muted-foreground text-xs leading-snug">
-                                      {subitem.description}
-                                    </div>
+                            <li key={subitem.label}>
+                              <NavigationMenuLink
+                                href={subitem.href}
+                                className="hover:bg-accent/50 flex-row items-center gap-3 p-3"
+                              >
+                                <subitem.icon className="text-foreground size-5" />
+                                <div className="flex flex-col gap-1">
+                                  <div className="text-sm font-medium tracking-normal">
+                                    {subitem.label}{' '}
+                                    <span className="text-muted-foreground font-normal">
+                                      ({subitem.category})
+                                    </span>
                                   </div>
-                                </NavigationMenuLink>
-                              </li>
+                                  <div className="text-muted-foreground text-xs leading-snug">
+                                    {subitem.description}
+                                  </div>
+                                </div>
+                              </NavigationMenuLink>
+                            </li>
                           ))}
                         </ul>
                       </NavigationMenuContent>
@@ -270,25 +280,25 @@ const Navbar = () => {
                                 View All Projects
                               </NavigationMenuLink>
                               {item.subitems.map((subitem) => (
-                                  <NavigationMenuLink
-                                    key={subitem.label}
-                                    href={subitem.href}
-                                    onClick={() => setIsMenuOpen(false)}
-                                    className={cn(
-                                      'text-muted-foreground hover:bg-accent/50 flex flex-row items-center gap-2 p-3 font-medium transition-colors',
-                                      pathname === subitem.href &&
-                                        'bg-accent font-semibold',
-                                    )}
-                                    suppressHydrationWarning
-                                  >
-                                    <subitem.icon className="size-5" />
-                                    <span>
-                                      {subitem.label}{' '}
-                                      <span className="text-muted-foreground font-normal">
-                                        ({subitem.category})
-                                      </span>
+                                <NavigationMenuLink
+                                  key={subitem.label}
+                                  href={subitem.href}
+                                  onClick={() => setIsMenuOpen(false)}
+                                  className={cn(
+                                    'text-muted-foreground hover:bg-accent/50 flex flex-row items-center gap-2 p-3 font-medium transition-colors',
+                                    pathname === subitem.href &&
+                                      'bg-accent font-semibold',
+                                  )}
+                                  suppressHydrationWarning
+                                >
+                                  <subitem.icon className="size-5" />
+                                  <span>
+                                    {subitem.label}{' '}
+                                    <span className="text-muted-foreground font-normal">
+                                      ({subitem.category})
                                     </span>
-                                  </NavigationMenuLink>
+                                  </span>
+                                </NavigationMenuLink>
                               ))}
                             </div>
                           </AccordionContent>
