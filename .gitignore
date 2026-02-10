@@ -67,6 +67,7 @@ claude.md
 base-cover-letter.md
 *-cover-letter.md
 cover-letter-*.md
+new.md
 
 # IDE
 .vscode/
