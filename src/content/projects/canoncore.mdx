@@ -59,28 +59,11 @@ I use this daily for my own movie and TV library. Active development continues w
     </div>
   </div>
   <div className="order-1 lg:order-2">
-    <ThemeAwareCarousel2
-      feature1={{
-        light: {
-          desktop: '/portfolio/canoncore-01-library-grid-desktop-thumb.webp',
-          mobile: '/portfolio/canoncore-01-library-grid-mobile-thumb.webp',
-        },
-        dark: {
-          desktop:
-            '/portfolio/canoncore-01-library-grid-dark-desktop-thumb.webp',
-          mobile: '/portfolio/canoncore-01-library-grid-dark-mobile-thumb.webp',
-        },
-      }}
-      feature2={{
-        light: {
-          desktop: '/portfolio/canoncore-02-tree-view-desktop-thumb.webp',
-          mobile: '/portfolio/canoncore-02-tree-view-mobile-thumb.webp',
-        },
-        dark: {
-          desktop: '/portfolio/canoncore-02-tree-view-dark-desktop-thumb.webp',
-          mobile: '/portfolio/canoncore-02-tree-view-dark-mobile-thumb.webp',
-        },
-      }}
+    <CarouselStandard2
+      images={[
+        '/portfolio/canoncore-01-library-grid-dark-desktop-thumb.webp',
+        '/portfolio/canoncore-02-tree-view-dark-desktop-thumb.webp',
+      ]}
       alt={['Grid view', 'Tree view']}
       buttonLabels={['Grid', 'Tree']}
     />
@@ -91,19 +74,16 @@ I use this daily for my own movie and TV library. Active development continues w
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
   <div className="order-1">
-    <ThemeAwareCarousel
-      lightImages={{
-        desktop: '/portfolio/canoncore-03-video-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-03-video-mobile-thumb.webp',
-      }}
-      darkImages={{
-        desktop: '/portfolio/canoncore-03-video-dark-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-03-video-dark-mobile-thumb.webp',
-      }}
+    <CarouselStandard2
+      images={[
+        '/portfolio/canoncore-03-video-dark-desktop-thumb.webp',
+        '/portfolio/canoncore-03-video-dark-mobile-thumb.webp',
+      ]}
       alt={[
         'Desktop video player with subtitle tracks',
         'Mobile video player with subtitle tracks',
       ]}
+      buttonLabels={['Desktop', 'Mobile']}
     />
   </div>
   <div className="order-2">
@@ -124,23 +104,7 @@ I use this daily for my own movie and TV library. Active development continues w
 {/* One-Click Metadata */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-1">
-    <ThemeAwareCarousel
-      lightImages={{
-        desktop: '/portfolio/canoncore-04-tmdb-wizard-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-04-tmdb-wizard-mobile-thumb.webp',
-      }}
-      darkImages={{
-        desktop: '/portfolio/canoncore-04-tmdb-wizard-dark-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-04-tmdb-wizard-dark-mobile-thumb.webp',
-      }}
-      alt={[
-        'Desktop TMDB search wizard with poster selection',
-        'Mobile TMDB search wizard with poster selection',
-      ]}
-    />
-  </div>
-  <div className="order-2">
+  <div className="order-2 lg:order-1">
     <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       One-Click Metadata
     </h3>
@@ -150,12 +114,38 @@ I use this daily for my own movie and TV library. Active development continues w
       multiple poster options, and choose a backdrop image for hero banners.
     </div>
   </div>
+  <div className="order-1 lg:order-2">
+    <CarouselStandard2
+      images={[
+        '/portfolio/canoncore-04-tmdb-wizard-dark-desktop-thumb.webp',
+        '/portfolio/canoncore-04-tmdb-wizard-dark-mobile-thumb.webp',
+      ]}
+      alt={[
+        'Desktop TMDB search wizard with poster selection',
+        'Mobile TMDB search wizard with poster selection',
+      ]}
+      buttonLabels={['Desktop', 'Mobile']}
+    />
+  </div>
 </div>
 
 {/* Google Drive Sync */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-2 lg:order-1">
+  <div className="order-1">
+    <CarouselStandard2
+      images={[
+        '/portfolio/canoncore-06-google-drive-sync-dark-desktop-thumb.webp',
+        '/portfolio/canoncore-06-google-drive-sync-dark-mobile-thumb.webp',
+      ]}
+      alt={[
+        'Desktop sync panel and Drive connection UI',
+        'Mobile sync panel and Drive connection UI',
+      ]}
+      buttonLabels={['Desktop', 'Mobile']}
+    />
+  </div>
+  <div className="order-2">
     <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Google Drive Sync
     </h3>
@@ -168,46 +158,12 @@ I use this daily for my own movie and TV library. Active development continues w
       isolated per file.
     </div>
   </div>
-  <div className="order-1 lg:order-2">
-    <ThemeAwareCarousel
-      lightImages={{
-        desktop: '/portfolio/canoncore-06-google-drive-sync-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-06-google-drive-sync-mobile-thumb.webp',
-      }}
-      darkImages={{
-        desktop:
-          '/portfolio/canoncore-06-google-drive-sync-dark-desktop-thumb.webp',
-        mobile:
-          '/portfolio/canoncore-06-google-drive-sync-dark-mobile-thumb.webp',
-      }}
-      alt={[
-        'Desktop sync panel and Drive connection UI',
-        'Mobile sync panel and Drive connection UI',
-      ]}
-    />
-  </div>
 </div>
 
 {/* Public Sharing */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-1">
-    <ThemeAwareCarousel
-      lightImages={{
-        desktop: '/portfolio/canoncore-07-explore-page-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-07-explore-page-mobile-thumb.webp',
-      }}
-      darkImages={{
-        desktop: '/portfolio/canoncore-07-explore-page-dark-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-07-explore-page-dark-mobile-thumb.webp',
-      }}
-      alt={[
-        'Desktop explore page with featured carousel',
-        'Mobile explore page with featured carousel',
-      ]}
-    />
-  </div>
-  <div className="order-2">
+  <div className="order-2 lg:order-1">
     <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Public Sharing
     </h3>
@@ -217,12 +173,35 @@ I use this daily for my own movie and TV library. Active development continues w
       banner carousel.
     </div>
   </div>
+  <div className="order-1 lg:order-2">
+    <CarouselStandard2
+      images={[
+        '/portfolio/canoncore-07-explore-page-dark-desktop-thumb.webp',
+        '/portfolio/canoncore-07-explore-page-dark-mobile-thumb.webp',
+      ]}
+      alt={[
+        'Desktop explore page with featured carousel',
+        'Mobile explore page with featured carousel',
+      ]}
+      buttonLabels={['Desktop', 'Mobile']}
+    />
+  </div>
 </div>
 
 {/* Forking */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-2 lg:order-1">
+  <div className="order-1">
+    <CarouselStandard2
+      images={[
+        '/portfolio/canoncore-32-fork-dialog-dark-desktop-thumb.webp',
+        '/portfolio/canoncore-32-fork-dialog-dark-mobile-thumb.webp',
+      ]}
+      alt={['Desktop fork to library dialog', 'Mobile fork to library dialog']}
+      buttonLabels={['Desktop', 'Mobile']}
+    />
+  </div>
+  <div className="order-2">
     <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Forking
     </h3>
@@ -235,40 +214,12 @@ I use this daily for my own movie and TV library. Active development continues w
       the structure is public, the files aren't.
     </div>
   </div>
-  <div className="order-1 lg:order-2">
-    <ThemeAwareCarousel
-      lightImages={{
-        desktop: '/portfolio/canoncore-32-fork-dialog-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-32-fork-dialog-mobile-thumb.webp',
-      }}
-      darkImages={{
-        desktop: '/portfolio/canoncore-32-fork-dialog-dark-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-32-fork-dialog-dark-mobile-thumb.webp',
-      }}
-      alt={['Desktop fork to library dialog', 'Mobile fork to library dialog']}
-    />
-  </div>
 </div>
 
 {/* Spotlight Search */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-1">
-    <ThemeAwareCarousel
-      lightImages={{
-        desktop: '/portfolio/canoncore-08-spotlight-search-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-08-spotlight-search-mobile-thumb.webp',
-      }}
-      darkImages={{
-        desktop:
-          '/portfolio/canoncore-08-spotlight-search-dark-desktop-thumb.webp',
-        mobile:
-          '/portfolio/canoncore-08-spotlight-search-dark-mobile-thumb.webp',
-      }}
-      alt={['Desktop spotlight search modal', 'Mobile spotlight search modal']}
-    />
-  </div>
-  <div className="order-2">
+  <div className="order-2 lg:order-1">
     <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Spotlight Search
     </h3>
@@ -280,12 +231,35 @@ I use this daily for my own movie and TV library. Active development continues w
       hierarchy.
     </div>
   </div>
+  <div className="order-1 lg:order-2">
+    <CarouselStandard2
+      images={[
+        '/portfolio/canoncore-08-spotlight-search-dark-desktop-thumb.webp',
+        '/portfolio/canoncore-08-spotlight-search-dark-mobile-thumb.webp',
+      ]}
+      alt={['Desktop spotlight search modal', 'Mobile spotlight search modal']}
+      buttonLabels={['Desktop', 'Mobile']}
+    />
+  </div>
 </div>
 
 {/* Built-in Documentation */}
 
 <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
-  <div className="order-2 lg:order-1">
+  <div className="order-1">
+    <CarouselStandard2
+      images={[
+        '/portfolio/canoncore-36-docs-dark-desktop-thumb.webp',
+        '/portfolio/canoncore-36-docs-dark-mobile-thumb.webp',
+      ]}
+      alt={[
+        'Desktop documentation with navigation and search',
+        'Mobile documentation with navigation and search',
+      ]}
+      buttonLabels={['Desktop', 'Mobile']}
+    />
+  </div>
+  <div className="order-2">
     <h3 className="text-foreground mb-4 text-xl font-semibold tracking-tight">
       Built-in Documentation
     </h3>
@@ -293,22 +267,6 @@ I use this daily for my own movie and TV library. Active development continues w
       Includes a documentation site built with
       [Fumadocs](https://fumadocs.vercel.app).
     </div>
-  </div>
-  <div className="order-1 lg:order-2">
-    <ThemeAwareCarousel
-      lightImages={{
-        desktop: '/portfolio/canoncore-36-docs-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-36-docs-mobile-thumb.webp',
-      }}
-      darkImages={{
-        desktop: '/portfolio/canoncore-36-docs-dark-desktop-thumb.webp',
-        mobile: '/portfolio/canoncore-36-docs-dark-mobile-thumb.webp',
-      }}
-      alt={[
-        'Desktop documentation with navigation and search',
-        'Mobile documentation with navigation and search',
-      ]}
-    />
   </div>
 </div>
 
