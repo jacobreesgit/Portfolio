@@ -35,7 +35,7 @@ const features = [
     id: 'frontend',
     icon: Code,
     title: 'Front-End Development',
-    description: 'Vue.js, React, Next.js, TypeScript, Tailwind, Sass',
+    description: 'Vue.js, React, React Native, Next.js, TypeScript, Tailwind, Three.js',
     filterTag: 'Front-End',
     image: {
       src: '/images/skills/front-end.webp',

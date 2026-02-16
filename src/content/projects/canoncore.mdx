@@ -6,11 +6,14 @@ technologies:
   [
     'Next.js 16',
     'React 19',
+    'React Native',
+    'Expo',
     'TypeScript',
     'PostgreSQL',
     'Prisma 7',
     'Tailwind CSS 4',
     'NextAuth.js v5',
+    'Three.js',
     'Vitest',
     'Playwright',
     'Storybook',
@@ -26,7 +29,7 @@ featured: true
 
 CanonCore turns Google Drive into a fully featured media library: visual browsing, metadata enrichment, progress tracking, and public sharing, without moving or duplicating your files. The name comes from "canon" - the app pulls canonical metadata from sources like [TMDB](https://www.themoviedb.org), with planned support for Fandom/MediaWiki and more. Create folder structures for movies and TV shows, reorganise with drag and drop, enrich items from [TMDB](https://www.themoviedb.org), track what you've watched, and share collections publicly. Your files live in your storage, not ours.
 
-I use this daily for my own movie and TV library. Active development continues with planned features including native iOS and tvOS apps.
+I use this daily for my own movie and TV library. Active development continues with a React Native iOS app and interactive 3D graph visualisation — see [In Progress](#in-progress) below.
 
 ---
 
@@ -274,6 +277,13 @@ I use this daily for my own movie and TV library. Active development continues w
 
 ---
 
+## In Progress
+
+- **React Native iOS App** — A native iOS companion app built with React Native and Expo. Browse your library, stream media, and track progress on the go, sharing the same backend and authentication as the web app.
+- **3D Graph Visualisation** — Interactive 3D graph visualisation built with Three.js, rendering items and connections as a force-directed node network with camera controls, zoom, and real-time physics.
+
+---
+
 ## How It's Built
 
 ### Architecture Decisions
@@ -316,7 +326,7 @@ All custom components are documented in [Storybook](https://canoncore-storybook.
 
 ## Tech Stack
 
-**Front End:** Next.js 16, React 19, TypeScript, Tailwind CSS 4, shadcn/ui, Vidstack, [dnd-kit](https://dndkit.com), cmdk
+**Front End:** Next.js 16, React 19, React Native, Expo, TypeScript, Tailwind CSS 4, shadcn/ui, Vidstack, Three.js, [dnd-kit](https://dndkit.com), cmdk
 
 **Back End:** Prisma 7, NextAuth.js v5, Server Actions
 

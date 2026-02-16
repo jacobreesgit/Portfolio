@@ -31,6 +31,8 @@ const technologies = [
   // State & Data
   { name: 'TanStack Query', color: 'text-red-500' },
   { name: 'Pinia', color: 'text-yellow-400' },
+  { name: 'React Native', color: 'text-cyan-500' },
+  { name: 'Three.js', color: 'text-foreground' },
   { name: 'Quasar', color: 'text-cyan-500' },
   // APIs & Services
   { name: 'Mapbox GL', color: 'text-blue-500' },

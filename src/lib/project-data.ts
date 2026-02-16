@@ -48,9 +48,11 @@ export const PROJECTS: ProjectMeta[] = [
     technologies: [
       'Next.js 16',
       'React 19',
+      'React Native',
       'TypeScript',
       'PostgreSQL',
       'Prisma 7',
+      'Three.js',
     ],
     tags: ['Front-End', 'Full-Stack', 'Tools & Design'],
     image: '/images/canoncore.webp',

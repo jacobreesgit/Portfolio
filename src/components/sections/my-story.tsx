@@ -50,8 +50,9 @@ export default function MyStory() {
               >
                 final coding project
               </Link>
-              ), I&apos;ve spent the last 3+ years as a Front-End Developer
-              working on products used by millions. At{' '}
+              ), I&apos;ve spent the last 3+ years building products and
+              managing client relationships across higher education and
+              e-commerce. At{' '}
               <Link
                 href="https://pavers.co.uk"
                 target="_blank"
@@ -60,8 +61,9 @@ export default function MyStory() {
               >
                 Pavers
               </Link>
-              , I helped build and improve accessible component libraries
-              powering 160+ retail shops. At Revolution Viewing, I worked on{' '}
+              , I built accessible component libraries across headless CMS
+              architectures powering 160+ retail shops. At Revolution Viewing, I
+              worked on{' '}
               <Link
                 href="https://vepple.com"
                 target="_blank"
@@ -70,8 +72,9 @@ export default function MyStory() {
               >
                 Vepple
               </Link>
-              , a platform serving 30+ UK universities, architecting everything
-              from real-time event systems to A/B testing frameworks.
+              , a platform serving 30+ UK universities, while also mentoring
+              engineers and supporting customer success through client
+              onboarding and demos.
             </p>
 
             <p>
@@ -82,10 +85,9 @@ export default function MyStory() {
             </p>
 
             <p>
-              I&apos;m now looking for a role with more technical ownership and
-              the opportunity to grow further into full-stack development. I
-              want to build products that matter, with a team that cares about
-              doing things properly.
+              I&apos;m now looking for a role with more technical ownership
+              across full-stack and iOS development. I want to build products
+              that matter, with a team that cares about doing things properly.
             </p>
           </motion.div>
         </motion.div>

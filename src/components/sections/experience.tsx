@@ -39,7 +39,10 @@ export default function Experience({ className }: ExperienceProps) {
       company: 'Revolution Viewing',
       bullets: [
         <>
-          Developed{' '}
+          Sole front-end and UX developer, collaborating directly on design
+          &amp; product direction, mentoring engineers, and supporting customer
+          success through client onboarding, demos, and feedback sessions.
+          Helped build{' '}
           <a
             href="https://vepple.com"
             target="_blank"
@@ -48,9 +51,8 @@ export default function Experience({ className }: ExperienceProps) {
           >
             Vepple
           </a>
-          , a virtual experience platform for 30+ UK universities including
-          Imperial College London and Nottingham Trent, reaching 1M+ prospective
-          students with users averaging 12+ pages and 7 minutes per visit.
+          , a virtual experience platform for 30+ UK universities, reaching 1M+
+          students with 12+ pages and 7 minutes per session.
         </>,
         <>
           Architected Events Management System with Firebase real-time chat,
@@ -63,13 +65,13 @@ export default function Experience({ className }: ExperienceProps) {
           design decisions.
         </>,
         <>
-          Led mobile navigation overhaul with 3-tier footer architecture,
-          increasing session duration by 41%.
+          Developed custom ACF blocks and GraphQL queries for headless WordPress
+          CMS.
         </>,
         <>
-          Engineered Explore by Map feature with Mapbox GL JS, directions API
-          (walking/cycling/driving), and GPS tracking. Map users averaged 21
-          pages per session with 64% longer engagement.
+          Engineered Explore by Map feature with Mapbox GL JS, directions API,
+          and GPS tracking. Map users averaged 21 pages per session with 64%
+          longer engagement.
         </>,
         <>
           Enhanced panorama Guided Tour suite (WCAG 2.2 AA) with ambassador
@@ -78,7 +80,7 @@ export default function Experience({ className }: ExperienceProps) {
         </>,
       ],
       technologies:
-        'Vue.js, Pinia, Quasar, Firebase, Mapbox GL JS, Vitest, Figma, GTM, Google Analytics',
+        'Vue.js, Pinia, Quasar, Firebase, GraphQL, WordPress, Mapbox GL JS, Histoire, Vitest, GTM',
     },
     {
       id: 'pavers',
@@ -87,7 +89,8 @@ export default function Experience({ className }: ExperienceProps) {
       company: 'Pavers',
       bullets: [
         <>
-          Built front-end solutions for{' '}
+          Developed a WCAG 2.1 AA-compliant component library (75+ components)
+          with multi-brand theming for{' '}
           <a
             href="https://pavers.co.uk"
             target="_blank"
@@ -96,10 +99,9 @@ export default function Experience({ className }: ExperienceProps) {
           >
             Pavers
           </a>
-          , a UK footwear retailer with 160+ stores. Developed a WCAG 2.1
-          AA-compliant component library using Shopify Liquid and React,
-          enabling content teams to customise pages via Sanity CMS across 5+
-          brands including Jones Bootmaker and Herring Shoes.
+          , a UK retailer with 160+ stores. Built reusable UI with Storybook
+          documentation using Shopify Liquid and React, enabling content teams
+          to customise pages via Sanity CMS across 5+ brands.
         </>,
         <>
           Integrated Algolia search, improving search relevance and driving a
