@@ -173,7 +173,8 @@ I use this daily for my own movie and TV library. Active development continues w
     <div className="text-muted-foreground leading-relaxed">
       Make items public to share them. Your profile page shows your public
       items. The explore page shows public items from everyone with a featured
-      banner carousel.
+      banner carousel. Shared links generate dynamic preview cards for
+      Twitter, Discord, and Slack.
     </div>
   </div>
   <div className="order-1 lg:order-2">
@@ -318,6 +319,24 @@ WCAG 2.1 AA compliant throughout. Reduced motion support via a custom hook that 
 
 ---
 
+### Observability
+
+[Sentry](https://sentry.io) error tracking across client, server, and edge runtimes with source maps for readable stack traces. Layered error boundaries catch failures at each route scope and report to Sentry automatically. [OpenTelemetry](https://opentelemetry.io) distributed tracing via Vercel's integration and Speed Insights for Core Web Vitals monitoring in production.
+
+---
+
+### CI/CD
+
+GitHub Actions pipeline runs a quality gate (format, lint, type check, unused code detection) then kicks off tests and production build in parallel. [Husky](https://typicode.github.io/husky) pre-commit hooks run ESLint and Prettier on staged files. Conventional commits enforced by commitlint.
+
+---
+
+### SEO & Social Sharing
+
+Dynamic OpenGraph images generated server-side for every public profile and item page — shared links show rich preview cards on Twitter, Discord, and Slack. JSON-LD structured data (Movie, TVSeries, Person schemas) for search engines. Dynamic sitemap keeps all public profiles and items indexed.
+
+---
+
 ### Component Documentation
 
 All custom components are documented in [Storybook](https://canoncore-storybook.vercel.app).
@@ -332,4 +351,4 @@ All custom components are documented in [Storybook](https://canoncore-storybook.
 
 **APIs:** Google Drive (OAuth 2.0, Changes API), TMDB
 
-**Infrastructure:** Vercel, Neon PostgreSQL (serverless branching), Upstash Redis, Pino
+**Infrastructure:** Vercel, Neon PostgreSQL (serverless branching), Upstash Redis, Sentry, GitHub Actions CI/CD
