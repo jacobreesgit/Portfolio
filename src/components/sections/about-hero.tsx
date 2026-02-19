@@ -62,7 +62,7 @@ export default function AboutHero() {
               className="text-muted-foreground mt-2 text-xl md:text-2xl"
               variants={fadeUp}
             >
-              Front-End Developer
+              Frontend Engineer
             </motion.p>
             <motion.p
               className="text-muted-foreground mt-3 flex items-center justify-center gap-1.5 md:justify-start"

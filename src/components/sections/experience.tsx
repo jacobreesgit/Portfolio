@@ -29,14 +29,30 @@ export default function Experience({ className }: ExperienceProps) {
     period: string;
     title: string;
     company: string;
+    roles?: Array<{
+      title: string;
+      period: string;
+      current?: boolean;
+    }>;
     bullets: React.ReactNode[];
     technologies: string;
   }> = [
     {
       id: 'revolution-viewing',
       period: 'Mar 2023 - Present',
-      title: 'Front-End Developer',
+      title: 'Frontend Engineer',
       company: 'Revolution Viewing',
+      roles: [
+        {
+          title: 'Frontend Engineer',
+          period: 'Feb 2026 - Present',
+          current: true,
+        },
+        {
+          title: 'Junior Frontend Developer',
+          period: 'Mar 2023 - Feb 2026',
+        },
+      ],
       bullets: [
         <>
           Sole front-end and UX developer, collaborating directly on design
@@ -205,17 +221,52 @@ export default function Experience({ className }: ExperienceProps) {
                 <p className="text-muted-foreground mb-4 text-base font-medium">
                   {exp.company}
                 </p>
-                <ul className="mb-3 space-y-2">
+                {exp.roles && (
+                  <div className="mb-5 flex flex-col items-start">
+                    {exp.roles.map((role, i, arr) => (
+                      <React.Fragment key={i}>
+                        {/* Role row */}
+                        <div className="flex items-center gap-3">
+                          <div
+                            className={cn(
+                              'size-[10px] shrink-0 rounded-full',
+                              role.current
+                                ? 'bg-foreground'
+                                : 'bg-muted-foreground/30',
+                            )}
+                          />
+                          <div
+                            className={cn(
+                              'text-sm',
+                              role.current
+                                ? 'text-foreground font-medium'
+                                : 'text-muted-foreground',
+                            )}
+                          >
+                            <span>{role.title}</span>
+                            <span className="text-muted-foreground/50 ml-2 text-xs lg:text-sm">
+                              {role.period}
+                            </span>
+                          </div>
+                        </div>
+                        {/* Connecting line between roles */}
+                        {i < arr.length - 1 && (
+                          <div className="bg-muted-foreground/40 ml-[4px] h-3 w-[2px]" />
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </div>
+                )}
+                <div className="mb-3 space-y-2">
                   {exp.bullets.map((bullet, index) => (
-                    <li
+                    <p
                       key={index}
-                      className="text-muted-foreground/80 flex gap-2 text-sm lg:text-base"
+                      className="text-muted-foreground/80 text-sm lg:text-base"
                     >
-                      <span className="text-muted-foreground/40 mt-1.5 h-1 w-1 shrink-0 rounded-full bg-current" />
-                      <span>{bullet}</span>
-                    </li>
+                      {bullet}
+                    </p>
                   ))}
-                </ul>
+                </div>
                 {exp.technologies && (
                   <p className="text-muted-foreground/60 text-xs lg:text-sm">
                     <span className="font-medium">Technologies:</span>{' '}

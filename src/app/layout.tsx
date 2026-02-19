@@ -19,13 +19,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://jacobrees.dev'),
   title: {
-    default: 'Jacob Rees | Front-End Developer',
+    default: 'Jacob Rees | Frontend Engineer',
     template: '%s | Jacob Rees',
   },
   description:
-    'Front-End Developer building products used by millions. Built Vepple (1M+ students, 4x engagement) and Pavers (75+ components powering 160+ shops). Vue.js, React, Next.js.',
+    'Frontend Engineer building products used by millions. Built Vepple (1M+ students, 4x engagement) and Pavers (75+ components powering 160+ shops). Vue.js, React, Next.js.',
   keywords: [
-    'Front-End Developer',
+    'Frontend Engineer',
     'Vue.js',
     'React',
     'Next.js',
@@ -47,24 +47,24 @@ export const metadata: Metadata = {
     shortcut: [{ url: '/favicon.png' }],
   },
   openGraph: {
-    title: 'Jacob Rees | Front-End Developer',
+    title: 'Jacob Rees | Frontend Engineer',
     description:
-      'Front-End Developer building products used by millions. Built Vepple (1M+ students, 4x engagement) and Pavers (75+ components powering 160+ shops).',
+      'Frontend Engineer building products used by millions. Built Vepple (1M+ students, 4x engagement) and Pavers (75+ components powering 160+ shops).',
     siteName: 'Jacob Rees',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Jacob Rees - Front-End Developer',
+        alt: 'Jacob Rees - Frontend Engineer',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Jacob Rees | Front-End Developer',
+    title: 'Jacob Rees | Frontend Engineer',
     description:
-      'Front-End Developer building products used by millions. Built Vepple (1M+ students, 4x engagement) and Pavers (75+ components powering 160+ shops).',
+      'Frontend Engineer building products used by millions. Built Vepple (1M+ students, 4x engagement) and Pavers (75+ components powering 160+ shops).',
     images: ['/images/og-image.jpg'],
   },
 };

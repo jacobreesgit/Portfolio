@@ -96,14 +96,14 @@ export default function Hero() {
               variants={fadeUp}
               className="text-muted-foreground dark:text-foreground mt-2 text-xl font-medium md:text-2xl"
             >
-              Front-End Developer
+              Frontend Engineer
             </motion.p>
 
             <motion.p
               variants={fadeUp}
               className="text-muted-foreground dark:text-foreground my-4 text-sm md:my-6 md:text-lg"
             >
-              Front-End Developer with full-stack and iOS development
+              Frontend Engineer with full-stack and iOS development
               experience, and a strong background in UI &amp; UX design. 3+
               years building products used by millions, including Vepple (1M+
               students, my work increased engagement by nearly 70%) and Pavers
