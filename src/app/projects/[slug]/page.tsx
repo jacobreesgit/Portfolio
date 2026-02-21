@@ -230,6 +230,7 @@ export default async function ProjectPage({ params }: PageProps) {
                 <MDXRemote
                   source={project.content}
                   components={mdxComponents}
+                  options={{ blockJS: false }}
                 />
               </article>
             </>
