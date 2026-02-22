@@ -58,7 +58,7 @@ export const PROJECTS: ProjectMeta[] = [
     image: '/images/canoncore.webp',
     featured: true,
     icon: MonitorPlay,
-    link: 'https://canoncore.com',
+    link: 'https://demo.canoncore.com',
     github: 'https://github.com/jacobreesgit/canoncore-v2',
   },
   {
