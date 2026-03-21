@@ -95,3 +95,6 @@ scratch/
 .claude/
 skills/
 .playwright-mcp
+
+# Job search CLI
+/job-search/
