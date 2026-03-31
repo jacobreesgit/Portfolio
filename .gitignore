@@ -28,6 +28,23 @@
 /public/images/musiccount.png
 /*.png
 
+# unprocessed source files
+/public/portfolio/*/unprocessed/
+
+# unused template/legacy images (moved to iCloud)
+/public/images/benefits-showcase/
+/public/images/features-carousel/
+/public/images/features-grid/
+/public/images/features-showcase/
+/public/images/logos/
+/public/images/gradient*.webp
+/public/images/hero.webp
+/public/images/apple-button*.png
+/public/images/google-button*.png
+/public/images/profile.jpeg
+/public/images/projects/*.jpg
+/public/layout/
+
 # misc
 .DS_Store
 *.pem
